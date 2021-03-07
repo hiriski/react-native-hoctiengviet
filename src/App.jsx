@@ -1,16 +1,12 @@
 import React from 'react';
-import {View, Text} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
+import RootStackNavigator from './navigations/RootStackNavigator';
 
 const App = () => {
   React.useEffect(() => {
     SplashScreen.hide();
   }, []);
-  return (
-    <View>
-      <Text>Hello World</Text>
-    </View>
-  );
+  return <RootStackNavigator />;
 };
 
 export default App;
