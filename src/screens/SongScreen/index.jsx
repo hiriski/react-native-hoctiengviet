@@ -1,5 +1,5 @@
-import {useNavigation} from '@react-navigation/core';
 import React from 'react';
+import {useNavigation} from '@react-navigation/core';
 import {Button, Text} from 'react-native';
 import {ROUTES} from '../../constants';
 import MainLayout from '../../layouts/MainLayout';

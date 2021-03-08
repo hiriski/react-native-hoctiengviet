@@ -7,7 +7,7 @@ import {ROUTES} from '../constants';
 import OnBoardingScreen from '../screens/OnBoardingScreen';
 import HomeTabNavigator from './HomeTabNavigator';
 import MemberStackNavigator from './MemberStackNavigator';
-import DrawerNavigator from './DrawerNavigator';
+// import DrawerNavigator from './DrawerNavigator';
 
 const Stack = createStackNavigator();
 

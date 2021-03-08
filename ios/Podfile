@@ -8,10 +8,6 @@ target 'HocTiengViet' do
 
   use_react_native!(:path => config["reactNativePath"])
 
-  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-async-storage/async-storage'
-
-  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
-
   pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
 
   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
