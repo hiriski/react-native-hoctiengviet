@@ -15,6 +15,7 @@ const RootStackNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
+        headerMode="none"
         screenOptions={{
           headerShown: false,
         }}>

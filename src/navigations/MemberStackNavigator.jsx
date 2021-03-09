@@ -9,7 +9,10 @@ const Stack = createStackNavigator();
 
 const MemberStackNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
       <Stack.Screen name={ROUTES.MEMBER_LIST} component={MemberListScreen} />
       <Stack.Screen
         name={ROUTES.MEMBER_DETAILS}

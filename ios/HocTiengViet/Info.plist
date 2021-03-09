@@ -71,6 +71,36 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>HKGrotesk-Black.otf</string>
+		<string>HKGrotesk-Bold.otf</string>
+		<string>HKGrotesk-BoldItalic.otf</string>
+		<string>HKGrotesk-BoldLegacy.otf</string>
+		<string>HKGrotesk-BoldLegacyItalic.otf</string>
+		<string>HKGrotesk-ExtraBold.otf</string>
+		<string>HKGrotesk-Italic.otf</string>
+		<string>HKGrotesk-LegacyItalic.otf</string>
+		<string>HKGrotesk-Light.otf</string>
+		<string>HKGrotesk-LightItalic.otf</string>
+		<string>HKGrotesk-LightLegacy.otf</string>
+		<string>HKGrotesk-LightLegacyItalic.otf</string>
+		<string>HKGrotesk-Medium.otf</string>
+		<string>HKGrotesk-MediumItalic.otf</string>
+		<string>HKGrotesk-MediumLegacy.otf</string>
+		<string>HKGrotesk-MediumLegacyItalic.otf</string>
+		<string>HKGrotesk-Regular.otf</string>
+		<string>HKGrotesk-RegularLegacy.otf</string>
+		<string>HKGrotesk-SemiBold.otf</string>
+		<string>HKGrotesk-SemiBoldItalic.otf</string>
+		<string>HKGrotesk-SemiBoldLegacy.otf</string>
+		<string>HKGrotesk-SemiBoldLegacyItalic.otf</string>
+		<string>Lora-Bold.ttf</string>
+		<string>Lora-BoldItalic.ttf</string>
+		<string>Lora-Italic.ttf</string>
+		<string>Lora-Medium.ttf</string>
+		<string>Lora-MediumItalic.ttf</string>
+		<string>Lora-Regular.ttf</string>
+		<string>Lora-SemiBold.ttf</string>
+		<string>Lora-SemiBoldItalic.ttf</string>
 	</array>
 </dict>
 </plist>

@@ -15,7 +15,10 @@ const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
   return (
-    <Drawer.Navigator>
+    <Drawer.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
       <Drawer.Screen name={ROUTES.PROFILE} component={ProfileScreen} />
       <Drawer.Screen name={ROUTES.SONG} component={SongScreen} />
       <Drawer.Screen name={ROUTES.CHAT} component={ChatScreen} />

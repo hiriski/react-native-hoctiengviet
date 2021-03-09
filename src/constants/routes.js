@@ -19,4 +19,5 @@ export const ROUTES = {
   SETTINGS: 'Settings',
   ABOUT: 'About',
   CONTACT: 'Contact',
+  LEARN: 'Learn',
 };

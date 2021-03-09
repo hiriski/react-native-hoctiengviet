@@ -4,15 +4,19 @@ import MainLayout from '../../layouts/MainLayout';
 import {useNavigation} from '@react-navigation/core';
 import {ROUTES} from '../../constants';
 
+import {SafeAreaView} from 'react-native-safe-area-context';
+
 const OnBoardingScreen = () => {
   const navigation = useNavigation();
   return (
     <MainLayout>
-      <Text>OnBoardingScreen</Text>
-      <Button
-        onPress={() => navigation.navigate(ROUTES.HOME)}
-        title="Go to home"
-      />
+      <SafeAreaView style={{flex: 1, backgroundColor: 'red'}}>
+        <Text>OnBoardingScreen</Text>
+        <Button
+          onPress={() => navigation.navigate(ROUTES.HOME)}
+          title="Go to home"
+        />
+      </SafeAreaView>
     </MainLayout>
   );
 };
