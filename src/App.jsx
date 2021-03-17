@@ -4,15 +4,18 @@ import RootStackNavigator from './navigations/RootStackNavigator';
 
 /* providers */
 import SafeAreaContextProvider from './providers/SafeAreaContextProvider';
+import UIKittenProvider from './providers/UIKittenProvider';
 
 const XinChaoApp = () => {
   React.useEffect(() => {
     SplashScreen.hide();
   }, []);
   return (
-    <SafeAreaContextProvider>
-      <RootStackNavigator />
-    </SafeAreaContextProvider>
+    <UIKittenProvider>
+      <SafeAreaContextProvider>
+        <RootStackNavigator />
+      </SafeAreaContextProvider>
+    </UIKittenProvider>
   );
 };
 
