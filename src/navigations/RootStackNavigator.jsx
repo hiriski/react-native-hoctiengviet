@@ -7,7 +7,7 @@ import {ROUTES} from '../constants';
 import OnBoardingScreen from '../screens/OnBoardingScreen';
 import HomeTabNavigator from './HomeTabNavigator';
 import MemberStackNavigator from './MemberStackNavigator';
-// import DrawerNavigator from './DrawerNavigator';
+import DrawerNavigator from './DrawerNavigator';
 
 const Stack = createStackNavigator();
 
@@ -20,8 +20,9 @@ const RootStackNavigator = () => {
           headerShown: false,
         }}>
         <Stack.Screen name={ROUTES.ONBOARDING} component={OnBoardingScreen} />
-        <Stack.Screen name={ROUTES.HOME} component={HomeTabNavigator} />
-        <Stack.Screen name={ROUTES.MEMBER} component={MemberStackNavigator} />
+        <Stack.Screen name={ROUTES.HOME} component={DrawerNavigator} />
+        {/* <Stack.Screen name={ROUTES.HOME_DRAWER} component={DrawerNavigator} /> */}
+        {/* <Stack.Screen name={ROUTES.MEMBER} component={MemberStackNavigator} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

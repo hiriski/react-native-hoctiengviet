@@ -6,10 +6,12 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import ProfileScreen from '../screens/ProfileScreen';
 import SongScreen from '../screens/SongScreen';
 import ChatScreen from '../screens/ChatScreen';
-// import AboutScreen from '../screens/AboutScreen';
-// import ContactScreen from '../screens/ContactScreen';
-// import FavoriteScreen from '../screens/FavoriteScreen';
-// import SettingsScreen from '../screens/SettingsScreen';
+import HomeScreen from '../screens/HomeScreen';
+import HomeTabNavigatorV2 from './HomeTabNavigatorV2';
+import AboutScreen from '../screens/AboutScreen';
+import ContactScreen from '../screens/ContactScreen';
+import FavoriteScreen from '../screens/FavoriteScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -19,13 +21,14 @@ const DrawerNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}>
+      <Drawer.Screen name={ROUTES.TAB} component={HomeTabNavigatorV2} />
       <Drawer.Screen name={ROUTES.PROFILE} component={ProfileScreen} />
       <Drawer.Screen name={ROUTES.SONG} component={SongScreen} />
       <Drawer.Screen name={ROUTES.CHAT} component={ChatScreen} />
-      {/* <Drawer.Screen name={ROUTES.FAVORITE} component={FavoriteScreen} />
+      <Drawer.Screen name={ROUTES.FAVORITE} component={FavoriteScreen} />
       <Drawer.Screen name={ROUTES.SETTINGS} component={SettingsScreen} />
       <Drawer.Screen name={ROUTES.ABOUT} component={AboutScreen} />
-      <Drawer.Screen name={ROUTES.CONTACT} component={ContactScreen} /> */}
+      <Drawer.Screen name={ROUTES.CONTACT} component={ContactScreen} />
     </Drawer.Navigator>
   );
 };
