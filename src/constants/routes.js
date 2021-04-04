@@ -11,6 +11,7 @@ export const ROUTES = {
   MEMBER: 'Member',
   MEMBER_LIST: 'MemberList',
   MEMBER_DETAILS: 'MemberDetails',
+  CREATE_DISCUSSION: 'CreateDiscussion',
   DISCUSSION_LIST: 'DiscussionList',
   DISCUSSION_DETAILS: 'DiscussionDetails',
   PHRASEBOOK_LIST: 'PhraseBookList',

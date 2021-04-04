@@ -1,15 +1,20 @@
 import React from 'react';
-import {View, Text, TouchableHighlight, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableHighlight,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {MATERIAL_ICONS, ROUTES} from '../constants';
+import {COLORS, ROUTES} from '../constants';
 import HomeScreen from '../screens/HomeScreen';
 import ChillaxScreen from '../screens/ChillaxScreen';
-import SongScreen from '../screens/SongScreen';
+import CreateDiscussionScreen from '../screens/CreateDiscussionScreen';
 import ChatScreen from '../screens/ChatScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {Icon} from '@ui-kitten/components';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,7 +23,10 @@ const HomeTabNavigatorV2 = () => {
     <Tab.Navigator tabBar={(props) => <CustomTabBar {...props} />}>
       <Tab.Screen name={ROUTES.HOME} component={HomeScreen} />
       <Tab.Screen name={ROUTES.CHILLAX} component={ChillaxScreen} />
-      <Tab.Screen name={ROUTES.SONG} component={SongScreen} />
+      <Tab.Screen
+        name={ROUTES.CREATE_DISCUSSION}
+        component={CreateDiscussionScreen}
+      />
       <Tab.Screen name={ROUTES.CHAT} component={ChatScreen} />
       <Tab.Screen name={ROUTES.PROFILE} component={ProfileScreen} />
     </Tab.Navigator>
@@ -32,22 +40,22 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
     return null;
   }
 
-  const renderTabBarItem = ({routeName, color = '#555', size = 22}) => {
+  const renderTabBarItem = ({routeName, fill = COLORS.muted, style}) => {
     let iconName;
     if (routeName === ROUTES.HOME) {
-      iconName = MATERIAL_ICONS.FOLDER;
+      iconName = 'layers';
     } else if (routeName === ROUTES.CHILLAX) {
-      iconName = MATERIAL_ICONS.COFFE;
-    } else if (routeName === ROUTES.SONG) {
-      iconName = MATERIAL_ICONS.HEADSET;
+      iconName = 'headphones';
+    } else if (routeName === ROUTES.CREATE_DISCUSSION) {
+      iconName = 'plus-circle';
     } else if (routeName === ROUTES.CHAT) {
-      iconName = MATERIAL_ICONS.FORUM;
+      iconName = 'message-circle';
     } else if (routeName === ROUTES.PROFILE) {
-      iconName = MATERIAL_ICONS.ACCOUNT_CIRCLE;
+      iconName = 'person';
     } else {
-      iconName = MATERIAL_ICONS.LAYERS;
+      iconName = 'home';
     }
-    return <MaterialIcons name={iconName} color={color} size={size} />;
+    return <Icon name={iconName} fill={fill} style={style} />;
   };
 
   return (
@@ -83,38 +91,34 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
             });
           };
 
-          return isFocused ? (
-            <View key={route.name} style={styles.rootItem}>
-              <TouchableHighlight
-                key={label}
-                underlayColor="#ececec"
-                style={[styles.item, styles.focusedItem]}
-                accessibilityRole="button"
-                accessibilityState={isFocused ? {selected: true} : {}}
-                accessibilityLabel={options.tabBarAccessibilityLabel}
-                testID={options.tabBarTestID}
-                onPress={onPress}
-                onLongPress={onLongPress}>
-                {renderTabBarItem({routeName: route.name, color: '#fff'})}
-                {/* <Text>{route.name}</Text> */}
-              </TouchableHighlight>
-            </View>
-          ) : (
-            <View key={route.name} style={styles.rootItem}>
-              <TouchableHighlight
-                underlayColor="#ececec"
-                key={label}
-                style={[styles.item, styles.inactiveItem]}
-                accessibilityRole="button"
-                accessibilityState={isFocused ? {selected: true} : {}}
-                accessibilityLabel={options.tabBarAccessibilityLabel}
-                testID={options.tabBarTestID}
-                onPress={onPress}
-                onLongPress={onLongPress}>
-                {renderTabBarItem({routeName: route.name})}
-                {/* <Text>{label}</Text> */}
-              </TouchableHighlight>
-            </View>
+          return (
+            <TouchableHighlight
+              key={label}
+              style={[styles.item, isFocused && styles.focusedItem]}
+              accessibilityRole="button"
+              accessibilityState={isFocused ? {selected: true} : {}}
+              accessibilityLabel={options.tabBarAccessibilityLabel}
+              onPress={onPress}
+              onLongPress={onLongPress}>
+              {isFocused ? (
+                <View style={styles.itemContainer}>
+                  {renderTabBarItem({
+                    routeName: route.name,
+                    color: COLORS.white,
+                    style: styles.iconFocus,
+                  })}
+                  <Text style={styles.label}>{route.name}</Text>
+                </View>
+              ) : (
+                <View style={styles.itemContainer}>
+                  {renderTabBarItem({
+                    routeName: route.name,
+                    color: COLORS.white,
+                    style: styles.icon,
+                  })}
+                </View>
+              )}
+            </TouchableHighlight>
           );
         })}
       </View>
@@ -124,13 +128,14 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
 
 const TAB_ITEM_SIZE = 42;
 const CONTAINER_HEIGHT = 50;
+console.log(Dimensions.get('window'));
 
 const styles = StyleSheet.create({
   root: {
-    // height: 100,
+    height: CONTAINER_HEIGHT,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10,
+    padding: 12,
     overflow: 'hidden',
   },
   container: {
@@ -138,27 +143,50 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     height: CONTAINER_HEIGHT,
-    borderRadius: 20,
-    backgroundColor: '#fff',
-  },
-  rootItem: {
-    alignItems: 'center',
+    borderRadius: CONTAINER_HEIGHT,
+    backgroundColor: COLORS.white,
     flex: 1,
   },
+  // rootItem: {
+  //   alignItems: 'center',
+  //   flex: 1,
+  // },
   item: {
     borderRadius: TAB_ITEM_SIZE,
-    width: TAB_ITEM_SIZE,
-    height: TAB_ITEM_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
   },
-  focusedItem: {
-    backgroundColor: 'red',
+  itemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
   },
-  focusedText: {color: '#fff'},
-  textFocused: {
-    color: '#673ab7',
+  itemContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  label: {
+    color: COLORS.white,
+    marginLeft: 4,
+    fontFamily: 'HKGrotesk-Bold',
+    fontSize: 15,
+  },
+  focusedItem: {
+    backgroundColor: COLORS.primary,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+  },
+  icon: {
+    width: 24,
+    height: 24,
+  },
+  activeIcon: {
+    width: 20,
+    height: 20,
   },
 });
 
