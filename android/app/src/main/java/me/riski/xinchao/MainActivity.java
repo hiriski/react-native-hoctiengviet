@@ -1,4 +1,4 @@
-package com.hoctiengviet;
+package me.riski.xinchao;
 
 import com.facebook.react.ReactActivity;
 import android.os.Bundle; // required for onCreate parameter
@@ -19,7 +19,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "HocTiengViet";
+    return "XinChao";
   }
 
 }

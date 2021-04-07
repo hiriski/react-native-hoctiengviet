@@ -6,10 +6,15 @@ import RootStackNavigator from './navigations/RootStackNavigator';
 import SafeAreaContextProvider from './providers/SafeAreaContextProvider';
 import UIKittenProvider from './providers/UIKittenProvider';
 
+import NotificationService from './services/NotificationService';
+
 const XinChaoApp = () => {
   React.useEffect(() => {
     SplashScreen.hide();
+    NotificationService.configure();
+    NotificationService.createChannel();
   }, []);
+
   return (
     <UIKittenProvider>
       <SafeAreaContextProvider>
