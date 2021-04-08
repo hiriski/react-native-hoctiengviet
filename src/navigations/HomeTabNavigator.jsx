@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, TouchableHighlight, StyleSheet} from 'react-native';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {MATERIAL_ICONS, ROUTES} from '../constants';
@@ -84,30 +84,36 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
           };
 
           return isFocused ? (
-            <TouchableOpacity
-              key={label}
-              style={styles.focusedItem}
-              accessibilityRole="button"
-              accessibilityState={isFocused ? {selected: true} : {}}
-              accessibilityLabel={options.tabBarAccessibilityLabel}
-              testID={options.tabBarTestID}
-              onPress={onPress}
-              onLongPress={onLongPress}>
-              {renderTabBarIcons({routeName: route.name, color: '#fff'})}
-            </TouchableOpacity>
+            <View style={styles.rootItem}>
+              <TouchableHighlight
+                key={label}
+                underlayColor="#ececec"
+                style={[styles.item, styles.focusedItem]}
+                accessibilityRole="button"
+                accessibilityState={isFocused ? {selected: true} : {}}
+                accessibilityLabel={options.tabBarAccessibilityLabel}
+                testID={options.tabBarTestID}
+                onPress={onPress}
+                onLongPress={onLongPress}>
+                {renderTabBarIcons({routeName: route.name, color: '#fff'})}
+              </TouchableHighlight>
+            </View>
           ) : (
-            <TouchableOpacity
-              key={label}
-              style={styles.item}
-              accessibilityRole="button"
-              accessibilityState={isFocused ? {selected: true} : {}}
-              accessibilityLabel={options.tabBarAccessibilityLabel}
-              testID={options.tabBarTestID}
-              onPress={onPress}
-              onLongPress={onLongPress}>
-              {renderTabBarIcons({routeName: route.name})}
-              {/* <Text>{label}</Text> */}
-            </TouchableOpacity>
+            <View style={styles.rootItem}>
+              <TouchableHighlight
+                underlayColor="#ececec"
+                key={label}
+                style={[styles.item, styles.inactiveItem]}
+                accessibilityRole="button"
+                accessibilityState={isFocused ? {selected: true} : {}}
+                accessibilityLabel={options.tabBarAccessibilityLabel}
+                testID={options.tabBarTestID}
+                onPress={onPress}
+                onLongPress={onLongPress}>
+                {renderTabBarIcons({routeName: route.name})}
+                {/* <Text>{label}</Text> */}
+              </TouchableHighlight>
+            </View>
           );
         })}
       </View>
@@ -115,34 +121,37 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
   );
 };
 
+const TAB_ITEM_SIZE = 42;
+
 const styles = StyleSheet.create({
   root: {
-    height: 60,
+    height: 62,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
   container: {
-    paddingHorizontal: 10,
-    height: 40,
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: TAB_ITEM_SIZE,
+  },
+  rootItem: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  item: {
+    borderRadius: TAB_ITEM_SIZE,
+    width: TAB_ITEM_SIZE,
+    height: TAB_ITEM_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
+    flex: 1,
   },
   focusedItem: {
     backgroundColor: 'red',
-    borderRadius: 46,
-    width: 46,
-    height: 46,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   focusedText: {color: '#fff'},
-  item: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   textFocused: {
     color: '#673ab7',
   },

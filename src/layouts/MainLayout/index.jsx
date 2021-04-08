@@ -7,7 +7,7 @@ const MainLayout = ({children}) => {
   return <View style={styles.root}>{children}</View>;
 };
 
-MainLayout.prototype = {
+MainLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
 

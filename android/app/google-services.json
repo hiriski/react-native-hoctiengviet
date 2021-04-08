@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "97949598812",
+    "project_id": "xinchao-app",
+    "storage_bucket": "xinchao-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97949598812:android:60daf968fbd07fbe129299",
+        "android_client_info": {
+          "package_name": "me.riski.xinchao"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97949598812-09cpkmprv2umosqko4bu7qcr2v1stgqb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.riski.xinchao",
+            "certificate_hash": "005af328cb0c3609c325810e57d70ffbce7406dc"
+          }
+        },
+        {
+          "client_id": "97949598812-27agl9elq3i6kf19ssb3nc0uh3s7rhbq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmPBQI49YKsid4xcckVn-b_xbagfTmt-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97949598812-27agl9elq3i6kf19ssb3nc0uh3s7rhbq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
