@@ -12,7 +12,7 @@ import NotificationScreen from '../screens/NotificationScreen';
 const Stack = createStackNavigator();
 
 const RootStackNavigator = () => {
-  const isAuthenticated = false;
+  const isAuthenticated = true;
   const isAlreadyLaunched = true;
   return (
     <NavigationContainer>
@@ -24,7 +24,7 @@ const RootStackNavigator = () => {
         {!isAlreadyLaunched ? (
           <Stack.Screen name={ROUTES.ONBOARDING} component={OnBoardingScreen} />
         ) : isAuthenticated ? (
-          <Stack.Screen name={ROUTES.HOME} component={DrawerNavigator} />
+          <Stack.Screen name={ROUTES.ROOT_STACK} component={DrawerNavigator} />
         ) : (
           <>
             <Stack.Screen
