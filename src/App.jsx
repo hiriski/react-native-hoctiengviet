@@ -8,6 +8,9 @@ import UIKittenProvider from './providers/UIKittenProvider';
 
 import NotificationService from './services/NotificationService';
 
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+GoogleSignin.configure();
+
 const XinChaoApp = () => {
   React.useEffect(() => {
     SplashScreen.hide();

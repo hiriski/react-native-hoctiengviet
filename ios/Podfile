@@ -14,6 +14,8 @@ target 'XinChao' do
 
   pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
 
+  pod 'RNGoogleSignin', :path => '../node_modules/@react-native-google-signin/google-signin'
+
   target 'XinChaoTests' do
     inherit! :complete
     # Pods for testing

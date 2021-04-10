@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 const AuthStackNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName={ROUTES.REGISTER}
+      initialRouteName={ROUTES.LOGIN}
       screenOptions={{
         headerShown: false,
       }}>
