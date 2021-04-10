@@ -7,7 +7,6 @@ import {ROUTES} from '../constants';
 import OnBoardingScreen from '../screens/OnBoardingScreen';
 import DrawerNavigator from './DrawerNavigator';
 import AuthStackNavigator from './AuthStackNavigator';
-import NotificationScreen from '../screens/NotificationScreen';
 
 const Stack = createStackNavigator();
 
@@ -27,10 +26,6 @@ const RootStackNavigator = () => {
           <Stack.Screen name={ROUTES.ROOT_STACK} component={DrawerNavigator} />
         ) : (
           <>
-            <Stack.Screen
-              name={ROUTES.NOTIFICATION}
-              component={NotificationScreen}
-            />
             <Stack.Screen name={ROUTES.AUTH} component={AuthStackNavigator} />
           </>
         )}
