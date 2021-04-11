@@ -1,18 +1,20 @@
 import React from 'react';
-import MainLayout from '../../layouts/MainLayout';
+import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {useNavigation} from '@react-navigation/core';
 import {ROUTES} from '../../constants';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-import styles from './styles';
 import FocusAwareStatusBar from '../../components/common/FocusAwareStatusBar';
-import {Button, Text} from '@ui-kitten/components';
+import {Layout, Button, Text, Input, Icon} from '@ui-kitten/components';
 
 import {
   GoogleSignin,
-  GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+
+// svg
+import GoogleIconSvg from '../../assets/svg/google.svg';
+import AuthLayout from '../../layouts/AuthLayout';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -20,8 +22,10 @@ const LoginScreen = () => {
   const [isLoginScreenPresented, setIsLoginScreenPresented] = React.useState(
     null,
   );
+  const [value, setValue] = React.useState('');
+  const [secureTextEntry, setSecureTextEntry] = React.useState(true);
 
-  const signIn = async () => {
+  const signInGoogle = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
@@ -65,23 +69,56 @@ const LoginScreen = () => {
 
   console.log('USERINFO', userInfo);
 
-  return (
-    <MainLayout>
-      <SafeAreaView style={styles.root}>
-        <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#fff" />
-        <Text>LoginScreen</Text>
+  const renderIcon = (props) => (
+    <TouchableWithoutFeedback onPress={toggleSecureEntry}>
+      <Icon {...props} name={secureTextEntry ? 'eye-off' : 'eye'} />
+    </TouchableWithoutFeedback>
+  );
 
-        <GoogleSigninButton
-          style={{width: 192, height: 48}}
-          size={GoogleSigninButton.Size.Wide}
-          color={GoogleSigninButton.Color.Dark}
-          onPress={signIn}
+  const toggleSecureEntry = () => {
+    setSecureTextEntry(!secureTextEntry);
+  };
+
+  return (
+    <AuthLayout>
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <Layout style={styles.container}>
+        <Text category="h1">Belajar Bahasa Vietnam Bersama Komunitas</Text>
+        <Input placeholder="Username/email" value="" />
+        <Input
+          value={value}
+          label="Password"
+          placeholder="Place your Text"
+          caption="Should contain at least 8 symbols"
+          accessoryRight={renderIcon}
+          captionIcon={AlertIcon}
+          secureTextEntry={secureTextEntry}
+          onChangeText={(nextValue) => setValue(nextValue)}
         />
+        <Button
+          style={styles.loginGoogleButton}
+          onPress={signInGoogle}
+          appearance="outline"
+          accessoryLeft={GoogleIcon}>
+          Sign In with Google
+        </Button>
         <Button onPress={getCurrentUser}>Get user info</Button>
         <Button onPress={signOut}>Sign Out</Button>
-      </SafeAreaView>
-    </MainLayout>
+      </Layout>
+    </AuthLayout>
   );
 };
+
+const GoogleIcon = () => <GoogleIconSvg width={20} height={20} />;
+const AlertIcon = (props) => <Icon {...props} name="alert-circle-outline" />;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  loginGoogleButton: {
+    borderColor: '#eee',
+  },
+});
 
 export default LoginScreen;

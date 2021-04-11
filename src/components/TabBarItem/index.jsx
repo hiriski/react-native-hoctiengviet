@@ -70,26 +70,19 @@ const TabBarItem = ({
   );
 };
 
-const TAB_ITEM_SIZE = 100;
+const TAB_ITEM_SIZE = 50;
 
 const styles = StyleSheet.create({
   itemRoot: {
     borderRadius: TAB_ITEM_SIZE,
-    maxHeight: TAB_ITEM_SIZE,
-    maxWidth: TAB_ITEM_SIZE,
     overflow: 'hidden',
     flex: 1,
   },
   item: {
     borderRadius: TAB_ITEM_SIZE,
-    // height: TAB_ITEM_SIZE,
-    // width: TAB_ITEM_SIZE,
     flex: 1,
   },
-  focusedItem: {
-    // paddingHorizontal: 14,
-    // width: 'auto',
-  },
+  focusedItem: {},
   itemContainer: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -100,8 +93,6 @@ const styles = StyleSheet.create({
     height: 24,
   },
   focusedIcon: {
-    // width: 18,
-    // height: 18,
     width: 22,
     height: 22,
     color: COLORS.primary,

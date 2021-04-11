@@ -65,9 +65,11 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
   );
 };
 
+const width = Dimensions.get('window').width;
 const CONTAINER_HEIGHT = 62;
 const SPACING = 20;
-export const TAB_BAR_WIDTH = Dimensions.get('window').width - SPACING * 4;
+export const TAB_BAR_WIDTH =
+  width > 360 ? width - SPACING * 4 : width - SPACING * 2;
 
 const styles = StyleSheet.create({
   root: {

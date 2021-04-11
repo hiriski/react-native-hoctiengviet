@@ -4,7 +4,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View, TouchableHighlight, StyleSheet} from 'react-native';
+import {View, TouchableHighlight, StyleSheet, Dimensions} from 'react-native';
 import {Icon, Text} from '@ui-kitten/components';
 import {ROUTES, COLORS} from '../../constants';
 import {useNavigation, useRoute} from '@react-navigation/core';
@@ -35,11 +35,12 @@ const DrawerItem = ({onPress, label, iconName}) => {
   );
 };
 
-const DRAWER_ITEM_HEIGHT = 54;
+const height = Dimensions.get('window').height;
+const DRAWER_ITEM_HEIGHT = height > 640 ? 52 : 46;
 
 const styles = StyleSheet.create({
   drawerItem: {
-    paddingHorizontal: 30,
+    paddingHorizontal: height > 640 ? 30 : 24,
   },
   activeDrawerItem: {
     backgroundColor: COLORS.primaryLight,
@@ -60,8 +61,8 @@ const styles = StyleSheet.create({
     color: COLORS.textSecondary,
   },
   icon: {
-    height: 21,
-    width: 21,
+    height: 20,
+    width: 20,
     marginRight: 24,
   },
 });

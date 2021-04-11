@@ -58,7 +58,10 @@ const HomeScreen = () => {
   return (
     <MainLayout>
       <SafeAreaView style={styles.root}>
-        <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#fff" />
+        <FocusAwareStatusBar
+          barStyle="light-content"
+          backgroundColor={COLORS.primary}
+        />
         <TopNavigation
           accessoryLeft={renderBackAction}
           accessoryRight={renderRightActions}

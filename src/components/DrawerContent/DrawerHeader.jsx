@@ -3,7 +3,13 @@
  */
 
 import React from 'react';
-import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import {Text, Divider, Icon} from '@ui-kitten/components';
 import {COLORS, ROUTES} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
@@ -48,12 +54,13 @@ const DrawerHeader = () => {
 };
 
 const HEADER_HEIGHT = 80;
-const AVATAR_SIZE = 50;
+const AVATAR_SIZE = 46;
+const height = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   root: {
     justifyContent: 'center',
-    paddingHorizontal: 30,
+    paddingHorizontal: height > 640 ? 30 : 24,
   },
   container: {
     flexDirection: 'row',

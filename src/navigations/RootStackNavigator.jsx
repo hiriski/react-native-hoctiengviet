@@ -11,7 +11,7 @@ import AuthStackNavigator from './AuthStackNavigator';
 const Stack = createStackNavigator();
 
 const RootStackNavigator = () => {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   const isAlreadyLaunched = true;
   return (
     <NavigationContainer>
