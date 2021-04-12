@@ -14,13 +14,45 @@ const Tab = createBottomTabNavigator();
 
 const HomeTabNavigatorV2 = () => {
   return (
-    <Tab.Navigator tabBar={(props) => <CustomTabBar {...props} />}>
-      <Tab.Screen name={ROUTES.HOME} component={HomeScreen} />
-      <Tab.Screen name={ROUTES.CHILLAX} component={ChillaxScreen} />
-      <Tab.Screen name={ROUTES.CREATE} component={CreateDiscussionScreen} />
-      <Tab.Screen name={ROUTES.CHAT} component={ChatScreen} />
-      <Tab.Screen name={ROUTES.PROFILE} component={ProfileScreen} />
-    </Tab.Navigator>
+    <>
+      <Tab.Navigator tabBar={(props) => <CustomTabBar {...props} />}>
+        <Tab.Screen
+          options={{
+            tabBarLabel: 'Home',
+          }}
+          name={ROUTES.HOME}
+          component={HomeScreen}
+        />
+        <Tab.Screen
+          options={{
+            tabBarLabel: 'Chillax',
+          }}
+          name={ROUTES.CHILLAX}
+          component={ChillaxScreen}
+        />
+        <Tab.Screen
+          options={{
+            tabBarLabel: 'Add',
+          }}
+          name={ROUTES.CREATE}
+          component={CreateDiscussionScreen}
+        />
+        <Tab.Screen
+          options={{
+            tabBarLabel: 'Chat',
+          }}
+          name={ROUTES.CHAT}
+          component={ChatScreen}
+        />
+        <Tab.Screen
+          options={{
+            tabBarLabel: 'Profil',
+          }}
+          name={ROUTES.PROFILE}
+          component={ProfileScreen}
+        />
+      </Tab.Navigator>
+    </>
   );
 };
 
@@ -71,7 +103,11 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
             });
 
             if (!isFocused && !event.defaultPrevented) {
-              navigation.navigate(route.name);
+              if (route.name === ROUTES.CREATE) {
+                alert('Add Button pressed!');
+              } else {
+                navigation.navigate(route.name);
+              }
             }
           };
 
@@ -100,7 +136,7 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
                     style: styles.focusedIcon,
                   })}
                   <Text style={styles.label} category="label">
-                    {route.name}
+                    {label}
                   </Text>
                 </View>
               ) : (

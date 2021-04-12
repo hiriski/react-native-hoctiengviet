@@ -1,15 +1,38 @@
 import React from 'react';
-import {Text} from 'react-native';
-import ScreenHeader from '../../components/partials/ScreenHeader';
-import MainLayout from '../../layouts/MainLayout';
+import {useNavigation} from '@react-navigation/core';
 
-const ProfileScreen = () => {
+import FocusAwareStatusBar from '../../components/common/FocusAwareStatusBar';
+import {Button, Text, Divider} from '@ui-kitten/components';
+import {useWindowDimensions, StyleSheet, Dimensions} from 'react-native';
+import ProfileHeader from '../../components/ProfileHeader';
+
+const HomeScreen = () => {
+  const navigation = useNavigation();
+  const {width} = useWindowDimensions();
+
   return (
-    <MainLayout>
-      <ScreenHeader title="PROFILE" />
-      <Text>ProfileScreen</Text>
-    </MainLayout>
+    <>
+      <FocusAwareStatusBar
+        barStyle="light-content"
+        backgroundColor={'transparent'}
+        translucent
+      />
+      <ProfileHeader />
+      <Text>HomeScreen</Text>
+      <Button
+        onPress={() =>
+          navigation.navigate(ROUTES.MEMBER, {
+            screen: ROUTES.MEMBER_LIST,
+          })
+        }>
+        Go to member list screen
+      </Button>
+    </>
   );
 };
 
-export default ProfileScreen;
+const width = Dimensions.get('window').width;
+
+const styles = StyleSheet.create({});
+
+export default HomeScreen;

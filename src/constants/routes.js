@@ -1,5 +1,6 @@
 export const ROUTES = {
   ONBOARDING: 'Onboarding',
+  ROOT_STACK: 'RootStack',
   AUTH: 'Auth',
   LOGIN: 'Login',
   REGISTER: 'Register',

@@ -3,6 +3,8 @@ import PushNotification from 'react-native-push-notification';
 class NotificationService {
   configure = () => {
     PushNotification.configure({
+      playSound: true,
+      soundName: 'default',
       // (required) Called when a remote or local notification is opened or received
       onNotification: function (notification) {
         console.log('LOCAL NOTIFICATION ==>', notification);
@@ -29,7 +31,7 @@ class NotificationService {
         channelId: 'default_notification_channel_id', // (required)
         channelName: 'My channel', // (required)
         channelDescription: 'A channel to categorise your notifications', // (optional) default: undefined.
-        playSound: false, // (optional) default: true
+        playSound: true, // (optional) default: true
         soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
         importance: 4, // (optional) default: 4. Int value of the Android notification importance
         vibrate: true, // (optional) default: true. Creates the default vibration patten if true.

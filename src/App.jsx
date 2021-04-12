@@ -1,8 +1,10 @@
 import React from 'react';
 import SplashScreen from 'react-native-splash-screen';
+import GlobalFlashMessage from './components/FlashMessage';
 import RootStackNavigator from './navigations/RootStackNavigator';
 
 /* providers */
+import OfflineProvider from './providers/OfflineProvider';
 import SafeAreaContextProvider from './providers/SafeAreaContextProvider';
 import UIKittenProvider from './providers/UIKittenProvider';
 
@@ -16,11 +18,14 @@ const XinChaoApp = () => {
   }, []);
 
   return (
-    <UIKittenProvider>
-      <SafeAreaContextProvider>
-        <RootStackNavigator />
-      </SafeAreaContextProvider>
-    </UIKittenProvider>
+    <OfflineProvider>
+      <UIKittenProvider>
+        <SafeAreaContextProvider>
+          <RootStackNavigator />
+          <GlobalFlashMessage />
+        </SafeAreaContextProvider>
+      </UIKittenProvider>
+    </OfflineProvider>
   );
 };
 
