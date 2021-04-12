@@ -1,15 +1,14 @@
 import React from 'react';
 import SplashScreen from 'react-native-splash-screen';
+import GlobalFlashMessage from './components/FlashMessage';
 import RootStackNavigator from './navigations/RootStackNavigator';
 
 /* providers */
+import OfflineProvider from './providers/OfflineProvider';
 import SafeAreaContextProvider from './providers/SafeAreaContextProvider';
 import UIKittenProvider from './providers/UIKittenProvider';
 
 import NotificationService from './services/NotificationService';
-
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-GoogleSignin.configure();
 
 const XinChaoApp = () => {
   React.useEffect(() => {
@@ -19,11 +18,14 @@ const XinChaoApp = () => {
   }, []);
 
   return (
-    <UIKittenProvider>
-      <SafeAreaContextProvider>
-        <RootStackNavigator />
-      </SafeAreaContextProvider>
-    </UIKittenProvider>
+    <OfflineProvider>
+      <UIKittenProvider>
+        <SafeAreaContextProvider>
+          <RootStackNavigator />
+          <GlobalFlashMessage />
+        </SafeAreaContextProvider>
+      </UIKittenProvider>
+    </OfflineProvider>
   );
 };
 

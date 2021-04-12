@@ -1,8 +1,9 @@
 import React from 'react';
 import MainLayout from '../../layouts/MainLayout';
-import {useNavigation} from '@react-navigation/core';
 import {COLORS, ROUTES} from '../../constants';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useIsConnected} from 'react-native-offline';
+import {showMessage, hideMessage} from 'react-native-flash-message';
 
 import styles from './styles';
 import FocusAwareStatusBar from '../../components/common/FocusAwareStatusBar';
@@ -15,12 +16,29 @@ import {
   TopNavigation,
   TopNavigationAction,
   Icon,
+  useTheme,
 } from '@ui-kitten/components';
 
-const HomeScreen = () => {
-  const navigation = useNavigation();
+const HomeScreen = ({navigation}) => {
+  const isConnected = useIsConnected();
+  const [isOffline, setIsOffline] = React.useState(!isConnected);
+  const theme = useTheme();
 
   const [menuVisible, setMenuVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    if (isOffline) {
+      showMessage({
+        message: 'You are offline!',
+        description: 'This is our second message',
+        type: 'default',
+        animationDuration: 350,
+        autoHide: false,
+        duration: 4000,
+        hideStatusBar: false,
+      });
+    }
+  }, []);
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
@@ -78,6 +96,16 @@ const HomeScreen = () => {
             })
           }>
           Go to member list screen
+        </Button>
+        <Button
+          onPress={() =>
+            showMessage({
+              message: 'Hello World',
+              description: 'This is our second message',
+              type: 'success',
+            })
+          }>
+          Show success flash message
         </Button>
       </SafeAreaView>
     </MainLayout>

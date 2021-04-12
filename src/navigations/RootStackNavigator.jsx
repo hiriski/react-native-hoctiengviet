@@ -11,7 +11,6 @@ import AuthStackNavigator from './AuthStackNavigator';
 const Stack = createStackNavigator();
 
 const RootStackNavigator = () => {
-  const isAuthenticated = false;
   const isAlreadyLaunched = true;
   return (
     <NavigationContainer>
@@ -22,10 +21,12 @@ const RootStackNavigator = () => {
         }}>
         {!isAlreadyLaunched ? (
           <Stack.Screen name={ROUTES.ONBOARDING} component={OnBoardingScreen} />
-        ) : isAuthenticated ? (
-          <Stack.Screen name={ROUTES.ROOT_STACK} component={DrawerNavigator} />
         ) : (
           <>
+            <Stack.Screen
+              name={ROUTES.ROOT_STACK}
+              component={DrawerNavigator}
+            />
             <Stack.Screen name={ROUTES.AUTH} component={AuthStackNavigator} />
           </>
         )}
