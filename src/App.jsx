@@ -5,27 +5,33 @@ import RootStackNavigator from './navigations/RootStackNavigator';
 
 /* providers */
 import OfflineProvider from './providers/OfflineProvider';
+import ReactReduxProvider from './providers/ReactReduxProvider';
 import SafeAreaContextProvider from './providers/SafeAreaContextProvider';
 import UIKittenProvider from './providers/UIKittenProvider';
 
 import NotificationService from './services/NotificationService';
+import {getAllAsyncStorage, clearAsyncStorage} from './utils';
 
 const XinChaoApp = () => {
   React.useEffect(() => {
     SplashScreen.hide();
     NotificationService.configure();
     NotificationService.createChannel();
+    getAllAsyncStorage();
+    // clearAsyncStorage();
   }, []);
 
   return (
-    <OfflineProvider>
-      <UIKittenProvider>
-        <SafeAreaContextProvider>
-          <RootStackNavigator />
-          <GlobalFlashMessage />
-        </SafeAreaContextProvider>
-      </UIKittenProvider>
-    </OfflineProvider>
+    <ReactReduxProvider>
+      <OfflineProvider>
+        <UIKittenProvider>
+          <SafeAreaContextProvider>
+            <RootStackNavigator />
+            <GlobalFlashMessage />
+          </SafeAreaContextProvider>
+        </UIKittenProvider>
+      </OfflineProvider>
+    </ReactReduxProvider>
   );
 };
 

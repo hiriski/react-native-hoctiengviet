@@ -6,7 +6,9 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {ROUTES} from '../../constants';
 import DrawerItem from './DrawerItem';
-import {useNavigation, useRoute} from '@react-navigation/core';
+import {useNavigation} from '@react-navigation/core';
+import {useDispatch} from 'react-redux';
+import {logout} from '../../redux/actions/authActions';
 
 const navigations = [
   {
@@ -35,6 +37,11 @@ const navigations = [
     icon: 'heart',
   },
   {
+    label: 'Log Out',
+    routeName: '__LOGOUT__',
+    icon: 'log-out',
+  },
+  {
     label: 'Pengaturan',
     routeName: ROUTES.SETTINGS,
     icon: 'settings',
@@ -43,12 +50,22 @@ const navigations = [
 
 const DrawerListItem = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const handlePress = (routeName) => {
+    if (routeName === '__LOGOUT__') {
+      dispatch(logout());
+    } else {
+      navigation.navigate(routeName);
+    }
+  };
+
   return (
     <View style={styles.root}>
       {navigations.map(({label, routeName, icon}) => (
         <DrawerItem
           key={routeName}
-          onPress={() => navigation.navigate(routeName)}
+          onPress={() => handlePress(routeName)}
           label={label}
           iconName={icon}
           routeName={routeName}

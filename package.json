@@ -5,9 +5,10 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "start": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "debug": "open 'rndebugger://set-debugger-loc?host=localhost&port=8081'"
   },
   "dependencies": {
     "@eva-design/eva": "^2.0.0",
@@ -64,7 +65,9 @@
     "metro-react-native-babel-preset": "^0.65.2",
     "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "16.13.1",
-    "reactotron-react-native": "^5.0.0"
+    "reactotron-react-native": "^5.0.0",
+    "redux-devtools-extension": "^2.13.9",
+    "remote-redux-devtools": "^0.5.16"
   },
   "jest": {
     "preset": "react-native"

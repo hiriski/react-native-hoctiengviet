@@ -15,9 +15,16 @@ import {
 // svg
 import GoogleIconSvg from '../../assets/svg/google.svg';
 import AuthLayout from '../../layouts/AuthLayout';
+import {useDispatch} from 'react-redux';
+import {
+  authWithSocialAccount,
+  authWithSocialAccountCancelled,
+  authWithSocialAccountFailure,
+} from '../../redux/actions/authActions';
+import GoogleSignInService from '../../services/GoogleSignInService';
 
-const LoginScreen = () => {
-  const navigation = useNavigation();
+const LoginScreen = ({navigation}) => {
+  const dispatch = useDispatch();
   const [userInfo, setUserInfo] = React.useState(null);
   const [isLoginScreenPresented, setIsLoginScreenPresented] = React.useState(
     null,
@@ -25,49 +32,37 @@ const LoginScreen = () => {
   const [value, setValue] = React.useState('');
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
 
-  const signInGoogle = async () => {
-    try {
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-      setUserInfo(userInfo);
-    } catch (error) {
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        // user cancelled the login flow
-        console.log('Login dibatalkan');
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        console.log('Login on progress');
-        // operation (e.g. sign in) is in progress already
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        console.log('Mohon update google play service');
-        // play services not available or outdated
-      } else {
-        // some other error happened
-        console.log('Error gak jelas ditangkap disini');
-      }
-    }
+  /**
+   * Sign In with Google
+   */
+  const signInWithGoogle = async () => {
+    const googleAccount = await GoogleSignInService.signIn();
+    const {id, name, email, photo} = googleAccount;
+    dispatch(
+      authWithSocialAccount({
+        social_id: id,
+        social_name: name,
+        social_email: email,
+        social_photo_url: photo,
+        social_provider: 'google', // Always be to lowercase
+      }),
+    );
   };
 
-  const getCurrentUser = async () => {
-    const currentUser = await GoogleSignin.getCurrentUser();
-    console.log(currentUser);
+  /**
+   * Handle sign out
+   */
+  const signOutGoogleAccount = () => {
+    GoogleSignInService.signOut();
   };
 
-  const signOut = async () => {
-    try {
-      await GoogleSignin.revokeAccess();
-      await GoogleSignin.signOut();
-      setUserInfo(null); // Remember to remove the user from your app's state as well
-    } catch (error) {
-      console.error(error);
-    }
+  /**
+   * Get current user
+   */
+  const getGoogleCurrentUser = async () => {
+    const googleAccount = await GoogleSignInService.getCurrentUser();
+    console.log(googleAccount);
   };
-
-  const isSignedIn = async () => {
-    const isSignedIn = await GoogleSignin.isSignedIn();
-    setIsLoginScreenPresented(!isSignedIn);
-  };
-
-  console.log('USERINFO', userInfo);
 
   const renderIcon = (props) => (
     <TouchableWithoutFeedback onPress={toggleSecureEntry}>
@@ -97,13 +92,13 @@ const LoginScreen = () => {
         />
         <Button
           style={styles.loginGoogleButton}
-          onPress={signInGoogle}
+          onPress={signInWithGoogle}
           appearance="outline"
           accessoryLeft={GoogleIcon}>
           Sign In with Google
         </Button>
-        <Button onPress={getCurrentUser}>Get user info</Button>
-        <Button onPress={signOut}>Sign Out</Button>
+        <Button onPress={getGoogleCurrentUser}>Get user info</Button>
+        <Button onPress={signOutGoogleAccount}>Sign Out</Button>
       </Layout>
     </AuthLayout>
   );
