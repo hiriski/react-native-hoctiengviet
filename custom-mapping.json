@@ -3,8 +3,7 @@
     "text-font-family": "HKGrotesk-Medium",
 
     "text-heading-1-font-size": 30,
-    "text-heading-1-font-weight": "700",
-    "text-heading-1-font-family": "HKGrotesk-Bold",
+    "text-heading-1-font-weight": "800",
     "text-heading-1-line-height": 32,
     
     "text-heading-2-font-size": 20,
@@ -15,7 +14,7 @@
     
     "text-subtitle-1-font-size": 15,
     "text-subtitle-1-font-weight": "600",
-    "text-subtitle-1-font-family": "HKGrotesk-SemiBold",
+    "text-subtitle-1-font-family": "HKGrotesk-Medium",
     "text-subtitle-1-line-height": 17,
 
     "text-paragraph-1-font-size": 15,

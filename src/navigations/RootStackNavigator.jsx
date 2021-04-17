@@ -4,14 +4,14 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {ROUTES} from '../constants';
 
 /* screens */
-import OnBoardingScreen from '../screens/OnBoardingScreen';
+import OnboardingScreen from '../screens/OnboardingScreen';
 import DrawerNavigator from './DrawerNavigator';
 import AuthStackNavigator from './AuthStackNavigator';
 
 const Stack = createStackNavigator();
 
 const RootStackNavigator = () => {
-  const isAlreadyLaunched = true;
+  const isAlreadyLaunched = false;
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -20,7 +20,7 @@ const RootStackNavigator = () => {
           headerShown: false,
         }}>
         {!isAlreadyLaunched ? (
-          <Stack.Screen name={ROUTES.ONBOARDING} component={OnBoardingScreen} />
+          <Stack.Screen name={ROUTES.ONBOARDING} component={OnboardingScreen} />
         ) : (
           <>
             <Stack.Screen
