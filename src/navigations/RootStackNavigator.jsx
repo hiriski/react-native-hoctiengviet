@@ -4,7 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {ROUTES} from '../constants';
 
 /* screens */
-import OnboardingScreen from '../screens/OnboardingScreen';
+import OnboardScreen from '../screens/OnboardScreen';
 import DrawerNavigator from './DrawerNavigator';
 import AuthStackNavigator from './AuthStackNavigator';
 
@@ -20,7 +20,7 @@ const RootStackNavigator = () => {
           headerShown: false,
         }}>
         {!isAlreadyLaunched ? (
-          <Stack.Screen name={ROUTES.ONBOARDING} component={OnboardingScreen} />
+          <Stack.Screen name={ROUTES.ONBOARDING} component={OnboardScreen} />
         ) : (
           <>
             <Stack.Screen
