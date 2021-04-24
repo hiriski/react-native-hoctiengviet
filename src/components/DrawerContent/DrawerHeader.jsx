@@ -14,6 +14,7 @@ import {Text, Divider, Icon} from '@ui-kitten/components';
 import {COLORS, ROUTES} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
 import IconButton from '../../components/partials/IconButton';
+import {ROOT_STACK, AUTH_STACK} from '../../config/navigator';
 
 const DrawerHeader = () => {
   const isLoggedIn = false;
@@ -53,9 +54,7 @@ const DrawerHeader = () => {
       activeOpacity={0.8}
       style={styles.touchableProfile}
       onPress={() =>
-        navigation.navigate(ROUTES.AUTH, {
-          screen: ROUTES.LOGIN,
-        })
+        navigation.navigate(ROOT_STACK.AUTH, {screen: AUTH_STACK.LOGIN})
       }>
       <View style={styles.avatar}>
         <View style={styles.avatarIconContainer}>
@@ -64,11 +63,11 @@ const DrawerHeader = () => {
       </View>
       <View style={styles.userInfo}>
         <Text style={styles.name} category="h2">
-          Kamu Belum Login
+          Hello, Stranger
         </Text>
         <View style={styles.label}>
           <Text style={styles.userLabel} category="label">
-            Login untuk berdiskusi
+            Kamu belum login
           </Text>
         </View>
       </View>

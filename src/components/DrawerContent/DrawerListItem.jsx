@@ -8,7 +8,7 @@ import {ROUTES} from '../../constants';
 import DrawerItem from './DrawerItem';
 import {useNavigation} from '@react-navigation/core';
 import {useDispatch} from 'react-redux';
-import {logout} from '../../redux/actions/authActions';
+import {logout} from '../../modules/auth/actions';
 
 const navigations = [
   {

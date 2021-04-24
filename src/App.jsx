@@ -1,24 +1,23 @@
 import React from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import GlobalFlashMessage from './components/FlashMessage';
-import RootStackNavigator from './navigations/RootStackNavigator';
 
 /* providers */
 import OfflineProvider from './providers/OfflineProvider';
 import ReactReduxProvider from './providers/ReactReduxProvider';
-import SafeAreaContextProvider from './providers/SafeAreaContextProvider';
 import UIKittenProvider from './providers/UIKittenProvider';
+import SafeAreaContextProvider from './providers/SafeAreaContextProvider';
 
 import NotificationService from './services/NotificationService';
-import {getAllAsyncStorage, clearAsyncStorage} from './utils';
+import AppRouter from './AppRouter';
+import {enableScreens} from 'react-native-screens';
+
+enableScreens();
 
 const XinChaoApp = () => {
   React.useEffect(() => {
     SplashScreen.hide();
     NotificationService.configure();
     NotificationService.createChannel();
-    getAllAsyncStorage();
-    // clearAsyncStorage();
   }, []);
 
   return (
@@ -26,8 +25,7 @@ const XinChaoApp = () => {
       <OfflineProvider>
         <UIKittenProvider>
           <SafeAreaContextProvider>
-            <RootStackNavigator />
-            <GlobalFlashMessage />
+            <AppRouter />
           </SafeAreaContextProvider>
         </UIKittenProvider>
       </OfflineProvider>

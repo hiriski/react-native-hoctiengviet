@@ -1,19 +1,4 @@
-import {
-  LOGIN_REQUEST,
-  LOGIN_FAILURE,
-  LOGIN_SUCCESS,
-  REGISTER_REQUEST,
-  REGISTER_FAILURE,
-  REGISTER_SUCCESS,
-  AUTH_WITH_SOCIAL_ACCOUNT_REQUEST,
-  AUTH_WITH_SOCIAL_ACCOUNT_CANCELLED,
-  AUTH_WITH_SOCIAL_ACCOUNT_FAILURE,
-  AUTH_WITH_SOCIAL_ACCOUNT_SUCCESS,
-  SET_USER_TOKEN,
-  SET_USER_DATA,
-  RESET_USER_DATA,
-  RESET_USER_TOKEN,
-} from '../actions/authActions';
+import * as Actions from './constants';
 
 const initialState = {
   user: null,
@@ -47,7 +32,7 @@ export default (state = initialState, action) => {
      * Login
      * -------------
      */
-    case LOGIN_REQUEST:
+    case Actions.LOGIN_REQUEST:
       return {
         ...state,
         login: {
@@ -57,7 +42,7 @@ export default (state = initialState, action) => {
           errorMessage: null,
         },
       };
-    case LOGIN_FAILURE:
+    case Actions.LOGIN_FAILURE:
       return {
         ...state,
         login: {
@@ -67,7 +52,7 @@ export default (state = initialState, action) => {
           errorMessage: action.payload,
         },
       };
-    case LOGIN_SUCCESS:
+    case Actions.LOGIN_SUCCESS:
       return {
         ...state,
         login: {
@@ -83,7 +68,7 @@ export default (state = initialState, action) => {
      * Register
      * -------------
      */
-    case REGISTER_REQUEST:
+    case Actions.REGISTER_REQUEST:
       return {
         ...state,
         register: {
@@ -93,7 +78,7 @@ export default (state = initialState, action) => {
           errorMessage: null,
         },
       };
-    case REGISTER_FAILURE:
+    case Actions.REGISTER_FAILURE:
       return {
         ...state,
         register: {
@@ -103,7 +88,7 @@ export default (state = initialState, action) => {
           errorMessage: action.payload,
         },
       };
-    case REGISTER_SUCCESS:
+    case Actions.REGISTER_SUCCESS:
       return {
         ...state,
         register: {
@@ -119,7 +104,7 @@ export default (state = initialState, action) => {
      * Social auth
      * -------------
      */
-    case AUTH_WITH_SOCIAL_ACCOUNT_REQUEST:
+    case Actions.AUTH_WITH_SOCIAL_ACCOUNT_REQUEST:
       return {
         ...state,
         socialAccount: {
@@ -131,7 +116,7 @@ export default (state = initialState, action) => {
           data: null,
         },
       };
-    case AUTH_WITH_SOCIAL_ACCOUNT_FAILURE:
+    case Actions.AUTH_WITH_SOCIAL_ACCOUNT_FAILURE:
       return {
         ...state,
         socialAccount: {
@@ -143,7 +128,7 @@ export default (state = initialState, action) => {
           data: null,
         },
       };
-    case AUTH_WITH_SOCIAL_ACCOUNT_CANCELLED:
+    case Actions.AUTH_WITH_SOCIAL_ACCOUNT_CANCELLED:
       return {
         ...state,
         socialAccount: {
@@ -155,7 +140,7 @@ export default (state = initialState, action) => {
           data: null,
         },
       };
-    case AUTH_WITH_SOCIAL_ACCOUNT_SUCCESS:
+    case Actions.AUTH_WITH_SOCIAL_ACCOUNT_SUCCESS:
       return {
         ...state,
         socialAccount: {
@@ -173,22 +158,22 @@ export default (state = initialState, action) => {
      * Common
      * -------------
      */
-    case SET_USER_TOKEN:
+    case Actions.SET_USER_TOKEN:
       return {
         ...state,
         token: action.payload,
       };
-    case SET_USER_DATA:
+    case Actions.SET_USER_DATA:
       return {
         ...state,
         user: action.payload,
       };
-    case RESET_USER_DATA:
+    case Actions.RESET_USER_DATA:
       return {
         ...state,
         user: null,
       };
-    case RESET_USER_TOKEN:
+    case Actions.RESET_USER_TOKEN:
       return {
         ...state,
         token: null,

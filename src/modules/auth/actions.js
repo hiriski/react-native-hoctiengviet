@@ -1,54 +1,26 @@
 import axios from 'axios';
 import {batch} from 'react-redux';
-import {API_URL} from '@env';
+import AuthService from './service';
 import {USER_TOKEN_KEY} from '../../constants';
 import {saveUserToken, removeUserToken} from '../../utils';
-
-/** Actions types  */
-export const AUTH_WITH_SOCIAL_ACCOUNT_REQUEST =
-  'AUTH_WITH_SOCIAL_ACCOUNT_REQUEST';
-export const AUTH_WITH_SOCIAL_ACCOUNT_CANCELLED =
-  'AUTH_WITH_SOCIAL_ACCOUNT_CANCELLED';
-export const AUTH_WITH_SOCIAL_ACCOUNT_FAILURE =
-  'AUTH_WITH_SOCIAL_ACCOUNT_FAILURE';
-export const AUTH_WITH_SOCIAL_ACCOUNT_SUCCESS =
-  'AUTH_WITH_SOCIAL_ACCOUNT_SUCCESS';
-export const REGISTER_REQUEST = 'REGISTER_REQUEST';
-export const REGISTER_FAILURE = 'REGISTER_FAILURE';
-export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
-export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const FETCHING_AUTHENTICATED_USER_REQUEST =
-  'FETCHING_AUTHENTICATED_USER_REQUEST';
-export const FETCHING_AUTHENTICATED_USER_FAILURE =
-  'FETCHING_AUTHENTICATED_USER_FAILURE';
-export const FETCHING_AUTHENTICATED_USER_SUCCESS =
-  'FETCHING_AUTHENTICATED_USER_SUCCESS';
-export const SET_USER_TOKEN = 'SET_USER_TOKEN';
-export const SET_USER_DATA = 'SET_USER_DATA';
-export const RESET_USER_DATA = 'RESET_USER_DATA';
-export const RESET_USER_TOKEN = 'RESET_USER_TOKEN';
+import * as Actions from './constants';
 
 export const setUserToken = (token) => ({
-  type: SET_USER_TOKEN,
+  type: Actions.SET_USER_TOKEN,
   payload: token,
 });
 
 export const setUserData = (user) => ({
-  type: SET_USER_DATA,
+  type: Actions.SET_USER_DATA,
   payload: user,
 });
 
 export const resetUserData = () => ({
-  type: RESET_USER_DATA,
+  type: Actions.RESET_USER_DATA,
 });
 
 export const resetUserToken = () => ({
-  type: RESET_USER_TOKEN,
+  type: Actions.RESET_USER_TOKEN,
 });
 
 /**
@@ -57,34 +29,31 @@ export const resetUserToken = () => ({
  * ----------------
  */
 export const authWithSocialAccountRequest = () => ({
-  type: AUTH_WITH_SOCIAL_ACCOUNT_REQUEST,
+  type: Actions.AUTH_WITH_SOCIAL_ACCOUNT_REQUEST,
 });
 
 export const authWithSocialAccountCancelled = () => ({
-  type: AUTH_WITH_SOCIAL_ACCOUNT_CANCELLED,
+  type: Actions.AUTH_WITH_SOCIAL_ACCOUNT_CANCELLED,
 });
 
 export const authWithSocialAccountFailure = (errorMessage) => ({
-  type: AUTH_WITH_SOCIAL_ACCOUNT_FAILURE,
+  type: Actions.AUTH_WITH_SOCIAL_ACCOUNT_FAILURE,
   payload: errorMessage,
 });
 
 export const authWithSocialAccountSuccess = (data) => (dispatch) => {
   dispatch({
-    type: AUTH_WITH_SOCIAL_ACCOUNT_SUCCESS,
+    type: Actions.AUTH_WITH_SOCIAL_ACCOUNT_SUCCESS,
     payload: data,
   });
 };
 
 export const authWithSocialAccount = (data) => {
   return async (dispatch) => {
-    let errMessage = 'Login failed';
+    let errMessage = 'Authenticate failed';
     dispatch(authWithSocialAccountRequest());
     try {
-      const response = await axios.post(
-        'http://192.168.119.100:8000/auth/social',
-        data,
-      );
+      const response = await AuthService.loginWithSocialAccount(data);
       console.log(response);
       if (response.status === 200) {
         // response status from the server always 200.
@@ -97,9 +66,7 @@ export const authWithSocialAccount = (data) => {
 
           // response server without social_account for new user.
           if (user.social_account) {
-            console.log('has social_account');
             dispatch(setUserData(user));
-
             // response server with social_account for user already login/register.
           } else {
             dispatch(
@@ -130,16 +97,16 @@ export const authWithSocialAccount = (data) => {
  * ------------------------
  * */
 export const loginRequest = () => ({
-  type: LOGIN_REQUEST,
+  type: Actions.LOGIN_REQUEST,
 });
 
 export const loginFailure = (errorMessage) => ({
-  type: LOGIN_FAILURE,
+  type: Actions.LOGIN_FAILURE,
   payload: errorMessage,
 });
 
 export const loginSuccess = (data) => ({
-  type: LOGIN_SUCCESS,
+  type: Actions.LOGIN_SUCCESS,
   payload: data,
 });
 
@@ -186,16 +153,16 @@ export const login = (credentials) => {
  * */
 
 export const registerRequest = () => ({
-  type: REGISTER_REQUEST,
+  type: Actions.REGISTER_REQUEST,
 });
 
 export const registerFailure = (errorMessage) => ({
-  type: REGISTER_FAILURE,
+  type: Actions.REGISTER_FAILURE,
   payload: errorMessage,
 });
 
 export const registerSuccess = (data) => ({
-  type: REGISTER_SUCCESS,
+  type: Actions.REGISTER_SUCCESS,
   payload: data,
 });
 
@@ -246,16 +213,16 @@ export const register = (userData) => {
  * Fetching authentcated user
  */
 export const fetchingAuthenticatedUserRequest = () => ({
-  type: FETCHING_AUTHENTICATED_USER_REQUEST,
+  type: Actions.FETCHING_AUTHENTICATED_USER_REQUEST,
 });
 
 export const fetchingAuthenticatedUserFailure = (errorMessage) => ({
-  type: FETCHING_AUTHENTICATED_USER_FAILURE,
+  type: Actions.FETCHING_AUTHENTICATED_USER_FAILURE,
   payload: errorMessage,
 });
 
 export const fetchingAuthenticatedUserSuccess = () => ({
-  type: FETCHING_AUTHENTICATED_USER_SUCCESS,
+  type: Actions.FETCHING_AUTHENTICATED_USER_SUCCESS,
 });
 
 export const fetchAuthenticatedUser = (token) => {

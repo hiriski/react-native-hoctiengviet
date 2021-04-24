@@ -1,8 +1,8 @@
-import {createStore, applyMiddleware} from 'redux';
-import {composeWithDevTools} from 'remote-redux-devtools';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import {createStore, applyMiddleware, compose} from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import thunk from 'redux-thunk';
-import rootReducer from '../reducers/rootReducer';
+import rootReducer from './reducers';
 
 import {persistStore, persistReducer} from 'redux-persist';
 
@@ -13,14 +13,14 @@ const persistConfig = {
 
   // Storage Method (React Native)
   storage: AsyncStorage,
-
-  // Whitelist (Save Specific Reducers)
-  // whitelist: ['app', 'auth'],
-  // Blacklist (Don't Save Specific Reducers)
-  // blacklist: ['counterReducer'],
 };
 
 const middlewares = [thunk];
+
+const composeEnhancers =
+  process.env.NODE_ENV === 'development'
+    ? composeWithDevTools({realtime: true})
+    : compose;
 
 // Middleware: Redux Persist Persisted Reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -28,7 +28,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 // Redux: Store
 export const store = createStore(
   persistedReducer,
-  composeWithDevTools(applyMiddleware(...middlewares)),
+  composeEnhancers(applyMiddleware(...middlewares)),
 );
 
 // Middleware: Redux Persist Persister

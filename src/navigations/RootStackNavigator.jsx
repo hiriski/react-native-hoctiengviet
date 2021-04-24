@@ -1,17 +1,18 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {ROUTES} from '../constants';
 
 /* screens */
 import OnboardScreen from '../screens/OnboardScreen';
 import DrawerNavigator from './DrawerNavigator';
 import AuthStackNavigator from './AuthStackNavigator';
 
+import {ROOT_STACK} from '../config/navigator';
+
 const Stack = createStackNavigator();
 
 const RootStackNavigator = () => {
-  const isAlreadyLaunched = false;
+  const isAlreadyLaunched = true;
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -20,14 +21,17 @@ const RootStackNavigator = () => {
           headerShown: false,
         }}>
         {!isAlreadyLaunched ? (
-          <Stack.Screen name={ROUTES.ONBOARDING} component={OnboardScreen} />
+          <Stack.Screen name={ROOT_STACK.ONBOARD} component={OnboardScreen} />
         ) : (
           <>
             <Stack.Screen
-              name={ROUTES.ROOT_STACK}
+              name={ROOT_STACK.HOME_DRAWER}
               component={DrawerNavigator}
             />
-            <Stack.Screen name={ROUTES.AUTH} component={AuthStackNavigator} />
+            <Stack.Screen
+              name={ROOT_STACK.AUTH}
+              component={AuthStackNavigator}
+            />
           </>
         )}
       </Stack.Navigator>
