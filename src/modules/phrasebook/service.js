@@ -10,6 +10,16 @@ class PhrasebookService {
   create = async (data) => {
     return await api.post('phrasebook', data);
   };
+
+  /**
+   *
+   * Get all phrasebook list.
+   * @params {object} data
+   * @returns {*}
+   */
+  getPhrasebooks = async () => {
+    return await api.get('phrasebook');
+  };
 }
 
 export default new PhrasebookService();

@@ -18,6 +18,11 @@ const navigations = [
     icon: 'layers',
   },
   {
+    label: 'Phrasebook',
+    routeName: 'PhrasebookList',
+    icon: 'book',
+  },
+  {
     label: 'Profil',
     routeName: ROUTES.PROFILE,
     icon: 'person',

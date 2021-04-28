@@ -16,7 +16,7 @@ export default function phrasebookReducer(state = initialState, action) {
      * Create Phrase
      * ---------------
      */
-    case Actions.CREATE_PHRASEBOOK_REQUEST:
+    case Actions.CREATE_PHRASE_REQUEST:
       return {
         ...state,
         create: {
@@ -25,7 +25,7 @@ export default function phrasebookReducer(state = initialState, action) {
           isSuccess: false,
         },
       };
-    case Actions.CREATE_PHRASEBOOK_FAILURE:
+    case Actions.CREATE_PHRASE_FAILURE:
       return {
         ...state,
         create: {
@@ -34,7 +34,7 @@ export default function phrasebookReducer(state = initialState, action) {
           isSuccess: false,
         },
       };
-    case Actions.CREATE_PHRASEBOOK_SUCCESS:
+    case Actions.CREATE_PHRASE_SUCCESS:
       return {
         ...state,
         create: {
@@ -43,11 +43,28 @@ export default function phrasebookReducer(state = initialState, action) {
           isSuccess: true,
         },
       };
-    case Actions.RESET_CREATE_PRASEBOOK_STATE:
+    case Actions.RESET_CREATE_PHRASE_STATE:
       return {
         ...state,
         create: initialState.create,
       };
+
+    /**
+     * ---------------
+     * Fetch phrasebooks.
+     * ---------------
+     */
+    case Actions.FETCHING_PHRASEBOOKS_REQUEST:
+      return state;
+    case Actions.FETCHING_PHRASEBOOKS_FAILURE:
+      return state;
+    case Actions.FETCHING_PHRASEBOOKS_SUCCESS:
+      return {
+        ...state,
+        list: action.payload,
+      };
+    case Actions.RESET_FETCHING_PHRASEBOOKS_STATE:
+      return state;
 
     default:
       return state;

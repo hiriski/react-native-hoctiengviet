@@ -31,8 +31,7 @@ const styles = StyleSheet.create({
 });
 
 FormInput.propTypes = {
-  onPress: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   onChangeText: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   size: PropTypes.string,

@@ -7,6 +7,7 @@ import OnboardScreen from '../screens/OnboardScreen';
 import DrawerNavigator from './DrawerNavigator';
 import AuthStackNavigator from './AuthStackNavigator';
 import {useSelector} from 'react-redux';
+import PhrasebookListScreen from '../screens/phrasebook/PhrasebookList';
 
 import {ROOT_STACK} from '../config/navigator';
 
@@ -25,12 +26,18 @@ const RootStackNavigator = () => {
         {!isAlreadyLaunched ? (
           <Stack.Screen name={ROOT_STACK.ONBOARD} component={OnboardScreen} />
         ) : (
-          <>
+          <React.Fragment>
             {token ? (
-              <Stack.Screen
-                name={ROOT_STACK.HOME_DRAWER}
-                component={DrawerNavigator}
-              />
+              <React.Fragment>
+                <Stack.Screen
+                  name={ROOT_STACK.HOME_DRAWER}
+                  component={DrawerNavigator}
+                />
+                <Stack.Screen
+                  name="PhrasebookList"
+                  component={PhrasebookListScreen}
+                />
+              </React.Fragment>
             ) : (
               /**
                * Allow stranger accessing homepage
@@ -46,7 +53,7 @@ const RootStackNavigator = () => {
                 />
               </React.Fragment>
             )}
-          </>
+          </React.Fragment>
         )}
       </Stack.Navigator>
     </NavigationContainer>
