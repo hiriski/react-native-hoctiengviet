@@ -6,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import OnboardScreen from '../screens/OnboardScreen';
 import DrawerNavigator from './DrawerNavigator';
 import AuthStackNavigator from './AuthStackNavigator';
+import {useSelector} from 'react-redux';
 
 import {ROOT_STACK} from '../config/navigator';
 
@@ -13,6 +14,7 @@ const Stack = createStackNavigator();
 
 const RootStackNavigator = () => {
   const isAlreadyLaunched = true;
+  const {token} = useSelector((state) => state.auth);
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -24,14 +26,26 @@ const RootStackNavigator = () => {
           <Stack.Screen name={ROOT_STACK.ONBOARD} component={OnboardScreen} />
         ) : (
           <>
-            <Stack.Screen
-              name={ROOT_STACK.HOME_DRAWER}
-              component={DrawerNavigator}
-            />
-            <Stack.Screen
-              name={ROOT_STACK.AUTH}
-              component={AuthStackNavigator}
-            />
+            {token ? (
+              <Stack.Screen
+                name={ROOT_STACK.HOME_DRAWER}
+                component={DrawerNavigator}
+              />
+            ) : (
+              /**
+               * Allow stranger accessing homepage
+               */
+              <React.Fragment>
+                <Stack.Screen
+                  name={ROOT_STACK.HOME_DRAWER}
+                  component={DrawerNavigator}
+                />
+                <Stack.Screen
+                  name={ROOT_STACK.AUTH}
+                  component={AuthStackNavigator}
+                />
+              </React.Fragment>
+            )}
           </>
         )}
       </Stack.Navigator>

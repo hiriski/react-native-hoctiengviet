@@ -4,7 +4,6 @@ import {COLORS, ROUTES} from '../../constants';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useIsConnected} from 'react-native-offline';
 import {showMessage, hideMessage} from 'react-native-flash-message';
-import {useSelector} from 'react-redux';
 
 import styles from './styles';
 import FocusAwareStatusBar from '../../components/common/FocusAwareStatusBar';
@@ -24,10 +23,6 @@ const HomeScreen = ({navigation}) => {
   const isConnected = useIsConnected();
   const [isOffline, setIsOffline] = React.useState(!isConnected);
   const theme = useTheme();
-
-  // user state
-  const {user} = useSelector((state) => state.auth);
-  console.log(user);
 
   const [menuVisible, setMenuVisible] = React.useState(false);
 

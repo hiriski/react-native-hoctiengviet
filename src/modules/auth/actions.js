@@ -5,6 +5,9 @@ import {USER_TOKEN_KEY} from '../../constants';
 import {saveUserToken, removeUserToken} from '../../utils';
 import * as Actions from './constants';
 
+/**
+ * Commons actions
+ */
 export const setUserToken = (token) => ({
   type: Actions.SET_USER_TOKEN,
   payload: token,
@@ -28,51 +31,55 @@ export const resetUserToken = () => ({
  * Login/Register with Social Account
  * ----------------
  */
-export const authWithSocialAccountRequest = () => ({
-  type: Actions.AUTH_WITH_SOCIAL_ACCOUNT_REQUEST,
+export const loginWithSocialAccountRequest = () => ({
+  type: Actions.LOGIN_WITH_SOCIAL_ACCOUNT_REQUEST,
 });
 
-export const authWithSocialAccountCancelled = () => ({
-  type: Actions.AUTH_WITH_SOCIAL_ACCOUNT_CANCELLED,
-});
+// export const loginWithSocialAccountCancelled = () => ({
+//   type: Actions.LOGIN_WITH_SOCIAL_ACCOUNT_CANCELLED,
+// });
 
-export const authWithSocialAccountFailure = (errorMessage) => ({
-  type: Actions.AUTH_WITH_SOCIAL_ACCOUNT_FAILURE,
+export const loginWithSocialAccountFailure = (errorMessage) => ({
+  type: Actions.LOGIN_WITH_SOCIAL_ACCOUNT_FAILURE,
   payload: errorMessage,
 });
 
-export const authWithSocialAccountSuccess = (data) => (dispatch) => {
+export const loginWithSocialAccountSuccess = ({provider}) => (dispatch) => {
   dispatch({
-    type: Actions.AUTH_WITH_SOCIAL_ACCOUNT_SUCCESS,
-    payload: data,
+    type: Actions.LOGIN_WITH_SOCIAL_ACCOUNT_SUCCESS,
+    payload: {provider},
   });
 };
 
-export const authWithSocialAccount = (data) => {
+export const loginWithSocialAccount = (userData) => {
   return async (dispatch) => {
     let errMessage = 'Authenticate failed';
-    dispatch(authWithSocialAccountRequest());
+    dispatch(loginWithSocialAccountRequest());
     try {
-      const response = await AuthService.loginWithSocialAccount(data);
-      console.log(response);
+      const response = await AuthService.loginWithSocialAccount(userData);
       if (response.status === 200) {
         // response status from the server always 200.
-        saveUserToken(response.data);
+        const {data} = response;
+
+        saveUserToken(data.token);
         batch(() => {
-          dispatch(authWithSocialAccountSuccess(response.data));
+          dispatch(
+            loginWithSocialAccountSuccess({provider: userData.social_provider}),
+          );
           dispatch(setUserToken(data.token));
 
-          const {user} = response.data;
+          const {user} = data;
 
           // response server without social_account for new user.
           if (user.social_account) {
             dispatch(setUserData(user));
+
             // response server with social_account for user already login/register.
           } else {
             dispatch(
               setUserData({
                 ...user,
-                social_account: data,
+                social_account: userData,
               }),
             );
           }
@@ -82,14 +89,18 @@ export const authWithSocialAccount = (data) => {
       if (e.response !== undefined) {
         if (e.response.status === 422) {
           errMessage = 'Username / Password yang anda masukan salah';
-          dispatch(authWithSocialAccountFailure(errMessage));
+          dispatch(loginWithSocialAccountFailure(errMessage));
         }
       } else {
-        dispatch(authWithSocialAccountFailure(errMessage));
+        dispatch(loginWithSocialAccountFailure(errMessage));
       }
     }
   };
 };
+
+export const resetLoginWithSocialAccount = () => ({
+  type: Actions.RESET_LOGIN_WITH_SOCIAL_ACCOUNT_STATE,
+});
 
 /**
  * ------------------------
@@ -105,38 +116,28 @@ export const loginFailure = (errorMessage) => ({
   payload: errorMessage,
 });
 
-export const loginSuccess = (data) => ({
+export const loginSuccess = () => ({
   type: Actions.LOGIN_SUCCESS,
-  payload: data,
 });
 
 export const login = (credentials) => {
   return async (dispatch) => {
-    let errMessage = 'Login failed';
+    let errMessage = 'Login failed.';
     dispatch(loginRequest());
     try {
-      const response = await axios.post(API_URL + '/login', credentials);
+      const response = await AuthService.login(credentials);
       if (response.status === 200) {
-        LocalStorageService.setItem(
-          USER_TOKEN_KEY,
-          JSON.stringify(response.data),
-        );
-        dispatch(loginSuccess(response.data));
+        const {token, user} = response.data;
+        LocalStorageService.setItem(USER_TOKEN_KEY, JSON.stringify(token));
+        batch(() => {
+          dispatch(loginSuccess());
+          dispatch(setUserData(user));
+        });
       }
     } catch (e) {
       if (e.response !== undefined) {
         if (e.response.status === 422) {
           errMessage = 'Username / Password yang anda masukan salah';
-          dispatch(loginFailure(errMessage));
-          batch(() => {
-            dispatch(
-              showAlert({
-                message: errMessage,
-                severity: 'error',
-              }),
-            );
-          });
-        } else {
           dispatch(loginFailure(errMessage));
         }
       } else {
@@ -145,6 +146,10 @@ export const login = (credentials) => {
     }
   };
 };
+
+export const resetLoginState = () => ({
+  type: Actions.RESET_LOGIN_STATE,
+});
 
 /**
  * ------------------------
@@ -161,53 +166,40 @@ export const registerFailure = (errorMessage) => ({
   payload: errorMessage,
 });
 
-export const registerSuccess = (data) => ({
+export const registerSuccess = () => ({
   type: Actions.REGISTER_SUCCESS,
-  payload: data,
 });
 
 export const register = (userData) => {
   return async (dispatch) => {
-    let errMessage = 'Register failed';
+    let errMessage = 'Register failed.';
     dispatch(registerRequest());
     try {
-      const response = await axios.post(API_URL + '/register', userData);
+      const response = await AuthService.register(userData);
       if (response.status === 201) {
-        LocalStorageService.setItem(
-          USER_TOKEN_KEY,
-          JSON.stringify(response.data),
-        );
-        dispatch(registerSuccess(response.data));
+        const {token, user} = response.data;
+        LocalStorageService.setItem(USER_TOKEN_KEY, JSON.stringify(token));
+        batch(() => {
+          dispatch(registerSuccess());
+          dispatch(setUserData(user));
+        });
       }
     } catch (e) {
       if (e.response !== undefined) {
-        console.log(e.response);
         if (e.response.status === 422) {
-          errMessage = 'Pastikan data yang kamu isi benar.';
-          batch(() => {
-            dispatch(registerFailure(errMessage));
-            dispatch(
-              showAlert({
-                message: errMessage,
-                severity: 'error',
-              }),
-            );
-          });
+          errMessage = 'Unprocessable entity';
+          dispatch(registerFailure(errMessage));
         }
       } else {
-        batch(() => {
-          dispatch(registerFailure(errMessage));
-          dispatch(
-            showAlert({
-              message: errMessage,
-              severity: 'error',
-            }),
-          );
-        });
+        dispatch(registerFailure(errMessage));
       }
     }
   };
 };
+
+export const resetRegisterState = () => ({
+  type: Actions.RESET_REGISTER_STATE,
+});
 
 /**
  * Fetching authentcated user
@@ -225,39 +217,65 @@ export const fetchingAuthenticatedUserSuccess = () => ({
   type: Actions.FETCHING_AUTHENTICATED_USER_SUCCESS,
 });
 
-export const fetchAuthenticatedUser = (token) => {
-  return (dispatch) => {
+export const fetchAuthenticatedUser = () => {
+  return async (dispatch) => {
+    let errorMessage = 'Fething authenticated user failed';
     dispatch(fetchingAuthenticatedUserRequest());
-    AuthService.getAuthenticatedUser(token)
-      .then((response) => {
-        if (response.status === 200) {
-          console.log(response);
-          batch(() => {
-            dispatch(fetchingAuthenticatedUserSuccess());
-            dispatch(setUserData(response.data.user));
-          });
-        } else {
-          dispatch(fetchingAuthenticatedUserFailure('Token is not valid'));
-        }
-      })
-      .catch((e) => {
-        dispatch(fetchingAuthenticatedUserFailure('Token is not valid'));
-        dispatch(setAlert(AlertTypes.error, 'Token is not valid'));
-      });
+    try {
+      const response = await AuthService.fetchAuthenticatedUser();
+      console.log(response);
+      if (response.status === 200) {
+        const {user} = response.data;
+        batch(() => {
+          dispatch(fetchingAuthenticatedUserSuccess());
+          dispatch(setUserData(user));
+        });
+      }
+    } catch (e) {
+      dispatch(fetchingAuthenticatedUserFailure(errorMessage));
+    }
   };
 };
 
 /**
  * ------------------------
- * Log out
+ * Revoke token
  * ------------------------
  */
+const revokingTokenRequest = () => ({
+  type: Actions.REVOKING_TOKEN_REQUEST,
+});
 
-export const logout = () => (dispatch) => {
-  // dispatch()
-  removeUserToken();
-  batch(() => {
-    dispatch(resetUserData());
-    dispatch(resetUserToken());
-  });
+const revokingTokenFailure = (errorMessage) => ({
+  type: Actions.REVOKING_TOKEN_FAILURE,
+  payload: errorMessage,
+});
+
+const revokingTokenSuccess = () => ({
+  type: Actions.REVOKING_TOKEN_SUCCESS,
+});
+
+export const revokeToken = () => {
+  return async (dispatch) => {
+    let errorMessage = 'Failed to revoke token';
+    dispatch(revokingTokenRequest());
+    try {
+      const response = await AuthService.revokeToken();
+      if (response.status === 200) {
+        removeUserToken();
+        batch(() => {
+          dispatch(revokingTokenSuccess());
+
+          // Also reset token & user data.
+          dispatch(resetUserToken());
+          dispatch(resetUserData());
+        });
+      }
+    } catch (e) {
+      if (e.response !== undefined) {
+        console.log(e.response);
+      }
+      dispatch(revokingTokenFailure(errorMessage));
+    }
+  };
 };

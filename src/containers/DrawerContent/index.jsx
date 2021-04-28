@@ -4,13 +4,7 @@
 
 import React from 'react';
 import {Linking, View, TouchableHighlight, StyleSheet} from 'react-native';
-import {
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
-import {Icon, Text} from '@ui-kitten/components';
-import {ROUTES, COLORS} from '../../constants';
+import {DrawerContentScrollView} from '@react-navigation/drawer';
 import DrawerHeader from './DrawerHeader';
 import DrawerListItem from './DrawerListItem';
 

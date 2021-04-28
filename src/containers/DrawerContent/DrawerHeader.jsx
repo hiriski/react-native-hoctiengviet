@@ -15,10 +15,11 @@ import {COLORS, ROUTES} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
 import IconButton from '../../components/partials/IconButton';
 import {ROOT_STACK, AUTH_STACK} from '../../config/navigator';
+import {useSelector} from 'react-redux';
 
 const DrawerHeader = () => {
-  const isLoggedIn = false;
   const navigation = useNavigation();
+  const {user, token} = useSelector((state) => state.auth);
 
   const renderProfileInfo = () => (
     <TouchableOpacity
@@ -33,16 +34,16 @@ const DrawerHeader = () => {
       </View>
       <View style={styles.userInfo}>
         <Text style={styles.name} category="h2">
-          Riski
+          {user.name}
         </Text>
-        <View style={styles.label}>
+        <View style={styles.viewLabel}>
           <Icon
             name="award-outline"
             fill={COLORS.secondary}
-            style={styles.labelIcon}
+            style={styles.iconLabel}
           />
-          <Text style={styles.userLabel} category="label">
-            Developer
+          <Text style={styles.textUserLabel} category="p2">
+            Member
           </Text>
         </View>
       </View>
@@ -66,7 +67,7 @@ const DrawerHeader = () => {
           Hello, Stranger
         </Text>
         <View style={styles.label}>
-          <Text style={styles.userLabel} category="label">
+          <Text style={styles.textUserLabel} category="label">
             Kamu belum login
           </Text>
         </View>
@@ -77,8 +78,8 @@ const DrawerHeader = () => {
   return (
     <View style={styles.root}>
       <View style={styles.container}>
-        {isLoggedIn ? renderProfileInfo() : renderGuestInfo()}
-        {isLoggedIn && (
+        {token ? renderProfileInfo() : renderGuestInfo()}
+        {token && (
           <IconButton
             iconName="edit-outline"
             onPress={() => alert('pressed')}
@@ -136,14 +137,14 @@ const styles = StyleSheet.create({
     color: COLORS.textSecondary,
     fontWeight: '700',
   },
-  label: {
+  viewLabel: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  userLabel: {
+  textUserLabel: {
     color: COLORS.textSecondary,
   },
-  labelIcon: {
+  iconLabel: {
     width: 14,
     height: 14,
     marginRight: 5,

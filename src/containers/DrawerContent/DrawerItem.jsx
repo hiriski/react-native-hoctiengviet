@@ -36,7 +36,7 @@ const DrawerItem = ({onPress, label, iconName}) => {
 };
 
 const height = Dimensions.get('window').height;
-const DRAWER_ITEM_HEIGHT = height > 640 ? 52 : 46;
+const DRAWER_ITEM_HEIGHT = height > 640 ? 50 : 44;
 
 const styles = StyleSheet.create({
   drawerItem: {
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   label: {
-    fontSize: 15,
+    fontSize: 16,
   },
   activeLavel: {
     color: COLORS.textPrimary,

@@ -4,11 +4,7 @@ import {Button} from '@ui-kitten/components';
 import GoogleIconSvg from '../../../assets/svg/google.svg';
 import {useDispatch} from 'react-redux';
 
-import {
-  authWithSocialAccount,
-  authWithSocialAccountCancelled,
-  authWithSocialAccountFailure,
-} from '../../../modules/auth/actions';
+import {loginWithSocialAccount} from '../../../modules/auth/actions';
 import GoogleSignInService from '../../../services/GoogleSignInService';
 
 const GoogleIcon = () => <GoogleIconSvg width={20} height={20} />;
@@ -22,7 +18,7 @@ const GoogleSignIn = () => {
     const googleAccount = await GoogleSignInService.signIn();
     const {id, name, email, photo} = googleAccount;
     dispatch(
-      authWithSocialAccount({
+      loginWithSocialAccount({
         social_id: id,
         social_name: name,
         social_email: email,
@@ -50,20 +46,18 @@ const GoogleSignIn = () => {
   return (
     <React.Fragment>
       <Button
-        style={styles.loginGoogleButton}
+        style={styles.button}
         onPress={signInWithGoogle}
-        appearance="outline"
+        appearance="ghost"
         accessoryLeft={GoogleIcon}>
-        Sign In with Google
+        Login dengan Google
       </Button>
-      <Button onPress={getGoogleCurrentUser}>Get user info</Button>
-      <Button onPress={signOutGoogleAccount}>Sign Out</Button>
     </React.Fragment>
   );
 };
 
 const styles = StyleSheet.create({
-  loginGoogleButton: {
+  button: {
     borderColor: '#eee',
   },
 });

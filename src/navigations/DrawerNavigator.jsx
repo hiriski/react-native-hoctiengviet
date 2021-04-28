@@ -5,7 +5,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import HomeTabNavigatorV3 from './HomeTabNavigatorV3';
 
-import DrawerContent from '../components/DrawerContent';
+import DrawerContent from '../containers/DrawerContent';
 
 const Drawer = createDrawerNavigator();
 

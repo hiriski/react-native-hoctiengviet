@@ -6,7 +6,7 @@ import CustomTabBar from '../components/CustomTabBar';
 // screens
 import HomeScreen from '../screens/HomeScreen';
 import ChillaxScreen from '../screens/ChillaxScreen';
-import CreateDiscussionScreen from '../screens/CreateDiscussionScreen';
+import CreatePhrase from '../screens/phrasebook/CreatePhrase';
 import ChatScreen from '../screens/ChatScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
@@ -14,7 +14,7 @@ const Tab = createBottomTabNavigator();
 
 const HomeTabNavigatorV3 = () => {
   return (
-    <>
+    <React.Fragment>
       <Tab.Navigator tabBar={(props) => <CustomTabBar {...props} />}>
         <Tab.Screen
           options={{
@@ -35,7 +35,7 @@ const HomeTabNavigatorV3 = () => {
             tabBarLabel: 'Add',
           }}
           name={ROUTES.CREATE}
-          component={CreateDiscussionScreen}
+          component={CreatePhrase}
         />
         <Tab.Screen
           options={{
@@ -52,7 +52,7 @@ const HomeTabNavigatorV3 = () => {
           component={ProfileScreen}
         />
       </Tab.Navigator>
-    </>
+    </React.Fragment>
   );
 };
 

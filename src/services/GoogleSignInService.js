@@ -12,25 +12,23 @@ class GoogleSignInService {
       await GoogleSignin.hasPlayServices();
       const googleAccount = await GoogleSignin.signIn();
       if (googleAccount !== null) {
-        return ({id, name, email, photo} = googleAccount.user);
+        return googleAccount.user;
       }
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
         // console.log('Login dibatalkan');
-        dispatch(authWithSocialAccountCancelled());
       } else if (error.code === statusCodes.IN_PROGRESS) {
         console.log('Login on progress');
         // operation (e.g. sign in) is in progress already
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
         // console.log('Mohon update google play service');
         // play services not available or outdated
-        dispatch(authWithSocialAccountFailure());
       } else {
         // some other error happened
-        dispatch(authWithSocialAccountFailure());
-        // console.log('Error gak jelas ditangkap disini');
+        console.log('Error gak jelas ditangkap disini');
       }
+      return null;
     }
   };
 

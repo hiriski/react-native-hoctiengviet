@@ -7,8 +7,9 @@ import {View, StyleSheet} from 'react-native';
 import {ROUTES} from '../../constants';
 import DrawerItem from './DrawerItem';
 import {useNavigation} from '@react-navigation/core';
-import {useDispatch} from 'react-redux';
-import {logout} from '../../modules/auth/actions';
+import {useDispatch, useSelector} from 'react-redux';
+import {revokeToken} from '../../modules/auth/actions';
+import GoogleSignInService from '../../services/GoogleSignInService';
 
 const navigations = [
   {
@@ -51,10 +52,14 @@ const navigations = [
 const DrawerListItem = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const {socialProvider} = useSelector((state) => state.auth);
 
   const handlePress = (routeName) => {
     if (routeName === '__LOGOUT__') {
-      dispatch(logout());
+      dispatch(revokeToken());
+      if (socialProvider === 'google') {
+        GoogleSignInService.signOut();
+      }
     } else {
       navigation.navigate(routeName);
     }

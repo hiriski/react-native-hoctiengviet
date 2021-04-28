@@ -3,25 +3,25 @@ import * as Actions from './constants';
 const initialState = {
   user: null,
   token: null,
+  isLoggedOut: false,
+  socialProvider: null,
   login: {
     isLoading: false,
     isSuccess: false,
     isError: false,
-    errorMessage: '',
+    errorMessage: null,
   },
   register: {
     isLoading: false,
     isSuccess: false,
     isError: false,
-    errorMessage: '',
+    errorMessage: null,
   },
-  socialAccount: {
+  loginSocialAccount: {
     isLoading: false,
-    cancelled: false,
+    isSuccess: false,
     isError: false,
     errorMessage: null,
-    isSuccess: false,
-    data: null,
   },
 };
 
@@ -62,6 +62,11 @@ export default (state = initialState, action) => {
           errorMessage: null,
         },
       };
+    case Actions.RESET_LOGIN_STATE:
+      return {
+        ...state,
+        login: initialState.login,
+      };
 
     /**
      * --------------
@@ -98,59 +103,68 @@ export default (state = initialState, action) => {
           errorMessage: null,
         },
       };
+    case Actions.RESET_REGISTER_STATE:
+      return {
+        ...state,
+        register: initialState.register,
+      };
 
     /**
      * --------------
      * Social auth
      * -------------
      */
-    case Actions.AUTH_WITH_SOCIAL_ACCOUNT_REQUEST:
+    case Actions.LOGIN_WITH_SOCIAL_ACCOUNT_REQUEST:
       return {
         ...state,
-        socialAccount: {
+        loginSocialAccount: {
           isLoading: true,
-          cancelled: false,
+          isSuccess: false,
           isError: false,
           errorMessage: null,
-          isSuccess: false,
-          data: null,
         },
       };
-    case Actions.AUTH_WITH_SOCIAL_ACCOUNT_FAILURE:
+    case Actions.LOGIN_WITH_SOCIAL_ACCOUNT_FAILURE:
       return {
         ...state,
-        socialAccount: {
+        loginSocialAccount: {
           isLoading: false,
-          cancelled: false,
+          isSuccess: false,
           isError: true,
           errorMessage: action.payload,
-          isSuccess: false,
-          data: null,
         },
       };
-    case Actions.AUTH_WITH_SOCIAL_ACCOUNT_CANCELLED:
+    // case Actions.LOGIN_WITH_SOCIAL_ACCOUNT_CANCELLED:
+    //   return {
+    //     ...state,
+    //   };
+    case Actions.LOGIN_WITH_SOCIAL_ACCOUNT_SUCCESS:
+      const {provider} = action.payload;
       return {
         ...state,
-        socialAccount: {
+        socialProvider: provider,
+        loginSocialAccount: {
           isLoading: false,
-          cancelled: true,
-          isError: false,
-          errorMessage: null,
-          isSuccess: false,
-          data: null,
-        },
-      };
-    case Actions.AUTH_WITH_SOCIAL_ACCOUNT_SUCCESS:
-      return {
-        ...state,
-        socialAccount: {
-          isLoading: false,
-          cancelled: false,
-          isError: false,
-          errorMessage: null,
           isSuccess: true,
-          data: action.payload,
+          isError: false,
+          errorMessage: null,
         },
+      };
+    case Actions.RESET_LOGIN_WITH_SOCIAL_ACCOUNT_STATE:
+      return {
+        ...state,
+        loginSocialAccount: initialState.loginSocialAccount,
+      };
+
+    /**
+     * ----------------
+     * Revoke token
+     * ----------------
+     */
+    case Actions.REVOKING_TOKEN_SUCCESS:
+      return {
+        ...state,
+        isLoggedOut: true, // Playing with this state from the ui
       };
 
     /**

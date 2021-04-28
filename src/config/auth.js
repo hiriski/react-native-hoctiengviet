@@ -1,3 +1,1 @@
-const USER_TOKEN_KEY = '@UserToken';
-
-export default {USER_TOKEN_KEY};
+export const USER_TOKEN_KEY = '@UserToken';
