@@ -75,39 +75,37 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <MainLayout>
-      <SafeAreaView style={styles.root}>
-        <FocusAwareStatusBar
-          barStyle="light-content"
-          backgroundColor={COLORS.primary}
-        />
-        <TopNavigation
-          accessoryLeft={renderBackAction}
-          accessoryRight={renderRightActions}
-          title="HomeScreen"
-          alignment="center"
-          style={{backgroundColor: COLORS.primary}}
-        />
-        <Divider />
-        <Text>HomeScreen</Text>
-        <Button
-          onPress={() =>
-            navigation.navigate(ROUTES.MEMBER, {
-              screen: ROUTES.MEMBER_LIST,
-            })
-          }>
-          Go to member list screen
-        </Button>
-        <Button
-          onPress={() =>
-            showMessage({
-              message: 'Hello World',
-              description: 'This is our second message',
-              type: 'success',
-            })
-          }>
-          Show success flash message
-        </Button>
-      </SafeAreaView>
+      <FocusAwareStatusBar
+        barStyle="light-content"
+        backgroundColor={COLORS.primary}
+      />
+      <TopNavigation
+        accessoryLeft={renderBackAction}
+        accessoryRight={renderRightActions}
+        title="HomeScreen"
+        alignment="center"
+        style={{backgroundColor: COLORS.primary}}
+      />
+      <Divider />
+      <Text>HomeScreen</Text>
+      <Button
+        onPress={() =>
+          navigation.navigate(ROUTES.MEMBER, {
+            screen: ROUTES.MEMBER_LIST,
+          })
+        }>
+        Go to member list screen
+      </Button>
+      <Button
+        onPress={() =>
+          showMessage({
+            message: 'Hello World',
+            description: 'This is our second message',
+            type: 'success',
+          })
+        }>
+        Show success flash message
+      </Button>
     </MainLayout>
   );
 };

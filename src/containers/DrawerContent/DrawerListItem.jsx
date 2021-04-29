@@ -4,42 +4,42 @@
 
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {ROUTES} from '../../constants';
 import DrawerItem from './DrawerItem';
 import {useNavigation} from '@react-navigation/core';
 import {useDispatch, useSelector} from 'react-redux';
 import {revokeToken} from '../../modules/auth/actions';
 import GoogleSignInService from '../../services/GoogleSignInService';
+import {TAB, HOME_DRAWER, ROOT_STACK} from '../../config/navigator';
 
 const navigations = [
   {
     label: 'Home',
-    routeName: ROUTES.HOME,
+    routeName: TAB.HOME,
     icon: 'layers',
   },
   {
     label: 'Phrasebook',
-    routeName: 'PhrasebookList',
+    routeName: HOME_DRAWER.PHRASEBOOK_LIST,
     icon: 'book',
   },
   {
     label: 'Profil',
-    routeName: ROUTES.PROFILE,
+    routeName: TAB.ACCOUNT,
     icon: 'person',
   },
   {
     label: 'Chillax',
-    routeName: ROUTES.CHILLAX,
+    routeName: TAB.CHILLAX,
     icon: 'headphones',
   },
   {
     label: 'Chat',
-    routeName: ROUTES.CHAT,
+    routeName: TAB.CHAT,
     icon: 'message-circle',
   },
   {
     label: 'Favorit',
-    routeName: ROUTES.FAVORITE,
+    routeName: HOME_DRAWER.FAVORITE,
     icon: 'heart',
   },
   {
@@ -49,7 +49,7 @@ const navigations = [
   },
   {
     label: 'Pengaturan',
-    routeName: ROUTES.SETTINGS,
+    routeName: ROOT_STACK.SETTINGS,
     icon: 'settings',
   },
 ];

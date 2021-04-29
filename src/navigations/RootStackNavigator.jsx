@@ -33,10 +33,6 @@ const RootStackNavigator = () => {
                   name={ROOT_STACK.HOME_DRAWER}
                   component={DrawerNavigator}
                 />
-                <Stack.Screen
-                  name="PhrasebookList"
-                  component={PhrasebookListScreen}
-                />
               </React.Fragment>
             ) : (
               /**

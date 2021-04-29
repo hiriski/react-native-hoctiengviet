@@ -1,10 +1,17 @@
 import React from 'react';
-import {View, Animated, StyleSheet, Dimensions} from 'react-native';
+import {
+  View,
+  Animated,
+  StyleSheet,
+  Dimensions,
+  TouchableHighlight,
+} from 'react-native';
 
-import {COLORS, ROUTES} from '../../constants';
+import {COLORS} from '../../constants';
 import {Icon, Text} from '@ui-kitten/components';
 import Ripple from 'react-native-material-ripple';
-import {TAB_BAR_WIDTH} from '../../containers/CustomTabBar';
+import {TAB_BAR_ITEM_SIZE} from './index';
+import {TAB} from '../../config/navigator';
 
 const TabBarItem = ({
   route,
@@ -16,15 +23,15 @@ const TabBarItem = ({
 }) => {
   const renderTabBarItem = ({routeName, fill, style}) => {
     let iconName;
-    if (routeName === ROUTES.HOME) {
+    if (routeName === TAB.HOME) {
       iconName = 'layers';
-    } else if (routeName === ROUTES.CHILLAX) {
+    } else if (routeName === TAB.CHILLAX) {
       iconName = 'headphones';
-    } else if (routeName === ROUTES.CREATE) {
+    } else if (routeName === TAB.ADD) {
       iconName = 'plus-circle';
-    } else if (routeName === ROUTES.CHAT) {
+    } else if (routeName === TAB.CHAT) {
       iconName = 'message-circle';
-    } else if (routeName === ROUTES.PROFILE) {
+    } else if (routeName === TAB.ACCOUNT) {
       iconName = 'person';
     } else {
       iconName = 'home';
@@ -33,12 +40,12 @@ const TabBarItem = ({
   };
   return (
     <View style={[styles.itemRoot]}>
-      <Ripple
+      <TouchableHighlight
         key={label}
-        rippleColor={COLORS.primary}
-        rippleOpacity={0.8}
-        rippleSize={100}
-        rippleCentered={true}
+        // rippleColor={COLORS.primary}
+        // rippleOpacity={0.8}
+        // rippleSize={100}
+        // rippleCentered={true}
         style={[styles.item, isFocused && styles.focusedItem]}
         accessibilityRole="button"
         accessibilityState={isFocused ? {selected: true} : {}}
@@ -52,9 +59,9 @@ const TabBarItem = ({
               fill: COLORS.primary,
               style: styles.focusedIcon,
             })}
-            <Text category="label" style={styles.focusedLable}>
+            {/* <Text category="label" style={styles.focusedLable}>
               {label}
-            </Text>
+            </Text> */}
           </View>
         ) : (
           <View style={styles.itemContainer}>
@@ -65,12 +72,12 @@ const TabBarItem = ({
             })}
           </View>
         )}
-      </Ripple>
+      </TouchableHighlight>
     </View>
   );
 };
 
-const TAB_ITEM_SIZE = 50;
+const TAB_ITEM_SIZE = TAB_BAR_ITEM_SIZE;
 
 const styles = StyleSheet.create({
   itemRoot: {

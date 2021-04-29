@@ -7,7 +7,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 const MainLayout = ({children}) => {
   return (
     <SafeAreaView style={styles.root}>
-      <Layout level="3" style={styles.layout}>
+      <Layout level="2" style={styles.layout}>
         {children}
       </Layout>
     </SafeAreaView>

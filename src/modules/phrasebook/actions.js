@@ -28,7 +28,6 @@ export const createPhrase = (data) => {
         dispatch(createPhraseSuccess(response.data.data));
       }
     } catch (e) {
-      console.log(e.response);
       dispatch(createPhraseFailure());
     }
   };
@@ -63,7 +62,6 @@ export const fetchPhrasebooks = () => {
       const response = await PhrasebookService.getPhrasebooks();
       if (response.status === 200) {
         const items = response.data.data;
-        console.log('ITEMS', items);
         dispatch(fetchingPhrasebookSuccess(items));
       }
     } catch (e) {
