@@ -9,11 +9,13 @@ import {
 import MainLayout from '../../../layouts/MainLayout';
 import PhraseItem from '../../../containers/phrasebook/PhraseItem';
 import {MARGIN} from '../../../components/config/spacing';
-import {Text} from '@ui-kitten/components';
+import {Text, useTheme} from '@ui-kitten/components';
+import FocusAwareStatusBar from '../../../components/common/FocusAwareStatusBar';
 
 const PhrasebookListScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = React.useState(false);
+  const theme = useTheme();
 
   const {list} = useSelector((state) => state.phrasebook);
   console.log(list);
@@ -53,9 +55,13 @@ const PhrasebookListScreen = ({navigation}) => {
 
   return (
     <MainLayout>
+      <FocusAwareStatusBar
+        barStyle="dark-content"
+        backgroundColor={theme['color-basic-200']}
+      />
       <View style={styles.viewHeader}>
         <Text style={styles.textHeader} category="h1">
-          Create new phrase
+          Phrasebooks
         </Text>
       </View>
       <View style={styles.root}>
@@ -98,7 +104,7 @@ const styles = StyleSheet.create({
     marginTop: MARGIN.LARGE,
   },
   textHeader: {
-    fontSize: 24,
+    fontSize: 20,
     textAlign: 'center',
   },
 });

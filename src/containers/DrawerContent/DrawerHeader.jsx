@@ -11,10 +11,10 @@ import {
   Dimensions,
 } from 'react-native';
 import {Text, Divider, Icon} from '@ui-kitten/components';
-import {COLORS, ROUTES} from '../../constants';
+import {COLORS} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
 import IconButton from '../../components/partials/IconButton';
-import {ROOT_STACK, AUTH_STACK} from '../../config/navigator';
+import {ROOT_STACK, AUTH_STACK, TAB} from '../../config/navigator';
 import {useSelector} from 'react-redux';
 
 const DrawerHeader = () => {
@@ -25,7 +25,7 @@ const DrawerHeader = () => {
     <TouchableOpacity
       activeOpacity={0.8}
       style={styles.touchableProfile}
-      onPress={() => navigation.navigate(ROUTES.PROFILE)}>
+      onPress={() => navigation.navigate(TAB.ACCOUNT)}>
       <View style={styles.avatar}>
         <Image
           source={require('../../assets/images/users/4yearsago.jpg')}

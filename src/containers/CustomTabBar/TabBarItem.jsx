@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 
 import {COLORS} from '../../constants';
-import {Icon, Text} from '@ui-kitten/components';
-import Ripple from 'react-native-material-ripple';
+import {Icon, Text, useTheme} from '@ui-kitten/components';
+// import Ripple from 'react-native-material-ripple';
 import {TAB_BAR_ITEM_SIZE} from './index';
 import {TAB} from '../../config/navigator';
 
@@ -21,6 +21,7 @@ const TabBarItem = ({
   onLongPress,
   options,
 }) => {
+  const theme = useTheme();
   const renderTabBarItem = ({routeName, fill, style}) => {
     let iconName;
     if (routeName === TAB.HOME) {
@@ -42,6 +43,7 @@ const TabBarItem = ({
     <View style={[styles.itemRoot]}>
       <TouchableHighlight
         key={label}
+        underlayColor={theme['color-basic-400']}
         // rippleColor={COLORS.primary}
         // rippleOpacity={0.8}
         // rippleSize={100}
@@ -96,8 +98,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   icon: {
-    width: 24,
-    height: 24,
+    width: 22,
+    height: 22,
   },
   focusedIcon: {
     width: 22,

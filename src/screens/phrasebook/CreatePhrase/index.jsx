@@ -5,6 +5,7 @@ import CreatePhraseForm from '../../../containers/phrasebook/Form';
 import {MARGIN} from '../../../components/config/spacing';
 import {useDispatch, useSelector} from 'react-redux';
 import {resetCreatePhrase} from '../../../modules/phrasebook/actions';
+import {HOME_DRAWER} from '../../../config/navigator';
 
 const CreatePhrase = ({navigation}) => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const CreatePhrase = ({navigation}) => {
 
   React.useEffect(() => {
     if (isSuccess) {
-      navigation.navigate('PhrasebookList');
+      navigation.navigate(HOME_DRAWER.PHRASEBOOK_LIST);
     }
     return () => {
       dispatch(resetCreatePhrase());

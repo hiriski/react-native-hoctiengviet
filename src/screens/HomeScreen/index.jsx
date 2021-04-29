@@ -1,11 +1,9 @@
 import React from 'react';
+import {View, StyleSheet} from 'react-native';
 import MainLayout from '../../layouts/MainLayout';
-import {COLORS, ROUTES} from '../../constants';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {COLORS} from '../../constants';
 import {useIsConnected} from 'react-native-offline';
 import {showMessage, hideMessage} from 'react-native-flash-message';
-
-import styles from './styles';
 import FocusAwareStatusBar from '../../components/common/FocusAwareStatusBar';
 import {
   Button,
@@ -18,6 +16,8 @@ import {
   Icon,
   useTheme,
 } from '@ui-kitten/components';
+import {primary} from '../../components/config/colors';
+import {HOME_DRAWER} from '../../config/navigator';
 
 const HomeScreen = ({navigation}) => {
   const isConnected = useIsConnected();
@@ -75,10 +75,7 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <MainLayout>
-      <FocusAwareStatusBar
-        barStyle="light-content"
-        backgroundColor={COLORS.primary}
-      />
+      <FocusAwareStatusBar barStyle="light-content" backgroundColor={primary} />
       <TopNavigation
         accessoryLeft={renderBackAction}
         accessoryRight={renderRightActions}
@@ -87,27 +84,32 @@ const HomeScreen = ({navigation}) => {
         style={{backgroundColor: COLORS.primary}}
       />
       <Divider />
-      <Text>HomeScreen</Text>
-      <Button
-        onPress={() =>
-          navigation.navigate(ROUTES.MEMBER, {
-            screen: ROUTES.MEMBER_LIST,
-          })
-        }>
-        Go to member list screen
-      </Button>
-      <Button
-        onPress={() =>
-          showMessage({
-            message: 'Hello World',
-            description: 'This is our second message',
-            type: 'success',
-          })
-        }>
-        Show success flash message
-      </Button>
+      <View style={styles.container}>
+        <Button
+          appearance="ghost"
+          onPress={() => navigation.navigate(HOME_DRAWER.PHRASEBOOK_LIST)}>
+          Phrasebook
+        </Button>
+        <Button
+          onPress={() =>
+            showMessage({
+              message: 'Hello World',
+              description: 'This is our second message',
+              type: 'success',
+            })
+          }>
+          Show success flash message
+        </Button>
+      </View>
     </MainLayout>
   );
 };
+
+const styles = StyleSheet.create({
+  root: {
+    backgroundColor: '#fff',
+  },
+  container: {},
+});
 
 export default HomeScreen;

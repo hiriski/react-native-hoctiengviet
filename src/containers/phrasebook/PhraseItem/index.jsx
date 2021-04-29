@@ -1,26 +1,43 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {Avatar, Button, ListItem} from '@ui-kitten/components';
+import {Avatar, Button, ListItem, Text} from '@ui-kitten/components';
 import {MARGIN} from '../../../components/config/spacing';
-const SampleButton = (props) => <Button size="tiny">Button</Button>;
-
-const LeftContent = (props) => (
-  <Avatar
-    {...props}
-    style={[styles.logo, {tintColor: null}]}
-    source={require('../../../assets/images/logo.png')}
-  />
-);
 
 const PhraseItem = React.memo(({item}) => {
-  console.log(item);
+  const handlePressDeleteButton = () => {
+    alert('handlePressDeleteButton');
+  };
+
+  const DeleteButton = () => (
+    <Button appearance="ghost" size="small" onPress={handlePressDeleteButton}>
+      Delete
+    </Button>
+  );
+
+  const LeftContent = (props) => (
+    <Avatar
+      {...props}
+      style={[styles.logo]}
+      source={require('../../../assets/images/logo.png')}
+    />
+  );
+
+  const renderTextTiengViet = () => (
+    <Text style={styles.textTiengViet} category="p1">
+      {item.text.vi}
+    </Text>
+  );
+  const renderTextBahasaIndonesia = () => (
+    <Text category="p2">{item.text.id}</Text>
+  );
+
   return (
     <ListItem
       style={styles.root}
-      title={item.text.vi}
-      description={item.text.id}
+      title={renderTextTiengViet}
+      description={renderTextBahasaIndonesia}
       accessoryLeft={LeftContent}
-      accessoryRight={SampleButton}
+      accessoryRight={DeleteButton}
     />
   );
 });
@@ -30,8 +47,12 @@ const styles = StyleSheet.create({
     marginBottom: MARGIN.SMALL,
   },
   logo: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
+    marginRight: MARGIN.SMALL,
+  },
+  textTiengViet: {
+    // fontWeight: '600',
   },
 });
 

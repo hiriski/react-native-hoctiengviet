@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet} from 'react-native';
+import {TextInput, StyleSheet} from 'react-native';
 import {Input} from '@ui-kitten/components';
 
 const FormInput = ({
@@ -11,10 +11,10 @@ const FormInput = ({
   ...props
 }) => {
   return (
-    <Input
+    <TextInput
       size={size}
       placeholder={placeholder}
-      style={styles.root}
+      style={styles.input}
       value={value}
       onChangeText={onChangeText}
       {...props}
@@ -23,10 +23,14 @@ const FormInput = ({
 };
 
 const styles = StyleSheet.create({
-  root: {
+  input: {
     marginBottom: 10,
     borderRadius: 5,
     lineHeight: 10,
+    borderTopWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderBottomWidth: 1,
   },
 });
 

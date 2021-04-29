@@ -1,5 +1,10 @@
 import React from 'react';
-import {StyleSheet, View, TouchableWithoutFeedback} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TouchableWithoutFeedback,
+  ImageBackground,
+} from 'react-native';
 
 import FocusAwareStatusBar from '../../../components/common/FocusAwareStatusBar';
 import {Layout, Text, Input, Icon} from '@ui-kitten/components';
@@ -27,38 +32,44 @@ const LoginScreen = ({navigation}) => {
 
   return (
     <AuthLayout>
-      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <Layout style={styles.root}>
-        <View style={styles.header}>
-          <Text style={styles.title} category="h1">
-            Login
-          </Text>
-          <Text style={styles.subtitle} category="h6">
-            Belajar Bahasa Vietnam Bersama Komunitas.
-          </Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <Input placeholder="Username/email" value="" />
-          <Input
-            value={value}
-            label="Password"
-            placeholder="Place your Text"
-            caption="Should contain at least 8 symbols"
-            accessoryRight={renderIcon}
-            captionIcon={AlertIcon}
-            secureTextEntry={secureTextEntry}
-            onChangeText={(nextValue) => setValue(nextValue)}
-          />
-        </View>
-        <View style={styles.socialAuth}>
-          <View style={styles.socilaAuthContainer}>
-            <Text style={styles.textSocialAuth} category="p1">
-              Login menggunakan akun social media kamu
+      {/* <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#fff" /> */}
+      <ImageBackground
+        style={styles.imageBackground}
+        source={{
+          uri: require('../../../assets/images/headers/ruben-daems-ksD-NZagHpE-unsplash-droped.jpg'),
+        }}>
+        <Layout style={styles.root}>
+          <View style={styles.header}>
+            <Text style={styles.title} category="h1">
+              Login
             </Text>
-            <GoogleSignIn />
+            <Text style={styles.subtitle} category="h6">
+              Belajar Bahasa Vietnam Bersama Komunitas.
+            </Text>
           </View>
-        </View>
-      </Layout>
+          <View style={styles.inputContainer}>
+            <Input placeholder="Username/email" value="" />
+            <Input
+              value={value}
+              label="Password"
+              placeholder="Place your Text"
+              caption="Should contain at least 8 symbols"
+              accessoryRight={renderIcon}
+              captionIcon={AlertIcon}
+              secureTextEntry={secureTextEntry}
+              onChangeText={(nextValue) => setValue(nextValue)}
+            />
+          </View>
+          <View style={styles.socialAuth}>
+            <View style={styles.socilaAuthContainer}>
+              <Text style={styles.textSocialAuth} category="p1">
+                Login menggunakan akun social media kamu
+              </Text>
+              <GoogleSignIn />
+            </View>
+          </View>
+        </Layout>
+      </ImageBackground>
     </AuthLayout>
   );
 };
@@ -68,8 +79,13 @@ const AlertIcon = (props) => <Icon {...props} name="alert-circle-outline" />;
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    alignItems: 'flex-start',
-    justifyContent: 'flex-end',
+    // alignItems: 'flex-start',
+    // justifyContent: 'flex-end',
+  },
+  imageBackground: {
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    flex: 1,
   },
   header: {
     // flex: 1,
