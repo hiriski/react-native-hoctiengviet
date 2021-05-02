@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primary_dark">#000000</color>
-    <color name="status_bar_color">#FFFFFF</color>
-    <color name="white">#FFF</color>
+    <color name="status_bar_color">#EAEEF6</color>
+    <color name="white">#FFFFFF</color>
+    <color name="splash_screen_text">#777</color>
 </resources>

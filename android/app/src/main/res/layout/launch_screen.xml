@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/status_bar_color"
     android:orientation="vertical">
-
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/logo"
+        android:layout_width="@dimen/splash_screen_logo"
+        android:layout_height="@dimen/splash_screen_logo"
+        android:layout_centerInParent="true"
+        android:src="@drawable/splash_logo"
+        android:contentDescription="@string/splash_screen_text"/>
+    <View
+        android:id="@+id/spacer"
+        android:layout_below="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/splash_screen_spacer"/>
+    <TextView
+        android:layout_below="@+id/spacer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="150dp"
-        android:layout_marginRight="150dp"
-        app:srcCompat="@drawable/splash_logo"
-        android:src="@drawable/splash_logo"
-        android:contentDescription="SplashLogo" />
+        android:text="@string/splash_screen_text"
+        android:textSize="@dimen/splash_screen_text"
+        android:textColor="@color/splash_screen_text"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true"/>
 </RelativeLayout>
