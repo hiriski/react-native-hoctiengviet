@@ -5,16 +5,18 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {PADDING} from '../../components/config/spacing';
 import {white} from '../../components/config/colors';
 import {Layout} from '@ui-kitten/components';
+import FocusAwareStatusBar from '../../components/common/FocusAwareStatusBar';
 
 const AuthLayout = ({children}) => {
   return (
-    <SafeAreaView style={styles.root}>
-      <ScrollView
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={styles.container}>
-        {children}
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView
+      keyboardShouldPersistTaps="handled"
+      style={styles.root}
+      contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}
+      showsVerticalScrollIndicator={false}>
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor={white} />
+      <SafeAreaView style={styles.container}>{children}</SafeAreaView>
+    </ScrollView>
   );
 };
 
