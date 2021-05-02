@@ -29,6 +29,7 @@ export const createPhrase = (data) => {
       }
     } catch (e) {
       dispatch(createPhraseFailure());
+      console.log(e.response);
     }
   };
 };

@@ -66,8 +66,8 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
 
 const width = Dimensions.get('window').width;
 const TAB_ITEM_COUNT = 5;
-export const TAB_BAR_ITEM_SIZE = 48;
-const CONTAINER_HEIGHT = 48;
+export const TAB_BAR_ITEM_SIZE = 52;
+const CONTAINER_HEIGHT = 52;
 const SPACING = 20;
 export const TAB_BAR_WIDTH = TAB_BAR_ITEM_SIZE * TAB_ITEM_COUNT;
 // export const TAB_BAR_WIDTH = width > 360 ? width - SPACING * 4 : width - SPACING * 2;
@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
   root: {
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden',
     position: 'absolute',
     bottom: 0,
     left: 0,
@@ -90,6 +89,12 @@ const styles = StyleSheet.create({
     backgroundColor: white,
     marginBottom: SPACING,
     width: TAB_BAR_WIDTH,
+
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 32,
   },
 });
 
