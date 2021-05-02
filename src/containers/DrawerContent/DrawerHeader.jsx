@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {Text, Divider, Icon} from '@ui-kitten/components';
 import {COLORS} from '../../constants';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, StackActions} from '@react-navigation/native';
 import IconButton from '../../components/partials/IconButton';
 import {ROOT_STACK, AUTH_STACK, TAB} from '../../config/navigator';
 import {useSelector} from 'react-redux';
@@ -20,6 +20,11 @@ import {useSelector} from 'react-redux';
 const DrawerHeader = () => {
   const navigation = useNavigation();
   const {user, token} = useSelector((state) => state.auth);
+
+  const navigateToLoginScreen = () => {
+    navigation.navigate(ROOT_STACK.AUTH);
+    // navigation.dispatch(StackActions.replace(ROOT_STACK.AUTH)); // Replace stack
+  };
 
   const renderProfileInfo = () => (
     <TouchableOpacity
@@ -54,9 +59,7 @@ const DrawerHeader = () => {
     <TouchableOpacity
       activeOpacity={0.8}
       style={styles.touchableProfile}
-      onPress={() =>
-        navigation.navigate(ROOT_STACK.AUTH, {screen: AUTH_STACK.LOGIN})
-      }>
+      onPress={navigateToLoginScreen}>
       <View style={styles.avatar}>
         <View style={styles.avatarIconContainer}>
           <Icon name="person" style={styles.avatarIcon} fill={COLORS.primary} />

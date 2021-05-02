@@ -3,7 +3,7 @@ import * as Actions from './constants';
 const initialState = {
   user: null,
   token: null,
-  isLoggedOut: false,
+  isLoggedOut: false, // Playing with this state from the ui
   socialProvider: null,
   login: {
     isLoading: false,
@@ -164,7 +164,13 @@ export default (state = initialState, action) => {
     case Actions.REVOKING_TOKEN_SUCCESS:
       return {
         ...state,
-        isLoggedOut: true, // Playing with this state from the ui
+        isLoggedOut: true,
+      };
+    /** Also is user failed to revoke token from server set isLoggedOut to true */
+    case Actions.REVOKING_TOKEN_FAILURE:
+      return {
+        ...state,
+        isLoggedOut: true,
       };
 
     /**
@@ -192,6 +198,8 @@ export default (state = initialState, action) => {
         ...state,
         token: null,
       };
+    case Actions.RESET_AUTH_STATE:
+      return initialState;
     default:
       return state;
   }

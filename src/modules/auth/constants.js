@@ -33,4 +33,4 @@ export const FETCHING_AUTHENTICATED_USER_SUCCESS =
 export const SET_USER_TOKEN = 'auth/SET_USER_TOKEN';
 export const RESET_USER_TOKEN = 'auth/RESET_USER_TOKEN';
 export const SET_USER_DATA = 'auth/SET_USER_DATA';
-export const RESET_USER_DATA = 'auth/RESET_USER_DATA';
+export const RESET_AUTH_STATE = 'auth/RESET_AUTH_STATE';

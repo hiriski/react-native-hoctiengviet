@@ -9,7 +9,7 @@ class AuthService {
    * @params {object} credentials
    * @returns {*}
    */
-  loginWithUserName = async (credentials) => {
+  loginWithEmailAndPassword = async (credentials) => {
     return await axios.post(API_URL + '/auth/login', credentials);
   };
 

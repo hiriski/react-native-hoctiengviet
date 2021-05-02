@@ -5,7 +5,7 @@ import {Input, useTheme} from '@ui-kitten/components';
 import {grey7} from '../../config/colors';
 import {MARGIN, PADDING} from '../../config/spacing';
 
-const FormInput = ({
+const InputBorderBottom = ({
   placeholder,
   value,
   onChangeText,
@@ -13,19 +13,24 @@ const FormInput = ({
   ...props
 }) => {
   const theme = useTheme();
-
+  const DEFAULT_BORDER_COLOR = theme['color-basic-400'];
   const [borderBottomColor, setBorderBottomColor] = React.useState(
-    theme['color-basic-400'],
+    DEFAULT_BORDER_COLOR,
   );
 
   const onFocus = () => {
     setBorderBottomColor('blue');
   };
 
+  const onBlur = () => {
+    setBorderBottomColor(DEFAULT_BORDER_COLOR);
+  };
+
   return (
     <TextInput
       size={size}
       onFocus={onFocus}
+      onBlur={onBlur}
       placeholder={placeholder}
       style={StyleSheet.flatten([{borderBottomColor}, styles.input])}
       value={value}
@@ -43,7 +48,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderRightWidth: 0,
     borderBottomWidth: 2,
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: '600',
     color: grey7,
     paddingHorizontal: 0,
@@ -51,11 +56,11 @@ const styles = StyleSheet.create({
   },
 });
 
-FormInput.propTypes = {
+InputBorderBottom.propTypes = {
   value: PropTypes.string,
   onChangeText: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   size: PropTypes.string,
 };
 
-export default FormInput;
+export default InputBorderBottom;

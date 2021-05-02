@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {batch} from 'react-redux';
 import AuthService from './service';
 import {USER_TOKEN_KEY} from '../../constants';
@@ -125,17 +124,19 @@ export const login = (credentials) => {
     let errMessage = 'Login failed.';
     dispatch(loginRequest());
     try {
-      const response = await AuthService.login(credentials);
+      const response = await AuthService.loginWithEmailAndPassword(credentials);
       if (response.status === 200) {
         const {token, user} = response.data;
-        LocalStorageService.setItem(USER_TOKEN_KEY, JSON.stringify(token));
+        saveUserToken(token);
         batch(() => {
           dispatch(loginSuccess());
           dispatch(setUserData(user));
+          dispatch(setUserToken(token));
         });
       }
     } catch (e) {
       if (e.response !== undefined) {
+        console.log(e);
         if (e.response.status === 422) {
           errMessage = 'Username / Password yang anda masukan salah';
           dispatch(loginFailure(errMessage));
@@ -178,10 +179,11 @@ export const register = (userData) => {
       const response = await AuthService.register(userData);
       if (response.status === 201) {
         const {token, user} = response.data;
-        LocalStorageService.setItem(USER_TOKEN_KEY, JSON.stringify(token));
+        saveUserToken(token);
         batch(() => {
           dispatch(registerSuccess());
           dispatch(setUserData(user));
+          dispatch(setUserToken(token));
         });
       }
     } catch (e) {
@@ -239,7 +241,7 @@ export const fetchAuthenticatedUser = () => {
 
 /**
  * ------------------------
- * Revoke token
+ * Revoke auth token
  * ------------------------
  */
 const revokingTokenRequest = () => ({
@@ -269,13 +271,22 @@ export const revokeToken = () => {
           // Also reset token & user data.
           dispatch(resetUserToken());
           dispatch(resetUserData());
+          dispatch(resetAuthState());
         });
       }
     } catch (e) {
+      /** Also reset auth state if failed to revoke token from the server */
       if (e.response !== undefined) {
         console.log(e.response);
       }
-      dispatch(revokingTokenFailure(errorMessage));
+      batch(() => {
+        dispatch(revokingTokenFailure(errorMessage));
+        dispatch(resetAuthState());
+      });
     }
   };
 };
+
+export const resetAuthState = () => ({
+  type: Actions.RESET_AUTH_STATE,
+});

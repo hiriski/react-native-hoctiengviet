@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Layout} from '@ui-kitten/components';
 import {PADDING} from '../../components/config/spacing';
+import {white} from '../../components/config/colors';
+import {Layout} from '@ui-kitten/components';
 
 const AuthLayout = ({children}) => {
   return (
     <SafeAreaView style={styles.root}>
-      <Layout style={styles.layout}>{children}</Layout>
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={styles.container}>
+        {children}
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -21,10 +26,11 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
   },
-  layout: {
+  container: {
     flex: 1,
-    paddingHorizontal: PADDING.BIG,
-    paddingBottom: PADDING.BIG,
+    paddingHorizontal: PADDING.LARGE * 2,
+    paddingBottom: PADDING.LARGE * 2,
+    backgroundColor: white,
   },
 });
 

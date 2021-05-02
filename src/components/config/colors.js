@@ -24,6 +24,7 @@ export const violet = '#6435C9';
 export const purple = '#A333C8';
 export const pink = '#E03997';
 export const brown = '#A5673F';
+export const error = '#FF5A5A';
 
 /**
  * Main colors
