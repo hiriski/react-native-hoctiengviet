@@ -12,7 +12,7 @@ export const phrasebookSchema = Yup.object().shape({
  * Login schema.
  */
 export const loginSchema = Yup.object().shape({
-  username: Yup.string().required('Username/Email harus di isi.'),
+  username_or_email: Yup.string().required('Username/Email harus di isi.'),
   password: Yup.string().required('Password harus di isi.'),
 });
 

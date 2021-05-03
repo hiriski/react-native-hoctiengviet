@@ -16,7 +16,7 @@ const ContainerLoginForm = () => {
    * Form initial values
    */
   const initialValues = {
-    username: '',
+    username_or_email: '',
     password: '',
   };
 
@@ -41,13 +41,13 @@ const ContainerLoginForm = () => {
           <View style={styles.viewInput}>
             <InputBorderBottom
               placeholder="Username/Email"
-              name="username"
-              onChangeText={handleChange('username')}
-              onBlur={handleBlur('username')}
-              value={values.username}
+              name="username_or_email"
+              onChangeText={handleChange('username_or_email')}
+              onBlur={handleBlur('username_or_email')}
+              value={values.username_or_email}
             />
-            {errors.username && (
-              <InputHelper type="error" text={errors.username} />
+            {errors.username_or_email && (
+              <InputHelper type="error" text={errors.username_or_email} />
             )}
           </View>
           <View style={styles.viewInput}>
