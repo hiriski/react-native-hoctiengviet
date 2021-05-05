@@ -2,5 +2,4 @@
     <string name="app_name">XinChao</string>
     <string name="splash_screen_text">XinChao</string>
     <string name="default_notification_channel_id">default_notification_channel_id</string>
-    <stirng name="test_notification">test_notification</stirng>
 </resources>
