@@ -1,16 +1,22 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
-import {Layout} from '@ui-kitten/components';
+import {ScrollView, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {PADDING} from '../../components/config/spacing';
+import {white} from '../../components/config/colors';
+import {Layout} from '@ui-kitten/components';
+import FocusAwareStatusBar from '../../components/common/FocusAwareStatusBar';
 
 const MainLayout = ({children}) => {
   return (
-    <SafeAreaView style={styles.root}>
-      <Layout level="2" style={styles.layout}>
-        {children}
-      </Layout>
-    </SafeAreaView>
+    <ScrollView
+      keyboardShouldPersistTaps="handled"
+      style={styles.root}
+      contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}
+      showsVerticalScrollIndicator={false}>
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor={white} />
+      <SafeAreaView style={styles.container}>{children}</SafeAreaView>
+    </ScrollView>
   );
 };
 
@@ -22,8 +28,9 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
   },
-  layout: {
+  container: {
     flex: 1,
+    paddingBottom: PADDING.LARGE * 2,
   },
 });
 

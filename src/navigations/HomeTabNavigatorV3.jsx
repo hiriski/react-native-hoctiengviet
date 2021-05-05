@@ -3,14 +3,13 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import CustomTabBar from '../containers/CustomTabBar';
 
 // screens
-// import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '../screens/home';
 import ChillaxScreen from '../screens/ChillaxScreen';
 import CreatePhrase from '../screens/phrasebook/CreatePhrase';
 import ChatScreen from '../screens/ChatScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
 import {TAB} from '../config/navigator';
-import PhrasebookListScreen from '../screens/phrasebook/PhrasebookList';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +21,7 @@ const HomeTabNavigatorV3 = () => {
           tabBarLabel: 'Home',
         }}
         name={TAB.HOME}
-        component={PhrasebookListScreen}
+        component={HomeScreen}
       />
       <Tab.Screen
         options={{
