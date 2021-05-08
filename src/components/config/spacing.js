@@ -1,7 +1,7 @@
-const SPACING_BASE = 12;
-const SPACING_SMALL = 8;
-const SPACING_LARGE = 16;
-const SPACING_BIG = 26;
+export const SPACING_BASE = 14;
+export const SPACING_SMALL = 8;
+export const SPACING_LARGE = 18;
+export const SPACING_BIG = 28;
 
 // Border radius
 export const BORDER_RADIUS = {
