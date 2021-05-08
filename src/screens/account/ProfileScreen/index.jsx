@@ -1,12 +1,12 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/core';
 
-import FocusAwareStatusBar from '../../components/common/FocusAwareStatusBar';
+import FocusAwareStatusBar from '../../../components/common/FocusAwareStatusBar';
 import {Button, Text, Divider} from '@ui-kitten/components';
 import {useWindowDimensions, StyleSheet, Dimensions} from 'react-native';
-import ProfileHeader from '../../components/ProfileHeader';
+import ProfileHeader from '../../../components/ProfileHeader';
 
-const HomeScreen = () => {
+const ProfileScreen = () => {
   const navigation = useNavigation();
   const {width} = useWindowDimensions();
 
@@ -35,4 +35,4 @@ const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({});
 
-export default HomeScreen;
+export default ProfileScreen;

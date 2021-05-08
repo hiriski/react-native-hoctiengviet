@@ -1,6 +1,5 @@
 import {batch} from 'react-redux';
 import AuthService from './service';
-import {USER_TOKEN_KEY} from '../../constants';
 import {saveUserToken, removeUserToken} from '../../utils';
 import * as Actions from './constants';
 
@@ -15,10 +14,6 @@ export const setUserToken = (token) => ({
 export const setUserData = (user) => ({
   type: Actions.SET_USER_DATA,
   payload: user,
-});
-
-export const resetUserData = () => ({
-  type: Actions.RESET_USER_DATA,
 });
 
 export const resetUserToken = () => ({
@@ -127,7 +122,7 @@ export const login = (credentials) => {
       const response = await AuthService.loginWithEmailAndPassword(credentials);
       if (response.status === 200) {
         const {token, user} = response.data;
-        saveUserToken(token);
+        await saveUserToken(token);
         batch(() => {
           dispatch(loginSuccess());
           dispatch(setUserData(user));
@@ -179,7 +174,7 @@ export const register = (userData) => {
       const response = await AuthService.register(userData);
       if (response.status === 201) {
         const {token, user} = response.data;
-        saveUserToken(token);
+        await saveUserToken(token);
         batch(() => {
           dispatch(registerSuccess());
           dispatch(setUserData(user));
@@ -204,7 +199,7 @@ export const resetRegisterState = () => ({
 });
 
 /**
- * Fetching authentcated user
+ * Fetching authenticated user
  */
 export const fetchingAuthenticatedUserRequest = () => ({
   type: Actions.FETCHING_AUTHENTICATED_USER_REQUEST,
@@ -221,7 +216,7 @@ export const fetchingAuthenticatedUserSuccess = () => ({
 
 export const fetchAuthenticatedUser = () => {
   return async (dispatch) => {
-    let errorMessage = 'Fething authenticated user failed';
+    let errorMessage = 'Fetching authenticated user failed';
     dispatch(fetchingAuthenticatedUserRequest());
     try {
       const response = await AuthService.fetchAuthenticatedUser();
@@ -264,13 +259,12 @@ export const revokeToken = () => {
     try {
       const response = await AuthService.revokeToken();
       if (response.status === 200) {
-        removeUserToken();
+        await removeUserToken();
         batch(() => {
           dispatch(revokingTokenSuccess());
 
           // Also reset token & user data.
           dispatch(resetUserToken());
-          dispatch(resetUserData());
           dispatch(resetAuthState());
         });
       }

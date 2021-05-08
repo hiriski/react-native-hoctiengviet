@@ -11,6 +11,7 @@ import PhraseItem from '../../../containers/phrasebook/PhraseItem';
 import {MARGIN} from '../../../components/config/spacing';
 import {Text, useTheme} from '@ui-kitten/components';
 import FocusAwareStatusBar from '../../../components/common/FocusAwareStatusBar';
+import FloatingAddPhraseButton from '../../../containers/phrasebook/FloatingAddPhraseButton';
 
 const PhrasebookListScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -25,9 +26,7 @@ const PhrasebookListScreen = ({navigation}) => {
   };
 
   React.useEffect(() => {
-    navigation.addListener('focus', () => {
-      fetchData();
-    });
+    fetchData();
     return () => {
       dispatch(resetFetchPhrasebooks());
     };
@@ -36,16 +35,6 @@ const PhrasebookListScreen = ({navigation}) => {
   const handleRefresh = () => {
     fetchData();
   };
-
-  /** Set refreshing to false when fetching is success */
-  // React.useEffect(() => {
-  //   if (isSuccess) {
-  //     setRefreshing(false);
-  //   }
-  //   if (isFetching) {
-  //     setRefreshing(true);
-  //   }
-  // }, [isSuccess]);
 
   /**
    * Render item
@@ -87,6 +76,7 @@ const PhrasebookListScreen = ({navigation}) => {
           <Text>No Items</Text>
         )}
       </View>
+      <FloatingAddPhraseButton />
     </MainLayout>
   );
 };

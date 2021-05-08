@@ -1,7 +1,7 @@
 export const ROOT_STACK = {
   ONBOARD: 'OnbardScreen',
   AUTH: 'AuthStack',
-  HOME_DRAWER: 'HomeDrawer',
+  HOME_TAB: 'TabStack',
   SETTINGS: 'SettingsScreen',
 };
 
@@ -12,13 +12,13 @@ export const AUTH_STACK = {
 };
 
 export const HOME_DRAWER = {
-  TAB: 'HomeTab',
+  HOME: 'HomeScreen',
   PHRASEBOOK_LIST: 'PhrasebookListScreen',
   FAVORITE: 'FavoriteScreen',
 };
 
 export const TAB = {
-  HOME: 'HomeScreen',
+  HOME: 'HomeDrawer',
   CHILLAX: 'ChillaxScreen',
   ADD: 'Add',
   CHAT: 'ChatScreen',

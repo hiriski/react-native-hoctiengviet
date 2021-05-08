@@ -4,34 +4,32 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View, TouchableHighlight, StyleSheet, Dimensions} from 'react-native';
+import {View, TouchableNativeFeedback, StyleSheet, Dimensions} from 'react-native';
 import {Icon, Text} from '@ui-kitten/components';
-import {ROUTES, COLORS} from '../../constants';
-import {useNavigation, useRoute} from '@react-navigation/core';
 
 const DrawerItem = ({onPress, label, iconName}) => {
   const isFocused = false;
   return (
-    <TouchableHighlight
+    <TouchableNativeFeedback
       underlayColor="#ebebeb"
       style={[
-        styles.drawerItem,
+        styles.root,
         isFocused ? styles.activeDrawerItem : styles.inactiveDrawerItem,
-      ]}
-      accessibilityRole="button"
-      onPress={onPress}>
-      <View style={styles.itemContainer}>
-        <Icon name={iconName} fill="#505050" style={styles.icon} />
-        <Text
-          category="h1"
-          style={[
-            styles.label,
-            isFocused ? styles.activeLavel : styles.inactiveLabel,
-          ]}>
-          {label}
-        </Text>
+      ]} onPress={onPress}>
+      <View style={styles.container}>
+        <View style={styles.itemContainer}>
+          <Icon name={iconName} fill="#505050" style={styles.icon} />
+          <Text
+            category="h1"
+            style={[
+              styles.label,
+              isFocused ? styles.activeLabel : styles.inactiveLabel,
+            ]}>
+            {label}
+          </Text>
+        </View>
       </View>
-    </TouchableHighlight>
+    </TouchableNativeFeedback>
   );
 };
 
@@ -39,11 +37,12 @@ const height = Dimensions.get('window').height;
 const DRAWER_ITEM_HEIGHT = height > 640 ? 50 : 44;
 
 const styles = StyleSheet.create({
-  drawerItem: {
+  root: {
+  },
+  container: {
     paddingHorizontal: height > 640 ? 30 : 24,
   },
   activeDrawerItem: {
-    backgroundColor: COLORS.primaryLight,
   },
   inactiveDrawerItem: {},
   itemContainer: {
@@ -54,11 +53,11 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
   },
-  activeLavel: {
-    color: COLORS.textPrimary,
+  activeLabel: {
+
   },
   inactiveLabel: {
-    color: COLORS.textSecondary,
+
   },
   icon: {
     height: 20,

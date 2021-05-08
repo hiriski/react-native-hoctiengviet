@@ -4,12 +4,11 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 /* screens */
 import OnboardScreen from '../screens/OnboardScreen';
-import DrawerNavigator from './DrawerNavigator';
 import AuthStackNavigator from './AuthStackNavigator';
-import {useSelector} from 'react-redux';
-import PhrasebookListScreen from '../screens/phrasebook/PhrasebookList';
 
 import {ROOT_STACK} from '../config/navigator';
+import HomeTabNavigator from './HomeTabNavigator';
+import {useSelector} from 'react-redux';
 
 const Stack = createStackNavigator();
 
@@ -30,8 +29,8 @@ const RootStackNavigator = () => {
             {token ? (
               <React.Fragment>
                 <Stack.Screen
-                  name={ROOT_STACK.HOME_DRAWER}
-                  component={DrawerNavigator}
+                  name={ROOT_STACK.HOME_TAB}
+                  component={HomeTabNavigator}
                 />
               </React.Fragment>
             ) : (
@@ -40,8 +39,8 @@ const RootStackNavigator = () => {
                */
               <React.Fragment>
                 <Stack.Screen
-                  name={ROOT_STACK.HOME_DRAWER}
-                  component={DrawerNavigator}
+                  name={ROOT_STACK.HOME_TAB}
+                  component={HomeTabNavigator}
                 />
                 <Stack.Screen
                   name={ROOT_STACK.AUTH}
