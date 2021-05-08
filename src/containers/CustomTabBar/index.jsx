@@ -89,12 +89,13 @@ const styles = StyleSheet.create({
     backgroundColor: white,
     marginBottom: SPACING,
     width: TAB_BAR_WIDTH,
+    overflow: 'hidden',
 
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 32,
+    shadowOffset: {width: 1, height: 0},
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 8,
   },
 });
 

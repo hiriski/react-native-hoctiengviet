@@ -1,17 +1,14 @@
 import React from 'react';
 import {
   View,
-  Animated,
   StyleSheet,
-  Dimensions,
   TouchableHighlight,
 } from 'react-native';
 
-import {COLORS} from '../../constants';
-import {Icon, Text, useTheme} from '@ui-kitten/components';
-// import Ripple from 'react-native-material-ripple';
+import {Icon, useTheme} from '@ui-kitten/components';
 import {TAB_BAR_ITEM_SIZE} from './index';
 import {TAB} from '../../config/navigator';
+import {primary} from '../../components/config/colors';
 
 const TabBarItem = ({
   route,
@@ -22,7 +19,7 @@ const TabBarItem = ({
   options,
 }) => {
   const theme = useTheme();
-  const renderTabBarItem = ({routeName, fill, style}) => {
+  const renderTabBarIcon = ({routeName, fill, style}) => {
     let iconName;
     if (routeName === TAB.HOME) {
       iconName = 'layers';
@@ -43,11 +40,7 @@ const TabBarItem = ({
     <View style={[styles.itemRoot]}>
       <TouchableHighlight
         key={label}
-        underlayColor={theme['color-basic-400']}
-        // rippleColor={COLORS.primary}
-        // rippleOpacity={0.8}
-        // rippleSize={100}
-        // rippleCentered={true}
+        underlayColor={theme['color-basic-300']}
         style={[styles.item, isFocused && styles.focusedItem]}
         accessibilityRole="button"
         accessibilityState={isFocused ? {selected: true} : {}}
@@ -56,20 +49,20 @@ const TabBarItem = ({
         onLongPress={onLongPress}>
         {isFocused ? (
           <View style={[styles.itemContainer]}>
-            {renderTabBarItem({
+            {renderTabBarIcon({
               routeName: route.name,
-              fill: COLORS.primary,
+              fill: primary,
               style: styles.focusedIcon,
             })}
-            {/* <Text category="label" style={styles.focusedLable}>
+            {/* <Text category="label" style={styles.focusedLabel}>
               {label}
             </Text> */}
           </View>
         ) : (
           <View style={styles.itemContainer}>
-            {renderTabBarItem({
+            {renderTabBarIcon({
               routeName: route.name,
-              fill: COLORS.muted,
+              fill: theme['color-basic-500'],
               style: styles.icon,
             })}
           </View>
@@ -88,7 +81,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   item: {
-    borderRadius: TAB_ITEM_SIZE,
     flex: 1,
   },
   focusedItem: {},
@@ -104,13 +96,13 @@ const styles = StyleSheet.create({
   focusedIcon: {
     width: 22,
     height: 22,
-    color: COLORS.primary,
+    color: primary,
   },
   label: {
     fontSize: 10,
   },
-  focusedLable: {
-    color: COLORS.primary,
+  focusedLabel: {
+    color: primary,
     fontSize: 10,
   },
 });
