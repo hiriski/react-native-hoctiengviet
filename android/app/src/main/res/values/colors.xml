@@ -2,6 +2,7 @@
 <resources>
     <color name="primary_dark">#000000</color>
     <color name="status_bar_color">#EAEEF6</color>
+    <color name="default_background_light">#FBFBFB</color>
     <color name="white">#FFFFFF</color>
     <color name="splash_screen_text">#777</color>
 </resources>
