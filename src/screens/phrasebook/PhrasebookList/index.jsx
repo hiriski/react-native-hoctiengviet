@@ -15,8 +15,8 @@ import FloatingAddPhraseButton from '../../../containers/phrasebook/FloatingAddP
 
 const PhrasebookListScreen = ({navigation, route}) => {
 
-  const { categoryId } = route.params;
-  console.log(categoryId);
+  // const { categoryId } = route.params;
+  // console.log(categoryId);
 
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = React.useState(false);

@@ -42,7 +42,7 @@ const InputBorderBottom = ({
 
 const styles = StyleSheet.create({
   input: {
-    marginBottom: MARGIN.SMALL / 2,
+    marginBottom: 0,
     borderRadius: 0,
     borderTopWidth: 0,
     borderLeftWidth: 0,

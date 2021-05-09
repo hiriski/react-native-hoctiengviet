@@ -30,8 +30,8 @@ const HomeHeader = () => {
 
   const renderGreeting = () => (
     <View style={styles.greeting}>
-      <Text style={styles.textGreeting} appearance="label">Xin Chào</Text>
-      <Text style={styles.textUserName} appearance="label">{user.name}</Text>
+      <Text style={styles.textGreeting} category="label">Xin Chào</Text>
+      <Text style={styles.textUserName} category="p1">{user.name}</Text>
     </View>
   )
 
@@ -39,6 +39,7 @@ const HomeHeader = () => {
   return (
     <Layout style={styles.root} level='1'>
       <View style={styles.container}>
+        { user !== null && renderGreeting() }
         {/*<Image source={require('../../../../assets/images/logo.png')} style={styles.logo} />*/}
       </View>
     </Layout>
@@ -52,7 +53,6 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING_SMALL
   },
   container: {
-    alignItems: 'flex-start',
     justifyContent: 'center'
   },
   logo: {

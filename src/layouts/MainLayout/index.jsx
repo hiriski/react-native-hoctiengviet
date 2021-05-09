@@ -10,9 +10,10 @@ const MainLayout = (props) => {
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      contentContainerStyle={styles.root}
+      style={styles.root}
+      contentContainerStyle={styles.container}
       showsVerticalScrollIndicator={false}>
-        <Layout style={StyleSheet.flatten([styles.container, { paddingTop: insets.top}])} level="2">
+        <Layout style={StyleSheet.flatten([styles.container, { paddingTop: insets.top}])} level="1">
           {children}
         </Layout>
     </ScrollView>
@@ -28,8 +29,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    flex: 1,
-  },
+    flexGrow: 1,
+  }
 });
 
 export default withStyles(MainLayout, (theme) => ({

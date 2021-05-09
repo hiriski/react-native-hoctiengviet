@@ -21,7 +21,7 @@ const CreatePhrase = ({navigation}) => {
   }, [isSuccess]);
 
   return (
-    <MainLayout level="4">
+    <MainLayout level="1">
       <View style={styles.viewHeader}>
         <Text style={styles.textHeader} category="h1">
           Create new phrase

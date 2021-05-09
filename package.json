@@ -13,6 +13,7 @@
   "dependencies": {
     "@eva-design/eva": "^2.0.0",
     "@gorhom/bottom-sheet": "^2",
+    "@hookform/resolvers": "^2.4.0",
     "@react-native-async-storage/async-storage": "^1.15.4",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/netinfo": "^6.0.0",
@@ -29,6 +30,7 @@
     "formik": "^2.2.6",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
+    "react-hook-form": "^7.4.2",
     "react-native": "0.63.4",
     "react-native-device-info": "^8.0.2",
     "react-native-dotenv": "^2.5.5",

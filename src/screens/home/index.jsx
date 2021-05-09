@@ -23,7 +23,7 @@ const HomeScreen = ({navigation}) => {
   return (
     <MainLayout>
       <HomeHeader />
-      <DailyQuotes/>
+      {/*<DailyQuotes/>*/}
       <HomeBanner />
       <HomePhrasebookCategoryList categories={categories} />
     </MainLayout>

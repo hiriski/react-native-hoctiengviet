@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Text} from '@ui-kitten/components';
 import PropTypes from 'prop-types';
-import {error, grey6} from '../../config/colors';
+import {error, grey6} from '../../../components/config/colors';
 
 const InputHelper = ({text, type}) => {
   return (
