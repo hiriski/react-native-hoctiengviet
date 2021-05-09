@@ -13,7 +13,11 @@ import {Text, useTheme} from '@ui-kitten/components';
 import FocusAwareStatusBar from '../../../components/common/FocusAwareStatusBar';
 import FloatingAddPhraseButton from '../../../containers/phrasebook/FloatingAddPhraseButton';
 
-const PhrasebookListScreen = ({navigation}) => {
+const PhrasebookListScreen = ({navigation, route}) => {
+
+  const { categoryId } = route.params;
+  console.log(categoryId);
+
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = React.useState(false);
   const theme = useTheme();

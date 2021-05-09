@@ -3,6 +3,7 @@ import {View, Image, StyleSheet} from 'react-native';
 import { Icon, Layout, MenuItem, OverflowMenu, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 import {SPACING_SMALL} from '../../../../components/config/spacing';
 import {useSelector} from 'react-redux';
+import { Avatar, Text } from '@ui-kitten/components';
 
 const BackIcon = (props) => (
   <Icon {...props} name='arrow-back'/>
@@ -26,10 +27,19 @@ const LogoutIcon = (props) => (
 
 const HomeHeader = () => {
   const { user } = useSelector((state) => state.auth);
+
+  const renderGreeting = () => (
+    <View style={styles.greeting}>
+      <Text style={styles.textGreeting} appearance="label">Xin Chào</Text>
+      <Text style={styles.textUserName} appearance="label">{user.name}</Text>
+    </View>
+  )
+
+
   return (
     <Layout style={styles.root} level='1'>
       <View style={styles.container}>
-        <Image source={require('../../../../assets/images/logo.png')} style={styles.logo} />
+        {/*<Image source={require('../../../../assets/images/logo.png')} style={styles.logo} />*/}
       </View>
     </Layout>
   );
@@ -42,12 +52,21 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING_SMALL
   },
   container: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center'
   },
   logo: {
     height: LOGO_SIZE,
     resizeMode: 'contain'
+  },
+
+  greeting: {
+    alignItems: "center",
+    justifyContent: 'center'
+  },
+  textGreeting: {},
+  textUserName: {
+    fontSize: 16,
   }
 });
 

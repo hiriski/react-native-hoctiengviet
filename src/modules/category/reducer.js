@@ -4,6 +4,7 @@ const initialState = {
   isLoading: false,
   isError: false,
   list: [],
+  lastFetched: null,
 };
 
 export default function categoryReducer(state = initialState, action) {
@@ -31,6 +32,7 @@ export default function categoryReducer(state = initialState, action) {
         isLoading: false,
         isError: false,
         list: action.payload,
+        lastFetched: new Date(),
       };
     default:
       return state;

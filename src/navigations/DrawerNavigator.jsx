@@ -6,9 +6,10 @@ import DrawerContent from '../containers/DrawerContent';
 
 import {HOME_DRAWER} from '../config/navigator';
 import HomeScreen from '../screens/home';
-import PhrasebookListScreen from '../screens/phrasebook/PhrasebookList';
 import {useSelector} from 'react-redux';
 import {grey9} from '../components/config/colors';
+import PhrasebookListScreen from '../screens/phrasebook/PhrasebookList';
+import PhrasebookCategoryListScreen from '../screens/phrasebook/CategoryList';
 
 const Drawer = createDrawerNavigator();
 
@@ -22,8 +23,7 @@ const DrawerNavigator = () => {
         headerShown: false,
       }}
       edgeWidth={60}
-      drawerStyle={[{backgroundColor: theme === "light" ? 'white' : grey9}, isLargeScreen ? null : {width: '75%'}]}
-      backBehavior="none"
+      drawerStyle={[{backgroundColor: theme === "light" ? 'white' : grey9}, isLargeScreen ? null : {width: '70%'}]}
       drawerType="front"
       drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen
@@ -33,6 +33,10 @@ const DrawerNavigator = () => {
       <Drawer.Screen
         name={HOME_DRAWER.PHRASEBOOK_LIST}
         component={PhrasebookListScreen}
+      />
+      <Drawer.Screen
+        name={HOME_DRAWER.PHRASEBOOK_CATEGORY_LIST}
+        component={PhrasebookCategoryListScreen}
       />
     </Drawer.Navigator>
   );

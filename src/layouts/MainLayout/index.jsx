@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {ScrollView, StyleSheet} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import { withStyles } from '@ui-kitten/components';
+import {Layout, withStyles} from '@ui-kitten/components';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const MainLayout = (props) => {
   const {eva, children} = props;
+  const insets = useSafeAreaInsets();
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      style={eva.style.root}
-      contentContainerStyle={styles.rootContentContainer}
+      contentContainerStyle={styles.root}
       showsVerticalScrollIndicator={false}>
-      <SafeAreaView style={styles.container}>{children}</SafeAreaView>
+        <Layout style={StyleSheet.flatten([styles.container, { paddingTop: insets.top}])} level="2">
+          {children}
+        </Layout>
     </ScrollView>
   );
 };
@@ -25,10 +27,6 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
   },
-  rootContentContainer: {
-    flexGrow: 1,
-    justifyContent: 'center'
-  },
   container: {
     flex: 1,
   },
@@ -36,6 +34,6 @@ const styles = StyleSheet.create({
 
 export default withStyles(MainLayout, (theme) => ({
   root: {
-    backgroundColor: theme['color-basic-100'], // it's doesn't work.
+    backgroundColor: theme['color-basic-200'], // it's doesn't work.
   }
 }));

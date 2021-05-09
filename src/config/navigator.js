@@ -14,6 +14,7 @@ export const AUTH_STACK = {
 export const HOME_DRAWER = {
   HOME: 'HomeScreen',
   PHRASEBOOK_LIST: 'PhrasebookListScreen',
+  PHRASEBOOK_CATEGORY_LIST: 'PhrasebookCategoryListScreen',
   FAVORITE: 'FavoriteScreen',
 };
 

@@ -1,48 +1,62 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {Text, useTheme} from '@ui-kitten/components';
+import {Text} from '@ui-kitten/components';
 import {MARGIN} from '../../../../components/config/spacing';
-import PhrasebookCategoryItemCard from '../../../../containers/phrasebook/PhrasebookCategoryItemCard';
+import CategoryCard from '../../../../containers/phrasebook/CategoryCard';
+import SectionHeader from '../../../../containers/SectionHeader';
+import Container from '../../../../containers/Container';
+import {HOME_DRAWER} from '../../../../config/navigator';
 
 const HomePhrasebookCategoryList = ({categories}) => {
-  const theme = useTheme();
-
-  console.log('HomePhrasebookCategoryList', categories);
+  const navigation = useNavigation();
 
   /**
    * Render item
    */
-  const renderItem = ({item}) => <PhrasebookCategoryItemCard category={item} />;
+  const renderItem = ({item}) => <CategoryCard containerStyle={styles.cardContentContainerStyle} category={item} />;
+
+  const handlePressMoreButton = () => {
+    navigation.navigate(HOME_DRAWER.PHRASEBOOK_CATEGORY_LIST);
+  };
 
   return (
     <View style={styles.root}>
-      {categories.length > 0 ? (
-        <FlatList
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          style={styles.container}
-          data={categories}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
-        />
-      ) : (
-        <Text>No Item</Text>
-      )}
+      <Container>
+        <SectionHeader uppercase={true} onPressMore={handlePressMoreButton} title={'Category'}/>
+        {categories.length > 0 ? (
+          <FlatList
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            style={styles.container}
+            data={categories}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id.toString()}
+          />
+        ) : (
+          <Text>No Item</Text>
+        )}
+
+      </Container>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
-    alignItems: 'center',
     marginTop: MARGIN.LARGE,
-    paddingLeft: MARGIN.BASE,
   },
   container: {},
   textHeader: {
     fontSize: 20,
     textAlign: 'center',
   },
+
+  // card
+  cardContentContainerStyle: {
+    width: 152,
+    marginRight: MARGIN.SMALL
+  }
 });
 
 export default HomePhrasebookCategoryList;
