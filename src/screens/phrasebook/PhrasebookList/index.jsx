@@ -19,7 +19,6 @@ const PhrasebookListScreen = ({navigation}) => {
   const theme = useTheme();
 
   const {list} = useSelector((state) => state.phrasebook);
-  console.log(list);
 
   const fetchData = () => {
     dispatch(fetchPhrasebooks());
@@ -44,10 +43,6 @@ const PhrasebookListScreen = ({navigation}) => {
 
   return (
     <MainLayout>
-      <FocusAwareStatusBar
-        barStyle="dark-content"
-        backgroundColor={theme['color-basic-200']}
-      />
       <View style={styles.viewHeader}>
         <Text style={styles.textHeader} category="h1">
           Phrasebooks

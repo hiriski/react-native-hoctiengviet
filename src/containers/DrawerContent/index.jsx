@@ -3,10 +3,11 @@
  */
 
 import React from 'react';
-import {Linking, View, TouchableHighlight, StyleSheet} from 'react-native';
+import { View, StyleSheet} from 'react-native';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
 import DrawerHeader from './DrawerHeader';
 import DrawerListItem from './DrawerListItem';
+import ToggleTheme from './ToggleTheme';
 
 const DrawerContent = ({state, descriptors, navigation}) => {
   return (
@@ -14,6 +15,7 @@ const DrawerContent = ({state, descriptors, navigation}) => {
       <View style={styles.container}>
         <DrawerHeader />
         <DrawerListItem />
+        <ToggleTheme/>
       </View>
     </DrawerContentScrollView>
   );

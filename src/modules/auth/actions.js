@@ -265,7 +265,7 @@ export const revokeToken = () => {
 
           // Also reset token & user data.
           dispatch(resetUserToken());
-          dispatch(resetAuthState());
+          // dispatch(resetAuthState());
         });
       }
     } catch (e) {
@@ -275,7 +275,7 @@ export const revokeToken = () => {
       }
       batch(() => {
         dispatch(revokingTokenFailure(errorMessage));
-        dispatch(resetAuthState());
+        // dispatch(resetAuthState());
       });
     }
   };

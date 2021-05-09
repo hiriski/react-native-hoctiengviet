@@ -2,19 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {ScrollView, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {PADDING} from '../../components/config/spacing';
-import {white} from '../../components/config/colors';
-import {Layout} from '@ui-kitten/components';
-import FocusAwareStatusBar from '../../components/common/FocusAwareStatusBar';
+import { withStyles } from '@ui-kitten/components';
 
-const MainLayout = ({children}) => {
+const MainLayout = (props) => {
+  const {eva, children} = props;
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      style={styles.root}
-      contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}
+      style={eva.style.root}
+      contentContainerStyle={styles.rootContentContainer}
       showsVerticalScrollIndicator={false}>
-      <FocusAwareStatusBar barStyle="dark-content" backgroundColor={white} />
       <SafeAreaView style={styles.container}>{children}</SafeAreaView>
     </ScrollView>
   );
@@ -28,10 +25,17 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
   },
+  rootContentContainer: {
+    flexGrow: 1,
+    justifyContent: 'center'
+  },
   container: {
     flex: 1,
-    paddingBottom: PADDING.LARGE * 2,
   },
 });
 
-export default MainLayout;
+export default withStyles(MainLayout, (theme) => ({
+  root: {
+    backgroundColor: theme['color-basic-100'], // it's doesn't work.
+  }
+}));

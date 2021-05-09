@@ -4,16 +4,15 @@ import RootStackNavigator from './navigations/RootStackNavigator';
 import GlobalFlashMessage from './components/FlashMessage';
 import {useSelector} from 'react-redux';
 import {clearAsyncStorage} from './utils';
-import {white} from './components/config/colors';
 
 const AppRouter = () => {
-  const {isLoggedOut} = useSelector((state) => state.auth);
-
+  const {theme} = useSelector((state) => state.common);
+  const barStyle = theme === 'dark' ? 'light-content' : 'dark-content';
   return (
     <React.Fragment>
       <StatusBar
         translucent
-        barStyle="dark-content"
+        barStyle={barStyle}
         backgroundColor="transparent"
       />
       <RootStackNavigator />

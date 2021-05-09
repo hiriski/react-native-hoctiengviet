@@ -7,19 +7,22 @@ import DrawerContent from '../containers/DrawerContent';
 import {HOME_DRAWER} from '../config/navigator';
 import HomeScreen from '../screens/home';
 import PhrasebookListScreen from '../screens/phrasebook/PhrasebookList';
+import {useSelector} from 'react-redux';
+import {grey9} from '../components/config/colors';
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
   const dimensions = useWindowDimensions();
   const isLargeScreen = dimensions.width >= 768;
+  const {theme} = useSelector(state => state.common);
   return (
     <Drawer.Navigator
       screenOptions={{
         headerShown: false,
       }}
       edgeWidth={60}
-      drawerStyle={[styles.drawerStyle, isLargeScreen ? null : {width: '75%'}]}
+      drawerStyle={[{backgroundColor: theme === "light" ? 'white' : grey9}, isLargeScreen ? null : {width: '75%'}]}
       backBehavior="none"
       drawerType="front"
       drawerContent={(props) => <DrawerContent {...props} />}>

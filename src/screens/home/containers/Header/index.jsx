@@ -1,34 +1,55 @@
 import React from 'react';
+import {View, Image, StyleSheet} from 'react-native';
+import { Icon, Layout, MenuItem, OverflowMenu, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+import {SPACING_SMALL} from '../../../../components/config/spacing';
+import {useSelector} from 'react-redux';
 
-import {StyleSheet, View} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {MARGIN} from '../../../../components/config/spacing';
-import {white} from '../../../../components/config/colors';
-import {Text, useTheme} from '@ui-kitten/components';
+const BackIcon = (props) => (
+  <Icon {...props} name='arrow-back'/>
+);
 
-const HomeHeader = ({navigation}) => {
-  const dispatch = useDispatch();
-  const theme = useTheme();
+const EditIcon = (props) => (
+  <Icon {...props} name='edit'/>
+);
 
+const MenuIcon = (props) => (
+  <Icon {...props} name='more-vertical'/>
+);
+
+const InfoIcon = (props) => (
+  <Icon {...props} name='info'/>
+);
+
+const LogoutIcon = (props) => (
+  <Icon {...props} name='log-out'/>
+);
+
+const HomeHeader = () => {
+  const { user } = useSelector((state) => state.auth);
   return (
-    <View style={styles.viewHeader}>
-      <Text style={styles.textHeader} category="h1">
-        Home
-      </Text>
-    </View>
+    <Layout style={styles.root} level='1'>
+      <View style={styles.container}>
+        <Image source={require('../../../../assets/images/logo.png')} style={styles.logo} />
+      </View>
+    </Layout>
   );
 };
 
+
+const LOGO_SIZE = 32;
 const styles = StyleSheet.create({
-  viewHeader: {
+  root: {
+    paddingVertical: SPACING_SMALL
+  },
+  container: {
     alignItems: 'center',
-    marginTop: MARGIN.LARGE,
-    backgroundColor: white,
+    justifyContent: 'center'
   },
-  textHeader: {
-    fontSize: 20,
-    textAlign: 'center',
-  },
+  logo: {
+    height: LOGO_SIZE,
+    resizeMode: 'contain'
+  }
 });
+
 
 export default HomeHeader;

@@ -16,6 +16,7 @@ const PhraseItem = React.memo(({item}) => {
 
   const LeftContent = (props) => (
     <Avatar
+      shape="square"
       {...props}
       style={[styles.logo]}
       source={require('../../../assets/images/logo.png')}
@@ -47,8 +48,8 @@ const styles = StyleSheet.create({
     marginBottom: MARGIN.SMALL,
   },
   logo: {
-    width: 30,
-    height: 30,
+    width: 32,
+    height: 32,
     marginRight: MARGIN.SMALL,
   },
   textTiengViet: {
