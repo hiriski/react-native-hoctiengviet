@@ -130,6 +130,7 @@ export const login = (credentials) => {
         });
       }
     } catch (e) {
+      console.log(e);
       if (e.response !== undefined) {
         console.log(e);
         if (e.response.status === 422) {

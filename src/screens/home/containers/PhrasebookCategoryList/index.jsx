@@ -6,7 +6,7 @@ import {MARGIN} from '../../../../components/config/spacing';
 import CategoryCard from '../../../../containers/phrasebook/CategoryCard';
 import SectionHeader from '../../../../containers/SectionHeader';
 import Container from '../../../../containers/Container';
-import {HOME_DRAWER} from '../../../../config/navigator';
+import {MAIN_STACK, ROOT_STACK} from '../../../../config/navigator';
 
 const HomePhrasebookCategoryList = ({categories}) => {
   const navigation = useNavigation();
@@ -17,7 +17,9 @@ const HomePhrasebookCategoryList = ({categories}) => {
   const renderItem = ({item}) => <CategoryCard containerStyle={styles.cardContentContainerStyle} category={item} />;
 
   const handlePressMoreButton = () => {
-    navigation.navigate(HOME_DRAWER.PHRASEBOOK_CATEGORY_LIST);
+    navigation.navigate(ROOT_STACK.MAIN, {
+      screen: MAIN_STACK.CATEGORY_LIST
+    });
   };
 
   return (

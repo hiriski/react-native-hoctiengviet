@@ -1,14 +1,14 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {useSelector} from 'react-redux';
 
 /* screens */
 import OnboardScreen from '../screens/OnboardScreen';
 import AuthStackNavigator from './AuthStackNavigator';
-
-import {ROOT_STACK} from '../config/navigator';
 import HomeTabNavigator from './HomeTabNavigator';
-import {useSelector} from 'react-redux';
+import MainStackNavigator from './MainStackNavigator';
+import {ROOT_STACK} from '../config/navigator';
 
 const Stack = createStackNavigator();
 
@@ -34,13 +34,15 @@ const RootStackNavigator = () => {
                 />
               </React.Fragment>
             ) : (
-              /**
-               * Allow stranger accessing homepage
-               */
+              /** Allow stranger accessing homepage */
               <React.Fragment>
                 <Stack.Screen
                   name={ROOT_STACK.HOME_TAB}
                   component={HomeTabNavigator}
+                />
+                <Stack.Screen
+                  name={ROOT_STACK.MAIN}
+                  component={MainStackNavigator}
                 />
                 <Stack.Screen
                   name={ROOT_STACK.AUTH}
