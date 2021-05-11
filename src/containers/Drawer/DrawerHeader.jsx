@@ -32,10 +32,10 @@ const DrawerHeader = () => {
       style={styles.touchableProfile}
       onPress={() => navigation.navigate(TAB.ACCOUNT)}>
       <View style={styles.avatar}>
-        <Image
-          source={require('../../assets/images/users/4yearsago.jpg')}
-          style={styles.avatarImg}
-        />
+        {/*<Image*/}
+        {/*  source={require('../../assets/images/users/4yearsago.jpg')}*/}
+        {/*  style={styles.avatarImg}*/}
+        {/*/>*/}
       </View>
       <View style={styles.userInfo}>
         <Text style={styles.name} category="h2">

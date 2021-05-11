@@ -5,7 +5,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import DrawerItem from './DrawerItem';
-import {useNavigation} from '@react-navigation/core';
+import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {revokeToken} from '../../modules/auth/actions';
 import GoogleSignInService from '../../services/GoogleSignInService';
@@ -16,11 +16,6 @@ const navigations = [
     label: 'Home',
     routeName: TAB.HOME,
     icon: 'layers',
-  },
-  {
-    label: 'Phrasebook',
-    routeName: HOME_DRAWER.PHRASEBOOK_LIST,
-    icon: 'book',
   },
   {
     label: 'Profil',
