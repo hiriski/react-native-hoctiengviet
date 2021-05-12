@@ -1,21 +1,20 @@
 import api from '../../api';
 
 class PhrasebookService {
+
   /**
-   *
-   * Create phrasebook
-   * @params {object} data
-   * @returns {*}
+   * Create phrases.
+   * @param data
+   * @returns {Promise<AxiosResponse<T>>}
    */
   create = async (data) => {
     return await api.post('phrasebook', data);
   };
 
   /**
-   *
-   * Get all phrasebook list.
-   * @params {object} data
-   * @returns {*}
+   * Get phrasebooks.
+   * @param categoryId
+   * @returns {Promise<AxiosResponse<T>>}
    */
   getPhrasebooks = async (categoryId) => {
     const response = await api.get(

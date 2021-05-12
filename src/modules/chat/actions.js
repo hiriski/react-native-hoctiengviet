@@ -13,7 +13,7 @@ export const fetchMessages = (conversationId) => {
       const response = await ChatService.getMessage(conversationId);
       if (response.status === 200) {
         const messages = response.data.data;
-        dispatch(fetchMessageSuccess(messages));
+        dispatch(fetchMessageSuccess(conversationId, messages));
       }
     } catch (e) {
       dispatch(fetchingMessageFailure());
@@ -30,9 +30,11 @@ const fetchingMessageFailure = () => ({
   type: Actions.FETCHING_MESSAGE_FAILURE,
 });
 
-const fetchMessageSuccess = (data) => ({
+const fetchMessageSuccess = (conversationId, messages) => ({
   type: Actions.FETCHING_MESSAGE_SUCCESS,
-  payload: data,
+  payload: {
+    ['conversationId_' + conversationId]: messages,
+  },
 });
 
 export const resetFetchingMessage = () => ({
@@ -61,4 +63,4 @@ export const sendMessage = (conversationId, data) => {
 export const mergeMessage = (data) => ({
   type: Actions.MERGE_MESSAGE,
   payload: data,
-})
+});

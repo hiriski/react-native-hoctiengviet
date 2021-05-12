@@ -3,28 +3,31 @@ import * as Actions from './constants';
 const initialState = {
   isSending: false,
   isError: false,
-  messages: [],
+  messages: {}, // object of array.
 };
 
 export default function chatReducer(state = initialState, action) {
   switch (action.type) {
     case Actions.FETCHING_MESSAGE_REQUEST:
       return {
+        ...state,
         isSending: true,
         isError: false,
-        messages: [],
       };
     case Actions.FETCHING_MESSAGE_FAILURE:
       return {
+        ...state,
         isSending: false,
         isError: true,
-        messages: [],
       };
     case Actions.FETCHING_MESSAGE_SUCCESS:
       return {
         isSending: false,
         isError: false,
-        messages: action.payload,
+        messages: {
+          ...state.messages,
+          ...action.payload,
+        },
       };
     case Actions.RESET_FETCHING_MESSAGE:
       return {

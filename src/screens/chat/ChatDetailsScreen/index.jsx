@@ -8,13 +8,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import {fetchMessages, resetFetchingMessage, sendMessage} from '../../../modules/chat/actions';
 import ChatBody from './containers/ChatBody';
 import ChatHeader from './containers/ChatHeader';
+import ScreenLoading from '../../../containers/ScreenLoading';
 
 const ChatDetailsScreen = ({navigation, route}) => {
   const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
   const {conversationId} = route.params;
   const { isSending, isError, messages } = useSelector(state => state.chat);
-  // console.log(messages);
 
   const handlePressBack = () => {
     navigation.navigate(TAB.DRAWER);
@@ -40,10 +40,12 @@ const ChatDetailsScreen = ({navigation, route}) => {
 
   return (
     <Layout style={StyleSheet.flatten([styles.root, { paddingTop: insets.top}])}>
-        <ChatHeader/>
-        <ChatBody messages={messages} sendMessage={_sendMessage} fetchMessage={fetchMessageData} />
-        {/*{ messages.length > 0 ? (*/}
-        {/*) : null }*/}
+      <ChatHeader/>
+      { messages.length > 0 ? (
+        <ChatBody messages={messages['conversationId_' + conversationId]} sendMessage={_sendMessage} fetchMessage={fetchMessageData} />
+      ) : (
+        <ScreenLoading />
+      )}
     </Layout>
   )
 };
