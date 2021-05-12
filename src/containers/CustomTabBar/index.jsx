@@ -4,8 +4,8 @@
 
 import React from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
-import TabBarItem from './TabBarItem';
 import {white} from '../../components/config/colors';
+import TabBarItem from './TabBarItem';
 
 const CustomTabBar = ({state, descriptors, navigation}) => {
   const focusedOptions = descriptors[state.routes[state.index].key].options;

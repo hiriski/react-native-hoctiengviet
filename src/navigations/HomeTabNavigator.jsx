@@ -5,7 +5,7 @@ import CustomTabBar from '../containers/CustomTabBar';
 // screens
 import ChillaxScreen from '../screens/ChillaxScreen';
 import CreatePhrase from '../screens/phrasebook/CreatePhrase';
-import ChatScreen from '../screens/ChatScreen';
+import ChatListScreen from '../screens/chat/ChatListScreen';
 import ProfileScreen from '../screens/account/ProfileScreen';
 
 import {TAB} from '../config/navigator';
@@ -20,7 +20,7 @@ const HomeTabNavigator = () => {
         options={{
           tabBarLabel: 'Home',
         }}
-        name={TAB.HOME}
+        name={TAB.DRAWER}
         component={DrawerNavigator}
       />
       <Tab.Screen
@@ -41,8 +41,8 @@ const HomeTabNavigator = () => {
         options={{
           tabBarLabel: 'Chat',
         }}
-        name={TAB.CHAT}
-        component={ChatScreen}
+        name={TAB.CHAT_LIST}
+        component={ChatListScreen}
       />
       <Tab.Screen
         options={{

@@ -4,7 +4,7 @@ import {View, TouchableNativeFeedback, StyleSheet} from 'react-native';
 import {MARGIN, PADDING} from '../../../components/config/spacing';
 import {Text, Icon, Layout, useTheme} from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/native';
-import {MAIN_STACK} from '../../../config/navigator';
+import {MAIN_STACK, ROOT_STACK} from '../../../config/navigator';
 
 const CategoryCard = ({category, containerStyle}) => {
   const theme = useTheme();
@@ -15,7 +15,10 @@ const CategoryCard = ({category, containerStyle}) => {
 
   const handlePress =() => {
     let params = { categoryId: id};
-    navigation.navigate(MAIN_STACK.ALL_PHRASEBOOK_LIST, params);
+    navigation.navigate(ROOT_STACK.MAIN, {
+      screen: MAIN_STACK.PHRASEBOOK_LIST,
+      params
+    });
   }
 
   return (

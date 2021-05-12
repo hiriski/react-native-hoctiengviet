@@ -43,11 +43,11 @@ export const resetCreatePhrase = () => ({
  * Fetch phrasebook
  * --------------------
  */
-export const fetchPhrasebooks = () => {
+export const fetchPhrasebooks = (categoryId) => {
   return async (dispatch) => {
     dispatch(fetchingPhrasebooksRequest());
     try {
-      const response = await PhrasebookService.getPhrasebooks();
+      const response = await PhrasebookService.getPhrasebooks(categoryId);
       if (response.status === 200) {
         const items = response.data.data;
         dispatch(fetchingPhrasebookSuccess(items));

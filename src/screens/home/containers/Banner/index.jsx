@@ -1,19 +1,22 @@
 import React from 'react';
 
 import {StyleSheet, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 
 import {Button, Text, useTheme} from '@ui-kitten/components';
 import Container from '../../../../containers/Container';
 import {PADDING} from '../../../../components/config/spacing';
-import {primary, white} from '../../../../components/config/colors';
+import {secondary, white} from '../../../../components/config/colors';
+import {MAIN_STACK} from '../../../../config/navigator';
 
 const HomeBanner = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const theme = useTheme();
 
   const handlePress = () => {
-    alert('Pressed');
+    navigation.navigate(MAIN_STACK.CHAT);
   };
 
   return (
@@ -32,7 +35,8 @@ const HomeBanner = () => {
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: primary,
+    backgroundColor: secondary,
+    borderRadius: 5
   },
   container: {
     flexDirection: 'row',

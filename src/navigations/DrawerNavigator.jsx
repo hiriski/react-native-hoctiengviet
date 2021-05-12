@@ -1,15 +1,12 @@
 import React from 'react';
 import {useWindowDimensions, StyleSheet} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-
-import DrawerContent from '../containers/DrawerContent';
-
-import {HOME_DRAWER} from '../config/navigator';
-import HomeScreen from '../screens/home';
 import {useSelector} from 'react-redux';
 import {grey9} from '../components/config/colors';
-import PhrasebookListScreen from '../screens/phrasebook/PhrasebookList';
+import {HOME_DRAWER} from '../config/navigator';
 import PhrasebookCategoryListScreen from '../screens/phrasebook/CategoryList';
+import DrawerComponent from '../containers/Drawer';
+import HomeScreen from '../screens/home';
 
 const Drawer = createDrawerNavigator();
 
@@ -25,14 +22,10 @@ const DrawerNavigator = () => {
       edgeWidth={60}
       drawerStyle={[{backgroundColor: theme === "light" ? 'white' : grey9}, isLargeScreen ? null : {width: '70%'}]}
       drawerType="front"
-      drawerContent={(props) => <DrawerContent {...props} />}>
+      drawerContent={(props) => <DrawerComponent {...props} />}>
       <Drawer.Screen
         name={HOME_DRAWER.HOME}
         component={HomeScreen}
-      />
-      <Drawer.Screen
-        name={HOME_DRAWER.PHRASEBOOK_LIST}
-        component={PhrasebookListScreen}
       />
       <Drawer.Screen
         name={HOME_DRAWER.PHRASEBOOK_CATEGORY_LIST}

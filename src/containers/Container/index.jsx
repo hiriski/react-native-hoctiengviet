@@ -16,7 +16,7 @@ const Container = ({style, spacing, children}) => {
       _spacing = SPACING_LARGE;
       break;
     default:
-      _spacing = SPACING_SMALL;
+      _spacing = 0;
   }
   return (
     <View style={StyleSheet.flatten([{

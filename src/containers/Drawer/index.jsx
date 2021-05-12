@@ -9,7 +9,7 @@ import DrawerHeader from './DrawerHeader';
 import DrawerListItem from './DrawerListItem';
 import ToggleTheme from './ToggleTheme';
 
-const DrawerContent = ({state, descriptors, navigation}) => {
+const Drawer = ({state, descriptors, navigation}) => {
   return (
     <DrawerContentScrollView style={styles.root}>
       <View style={styles.container}>
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
   container: {},
 });
 
-export default DrawerContent;
+export default Drawer;

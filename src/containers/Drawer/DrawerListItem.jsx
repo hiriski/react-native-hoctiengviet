@@ -14,7 +14,7 @@ import {TAB, HOME_DRAWER, ROOT_STACK} from '../../config/navigator';
 const navigations = [
   {
     label: 'Home',
-    routeName: TAB.HOME,
+    routeName: TAB.DRAWER,
     icon: 'layers',
   },
   {
@@ -29,7 +29,7 @@ const navigations = [
   },
   {
     label: 'Chat',
-    routeName: TAB.CHAT,
+    routeName: TAB.CHAT_LIST,
     icon: 'message-circle',
   },
   {

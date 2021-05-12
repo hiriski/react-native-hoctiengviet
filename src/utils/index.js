@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {USER_TOKEN_KEY} from '../config/auth';
+import {createFormData} from './form';
 
 export const saveUserToken = async (token) => {
   try {
@@ -53,3 +54,5 @@ export const getAllAsyncStorage = async () => {
     console.log(error, 'Failed to get all async storage data');
   }
 };
+
+export {createFormData};

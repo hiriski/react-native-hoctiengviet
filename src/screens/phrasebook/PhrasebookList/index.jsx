@@ -12,11 +12,10 @@ import {MARGIN} from '../../../components/config/spacing';
 import {Text, useTheme} from '@ui-kitten/components';
 import FocusAwareStatusBar from '../../../components/common/FocusAwareStatusBar';
 import FloatingAddPhraseButton from '../../../containers/phrasebook/FloatingAddPhraseButton';
+import PhrasebookListHeader from './Header';
 
 const PhrasebookListScreen = ({navigation, route}) => {
-
-  // const { categoryId } = route.params;
-  // console.log(categoryId);
+  const { categoryId } = route.params || null;
 
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = React.useState(false);
@@ -25,7 +24,7 @@ const PhrasebookListScreen = ({navigation, route}) => {
   const {list} = useSelector((state) => state.phrasebook);
 
   const fetchData = () => {
-    dispatch(fetchPhrasebooks());
+    dispatch(fetchPhrasebooks(categoryId));
   };
 
   React.useEffect(() => {
@@ -41,18 +40,12 @@ const PhrasebookListScreen = ({navigation, route}) => {
 
   /**
    * Render item
-   *
    */
   const renderItem = ({item}) => <PhraseItem item={item} />;
 
   return (
-    <MainLayout>
-      <View style={styles.viewHeader}>
-        <Text style={styles.textHeader} category="h1">
-          Phrasebooks
-        </Text>
-      </View>
-      <View style={styles.root}>
+    <React.Fragment>
+      <PhrasebookListHeader/>
         {list.length > 0 ? (
           <FlatList
             refreshControl={
@@ -66,7 +59,7 @@ const PhrasebookListScreen = ({navigation, route}) => {
               />
             }
             showsVerticalScrollIndicator={false}
-            style={styles.container}
+            style={styles.flatListRoot}
             data={list}
             renderItem={renderItem}
             keyExtractor={(item) => item.id.toString()}
@@ -74,20 +67,18 @@ const PhrasebookListScreen = ({navigation, route}) => {
         ) : (
           <Text>No Items</Text>
         )}
-      </View>
       <FloatingAddPhraseButton />
-    </MainLayout>
+    </React.Fragment>
   );
 };
 
 const styles = StyleSheet.create({
-  root: {
+  flatListRoot: {
     flex: 1,
     paddingHorizontal: 10,
     paddingTop: MARGIN.LARGE,
   },
   container: {},
-
   viewHeader: {
     alignItems: 'center',
     marginTop: MARGIN.LARGE,

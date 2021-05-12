@@ -6,7 +6,6 @@ import {useSelector} from 'react-redux';
 /* screens */
 import OnboardScreen from '../screens/OnboardScreen';
 import AuthStackNavigator from './AuthStackNavigator';
-import HomeTabNavigator from './HomeTabNavigator';
 import MainStackNavigator from './MainStackNavigator';
 import {ROOT_STACK} from '../config/navigator';
 
@@ -29,17 +28,13 @@ const RootStackNavigator = () => {
             {token ? (
               <React.Fragment>
                 <Stack.Screen
-                  name={ROOT_STACK.HOME_TAB}
-                  component={HomeTabNavigator}
+                  name={ROOT_STACK.MAIN}
+                  component={MainStackNavigator}
                 />
               </React.Fragment>
             ) : (
-              /** Allow stranger accessing homepage */
               <React.Fragment>
-                <Stack.Screen
-                  name={ROOT_STACK.HOME_TAB}
-                  component={HomeTabNavigator}
-                />
+                {/* Allow stranger accessing homepage */}
                 <Stack.Screen
                   name={ROOT_STACK.MAIN}
                   component={MainStackNavigator}

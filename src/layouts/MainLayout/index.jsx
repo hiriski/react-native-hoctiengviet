@@ -13,7 +13,7 @@ const MainLayout = (props) => {
       style={styles.root}
       contentContainerStyle={styles.container}
       showsVerticalScrollIndicator={false}>
-        <Layout style={StyleSheet.flatten([styles.container, { paddingTop: insets.top}])} level="1">
+        <Layout style={StyleSheet.flatten([styles.container, { paddingTop: insets.top}])} level="2">
           {children}
         </Layout>
     </ScrollView>

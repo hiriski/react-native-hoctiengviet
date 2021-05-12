@@ -17,8 +17,11 @@ class PhrasebookService {
    * @params {object} data
    * @returns {*}
    */
-  getPhrasebooks = async () => {
-    return await api.get('phrasebook');
+  getPhrasebooks = async (categoryId) => {
+    const response = await api.get(
+      categoryId ? '/phrasebook?category_id=' + categoryId : '/phrasebook',
+    );
+    return response;
   };
 }
 

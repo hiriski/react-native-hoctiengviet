@@ -17,11 +17,12 @@ const AvatarComponent = React.memo(
   },
 );
 
-Avatar.defaultProps = {
-  size: 'large',
+AvatarComponent.defaultProps = {
+  size: 'medium',
   shape: 'round'
 };
-Avatar.propTypes = {
+
+AvatarComponent.propTypes = {
   user: PropTypes.object,
 };
 

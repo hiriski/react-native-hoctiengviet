@@ -27,7 +27,7 @@ const TabBarItem = ({
       iconName = 'headphones';
     } else if (routeName === TAB.ADD) {
       iconName = 'plus-circle';
-    } else if (routeName === TAB.CHAT) {
+    } else if (routeName === TAB.CHAT_LIST) {
       iconName = 'message-circle';
     } else if (routeName === TAB.ACCOUNT) {
       iconName = 'person';
@@ -72,11 +72,9 @@ const TabBarItem = ({
   );
 };
 
-const TAB_ITEM_SIZE = TAB_BAR_ITEM_SIZE;
-
 const styles = StyleSheet.create({
   itemRoot: {
-    borderRadius: TAB_ITEM_SIZE,
+    borderRadius: TAB_BAR_ITEM_SIZE,
     overflow: 'hidden',
     flex: 1,
   },

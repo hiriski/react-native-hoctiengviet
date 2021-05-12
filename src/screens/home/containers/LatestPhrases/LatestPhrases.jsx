@@ -8,7 +8,7 @@ import SectionHeader from '../../../../containers/SectionHeader';
 import Container from '../../../../containers/Container';
 import {MAIN_STACK, ROOT_STACK} from '../../../../config/navigator';
 
-const HomePhrasebookCategoryList = ({categories}) => {
+const HomeLatestPhrases = ({categories}) => {
   const navigation = useNavigation();
 
   /**
@@ -24,7 +24,7 @@ const HomePhrasebookCategoryList = ({categories}) => {
 
   return (
     <React.Fragment>
-      <SectionHeader style={styles.sectionHeader} uppercase={true} onPressMore={handlePressMoreButton} title={'Category'}/>
+      <SectionHeader style={styles.sectionHeader} uppercase={true} onPressMore={handlePressMoreButton} title={'New Phrases'}/>
       <Container style={styles.container}>
         {categories.length > 0 ? (
           <FlatList
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HomePhrasebookCategoryList;
+export default HomeLatestPhrases;

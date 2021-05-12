@@ -6,8 +6,8 @@ import {MARGIN} from '../../../../components/config/spacing';
 
 const DailyQuotes = () => {
   return (
-    <Container spacing="medium" style={styles.root}>
-      <Layout level='1'>
+    <Container spacing="large" style={styles.root}>
+      <Layout level='2'>
         <Text category="p1" style={styles.textSmall}>{"Keep Calm and"}</Text>
         <Text category="h1" style={styles.textBig}>{"Learn Vietnamese"}</Text>
       </Layout>
@@ -17,14 +17,14 @@ const DailyQuotes = () => {
 
 const styles = StyleSheet.create({
   root: {
-    marginBottom: MARGIN.BASE
+    marginVertical: MARGIN.BASE,
   },
   textSmall: {
-    fontSize: 16,
+    fontSize: 18,
   },
   textBig: {
-    fontSize: 26,
+    fontSize: 28,
   }
-})
+});
 
 export default DailyQuotes;

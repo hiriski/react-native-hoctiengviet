@@ -1,11 +1,10 @@
 import React from 'react';
+import {StyleSheet} from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import MainLayout from '../../layouts/MainLayout';
-import {useNavigation} from '@react-navigation/core';
+import {useNavigation} from '@react-navigation/native';
 import {COLORS, ROUTES} from '../../constants';
 import {SafeAreaView} from 'react-native-safe-area-context';
-
-import styles from './styles';
 import FocusAwareStatusBar from '../../components/common/FocusAwareStatusBar';
 import {Button, Text} from '@ui-kitten/components';
 
@@ -85,5 +84,14 @@ const NotificationScreen = () => {
     </MainLayout>
   );
 };
+
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    paddingHorizontal: 20,
+  },
+});
+
 
 export default NotificationScreen;
