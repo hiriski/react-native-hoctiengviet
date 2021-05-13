@@ -6,8 +6,8 @@ import ChatService from './service';
  * @param conversationId
  * @returns {function(...[*]=)}
  */
-export const fetchMessages = (conversationId) => {
-  return async (dispatch) => {
+export const fetchMessages = conversationId => {
+  return async dispatch => {
     dispatch(fetchingMessageRequest());
     try {
       const response = await ChatService.getMessage(conversationId);
@@ -48,19 +48,36 @@ export const resetFetchingMessage = () => ({
  * @returns {function(...[*]=)}
  */
 export const sendMessage = (conversationId, data) => {
-  return async (dispatch) => {
+  return async dispatch => {
+    dispatch(sendingMessageRequest());
     try {
       const response = await ChatService.sendMessage(conversationId, data);
       if (response.status === 201) {
-        alert('message has been send');
+        dispatch(
+          sendingMessageSuccess(conversationId, 'Message has been send!'),
+        );
       }
     } catch (e) {
-      console.log(e.response);
+      dispatch(sendingMessageFailure());
     }
   };
 };
 
-export const mergeMessage = (data) => ({
+export const sendingMessageRequest = () => ({
+  type: Actions.SENDING_MESSAGE_REQUEST,
+});
+
+const sendingMessageSuccess = (conversationId, message) => ({
+  type: Actions.SENDING_MESSAGE_SUCCESS,
+  payload: {},
+});
+
+const sendingMessageFailure = () => ({
+  type: Actions.SENDING_MESSAGE_FAILURE,
+});
+
+// common.
+export const mergeMessage = data => ({
   type: Actions.MERGE_MESSAGE,
   payload: data,
 });

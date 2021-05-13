@@ -1,6 +1,7 @@
 import * as Actions from './constants';
 
 const initialState = {
+  isFetching: false,
   isSending: false,
   isError: false,
   messages: {}, // object of array.
@@ -11,18 +12,19 @@ export default function chatReducer(state = initialState, action) {
     case Actions.FETCHING_MESSAGE_REQUEST:
       return {
         ...state,
-        isSending: true,
+        isFetching: true,
         isError: false,
       };
     case Actions.FETCHING_MESSAGE_FAILURE:
       return {
         ...state,
-        isSending: false,
+        isFetching: false,
         isError: true,
       };
     case Actions.FETCHING_MESSAGE_SUCCESS:
       return {
-        isSending: false,
+        ...state,
+        isFetching: false,
         isError: false,
         messages: {
           ...state.messages,
@@ -31,9 +33,9 @@ export default function chatReducer(state = initialState, action) {
       };
     case Actions.RESET_FETCHING_MESSAGE:
       return {
-        isSending: false,
+        ...state,
+        isFetching: false,
         isError: false,
-        messages: [],
       };
     default:
       return state;
