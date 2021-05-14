@@ -1,5 +1,37 @@
 import * as Actions from './constants';
-import ChatService from './service';
+import ConversationService from './service';
+
+/**
+ * Fetching conversaiton list.
+ * @returns {function(...[*]=)}
+ */
+export const fetchConversationList = () => {
+  return async dispatch => {
+    dispatch(fetchingConversationListRequest());
+    try {
+      const response = await ConversationService.getConversationList();
+      if (response.status === 200) {
+        const {data} = response.data;
+        dispatch(fetchingConversationListSuccess(data));
+      }
+    } catch (e) {
+      dispatch(fetchingConversationListFailure());
+    }
+  };
+};
+
+const fetchingConversationListRequest = () => ({
+  type: Actions.FETCHING_CONVERSATION_LIST_REQUEST,
+});
+
+const fetchingConversationListFailure = () => ({
+  type: Actions.FETCHING_CONVERSATION_LIST_FAILURE,
+});
+
+const fetchingConversationListSuccess = conversations => ({
+  type: Actions.FETCHING_CONVERSATION_LIST_SUCCESS,
+  payload: conversations,
+});
 
 /**
  * Fetch message.
@@ -10,7 +42,7 @@ export const fetchMessages = conversationId => {
   return async dispatch => {
     dispatch(fetchingMessageRequest());
     try {
-      const response = await ChatService.getMessage(conversationId);
+      const response = await ConversationService.getMessage(conversationId);
       if (response.status === 200) {
         const messages = response.data.data;
         dispatch(fetchMessageSuccess(conversationId, messages));
@@ -33,7 +65,7 @@ const fetchingMessageFailure = () => ({
 const fetchMessageSuccess = (conversationId, messages) => ({
   type: Actions.FETCHING_MESSAGE_SUCCESS,
   payload: {
-    ['conversationId_' + conversationId]: messages,
+    ['conversation_id_' + conversationId]: messages,
   },
 });
 
@@ -51,7 +83,10 @@ export const sendMessage = (conversationId, data) => {
   return async dispatch => {
     dispatch(sendingMessageRequest());
     try {
-      const response = await ChatService.sendMessage(conversationId, data);
+      const response = await ConversationService.sendMessage(
+        conversationId,
+        data,
+      );
       if (response.status === 201) {
         dispatch(
           sendingMessageSuccess(conversationId, 'Message has been send!'),
@@ -74,6 +109,77 @@ const sendingMessageSuccess = (conversationId, message) => ({
 
 const sendingMessageFailure = () => ({
   type: Actions.SENDING_MESSAGE_FAILURE,
+});
+
+/**
+ * Send first private message.
+ * @param toUserId
+ * @param data
+ * @returns {function(...[*]=)}
+ */
+export const sendFirstMessage = (toUserId, data) => {
+  return async dispatch => {
+    dispatch(sendingFirstMessageRequest());
+    try {
+      const response = await ConversationService.sendFirstMessage(
+        toUserId,
+        data,
+      );
+      /**
+       * Sample response from server.
+       "data": {
+          "id": 1,
+          "channel_id": "xME_1620998819",
+          "conversation_type": "private",
+          "last_message": {
+                "_id": 1,
+                "text": null,
+                "user": {
+                    "_id": 1,
+                    "name": "Riski",
+                    "avatar": "http://apixinchao.riski.me/storage/images/users/4yearsago.jpg"
+                },
+                "send": true,
+                "received": true,
+                "createdAt": "2021-05-14T13:26:59.000000Z"
+            }
+          }
+       */
+      if (response.status === 201) {
+        const {data} = response.data;
+        dispatch(sendingFirstMessageSuccess(data));
+      }
+    } catch (e) {
+      dispatch(sendingFirstMessageFailure('Failed to sending first message!'));
+    }
+  };
+};
+
+const sendingFirstMessageRequest = () => ({
+  type: Actions.SENDING_FIRST_MESSAGE_REQUEST,
+});
+
+const sendingFirstMessageFailure = (message = '') => ({
+  type: Actions.SENDING_FIRST_MESSAGE_FAILURE,
+  payload: message,
+});
+
+export const sendingFirstMessageSuccess = data => ({
+  type: Actions.SENDING_FIRST_MESSAGE_SUCCESS,
+  payload: data,
+});
+
+export const resetSendFirstMessage = () => ({
+  type: Actions.RESET_SEND_FIRST_MESSAGE,
+});
+
+// Start chatting.
+export const setUserToStartChatting = userObject => ({
+  type: Actions.SET_USER_TO_START_CHATTING,
+  payload: userObject,
+});
+export const unsetUserToStartChatting = () => ({
+  type: Actions.UNSET_USER_TO_START_CHATTING,
 });
 
 // common.

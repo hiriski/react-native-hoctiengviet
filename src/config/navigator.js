@@ -18,7 +18,7 @@ export const MAIN_STACK = {
   PHRASEBOOK_LIST: 'PhrasebookListScreen',
   ACCOUNT: 'AccountStack',
   NOTIFICATION: 'NotificationScreen',
-  CHAT: 'ChatScreen',
+  CONVERSATION: 'ConversationStack',
 };
 
 export const HOME_DRAWER = {
@@ -31,6 +31,12 @@ export const TAB = {
   DRAWER: 'HomeDrawer',
   CHILLAX: 'ChillaxScreen',
   ADD: 'Add',
-  CHAT_LIST: 'ChatListScreen',
   ACCOUNT: 'AccountScreen',
+};
+
+export const CONVERSATION_STACK = {
+  NEW_CONVERSATION: 'NewConversationScreen',
+  CHAT_LOGIN_REQUIRED: 'ChatLoginRequiredScreen',
+  CONVERSATION_LIST: 'ConversationListScreen',
+  CHAT: 'ChatScreen',
 };

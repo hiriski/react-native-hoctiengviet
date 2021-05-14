@@ -14,7 +14,7 @@ class UserService {
    * @param userId
    * @returns {Promise<AxiosResponse<T>>}
    */
-  getUserById = async (userId) => {
+  getUserById = async userId => {
     return await api.get('/user/' + userId);
   };
 }

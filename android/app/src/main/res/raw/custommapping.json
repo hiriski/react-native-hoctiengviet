@@ -1,30 +1,34 @@
 {
   "strict": {
-    "text-font-family": "HKGrotesk-Medium",
+    "text-font-family": "HKGrotesk-SemiBold",
 
     "text-heading-1-font-size": 36,
-    "text-heading-1-font-weight": "700",
     "text-heading-1-line-height": 40,
-    
+    "text-heading-1-font-family": "HKGrotesk-Bold",
+
     "text-heading-2-font-size": 32,
     "text-heading-2-line-height": 34,
-    
+
     "text-heading-3-font-size": 28,
     "text-heading-3-line-height": 30,
-    
+
     "text-subtitle-1-font-size": 15,
-    "text-subtitle-1-font-weight": "600",
+    "text-subtitle-1-font-weight": "500",
     "text-subtitle-1-line-height": 17,
+    "text-subtitle-1-font-family": "HKGrotesk-SemiBold",
 
     "text-paragraph-1-font-size": 15,
-    "text-paragraph-1-font-weight": "400",
+    "text-paragraph-1-font-weight": "500",
     "text-paragraph-1-line-height": 17,
+    "text-paragraph-1-font-family": "HKGrotesk-SemiBold",
 
     "text-caption-1-font-size": 12,
-    "text-caption-1-font-weight": "400",
+    "text-caption-1-font-weight": "500",
     "text-caption-1-line-height": 14,
+    "text-caption-1-font-family": "HKGrotesk-SemiBold",
 
     "text-label-font-size": 12,
-    "text-label-font-weight": "500"
+    "text-label-font-weight": "500",
+    "text-label-font-family": "HKGrotesk-Medium"
   }
 }

@@ -3,7 +3,7 @@ import common from './modules/common/reducer';
 import auth from './modules/auth/reducer';
 import phrasebook from './modules/phrasebook/reducer';
 import category from './modules/category/reducer';
-import chat from './modules/chat/reducer';
+import conversation from './modules/conversation/reducer';
 import user from './modules/user/reducer';
 
 export default combineReducers({
@@ -11,6 +11,6 @@ export default combineReducers({
   auth,
   phrasebook,
   category,
-  chat,
+  conversation,
   user,
 });

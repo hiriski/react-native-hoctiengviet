@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {TouchableHighlight, StyleSheet} from 'react-native';
 import {Icon, useTheme} from '@ui-kitten/components';
-import {grey6} from '../../config/colors';
 import {useSelector} from 'react-redux';
 
 const IconButton = ({onPress, iconName, size, fill, style}) => {
@@ -13,12 +12,12 @@ const IconButton = ({onPress, iconName, size, fill, style}) => {
       style={StyleSheet.flatten([styles.root, style])}
       onPress={onPress}
       underlayColor={theme === 'dark' ? 'rgba(0, 0, 0, 0.2)' : 'rgba(0,0,0,0.065)' }>
-      <Icon name={iconName} fill={fill} style={styles.icon} />
+      <Icon name={iconName} fill={fill ? fill : uiTheme['text-hint-color']} style={styles.icon} />
     </TouchableHighlight>
   );
 };
 
-const BUTTON_SIZE = 44;
+const BUTTON_SIZE = 42;
 
 const styles = StyleSheet.create({
   root: {
@@ -36,7 +35,6 @@ const styles = StyleSheet.create({
 
 IconButton.defaultProps = {
   size: 'medium',
-  fill: grey6,
 };
 
 IconButton.propTypes = {

@@ -1,6 +1,24 @@
 import api from '../../api';
 
-class ChatService {
+class ConversationService {
+  /**
+   * Get conversation list.
+   * @returns {Promise<AxiosResponse<T>>}
+   */
+  getConversationList = async () => {
+    return await api.get('/conversation');
+  };
+
+  /**
+   * Send first message.
+   * @param toUserId
+   * @param data
+   * @returns {Promise<AxiosResponse<T>>}
+   */
+  sendFirstMessage = async (toUserId, data) => {
+    return await api.post('/conversation/send-first-message/' + toUserId, data);
+  };
+
   /**
    * Send message.
    * @param conversationId
@@ -8,7 +26,7 @@ class ChatService {
    * @returns {Promise<AxiosResponse<T>>}
    */
   sendMessage = async (conversationId, data) => {
-    return await api.post('/chat/send/' + conversationId, data);
+    return await api.post('/message/' + conversationId, data);
   };
 
   /**
@@ -16,9 +34,9 @@ class ChatService {
    * @param conversationId
    * @returns {Promise<AxiosResponse<T>>}
    */
-  getMessage = async (conversationId) => {
-    return await api.get('/chat/' + conversationId);
+  getMessage = async conversationId => {
+    return await api.get('/message/' + conversationId);
   };
 }
 
-export default new ChatService();
+export default new ConversationService();

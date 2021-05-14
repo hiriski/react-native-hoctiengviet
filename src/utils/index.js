@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {USER_TOKEN_KEY} from '../config/auth';
 import {createFormData} from './form';
+import { isSmallScreen } from './screen';
 
 export const saveUserToken = async (token) => {
   try {
@@ -55,4 +56,4 @@ export const getAllAsyncStorage = async () => {
   }
 };
 
-export {createFormData};
+export {createFormData, isSmallScreen};

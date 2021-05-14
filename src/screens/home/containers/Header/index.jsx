@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Image, TouchableOpacity, StyleSheet} from 'react-native';
-import { Icon, Layout} from '@ui-kitten/components';
+import {Layout, useTheme} from '@ui-kitten/components';
 import {MARGIN, SPACING_SMALL} from '../../../../components/config/spacing';
 import {useSelector} from 'react-redux';
 import { Text } from '@ui-kitten/components';
@@ -8,12 +8,13 @@ import IconButton from '../../../../components/partials/IconButton';
 import Container from '../../../../containers/Container';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 import AvatarComponent from '../../../../components/Avatar';
-import {grey2, primary} from '../../../../components/config/colors';
+import {primary} from '../../../../components/config/colors';
 import {AUTH_STACK, MAIN_STACK, ROOT_STACK} from '../../../../config/navigator';
 
 const HomeHeader = () => {
   const { user } = useSelector((state) => state.auth);
   const navigation = useNavigation();
+  const theme = useTheme();
 
   const navigateToProfile = () => {
     navigation.navigate(MAIN_STACK.ACCOUNT);
@@ -66,7 +67,7 @@ const HomeHeader = () => {
           {/* user is logged in 👇 */}
           { user !== null ? (
             <React.Fragment>
-              <View style={styles.divider}/>
+              <View style={StyleSheet.flatten([styles.divider, { backgroundColor: theme['outline-color']}])}/>
               {renderGreeting()}
             </React.Fragment>
           ) : renderLogo() }
@@ -77,7 +78,7 @@ const HomeHeader = () => {
 };
 
 
-const AVATAR_SIZE = 40;
+const AVATAR_SIZE = 36;
 const HEADER_HEIGHT = 52;
 const LOGO_SIZE = 20;
 const styles = StyleSheet.create({
@@ -91,12 +92,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   iconButtonMenu: {
-    marginRight: MARGIN.BASE
+    marginRight: MARGIN.SMALL
   },
   divider: {
-    // width: StyleSheet.hairlineWidth,
     width: 1,
-    backgroundColor: grey2,
     height: 26,
     marginRight: MARGIN.LARGE
   },

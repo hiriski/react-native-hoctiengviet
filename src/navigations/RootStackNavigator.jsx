@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 
 const RootStackNavigator = () => {
   const isAlreadyLaunched = true;
-  const {token} = useSelector((state) => state.auth);
+  const {token} = useSelector(state => state.auth);
   return (
     <NavigationContainer>
       <Stack.Navigator

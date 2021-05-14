@@ -12,15 +12,19 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         isFetching: true,
+        isError: false,
       };
     case Actions.FETCHING_USER_LIST_FAILURE:
       return {
         ...state,
+        isFetching: false,
         isError: true,
       };
     case Actions.FETCHING_USER_LIST_SUCCESS:
       return {
         ...state,
+        isFetching: false,
+        isError: false,
         list: action.payload,
       };
     case Actions.RESET_FETCH_STATE:
@@ -28,7 +32,7 @@ export default function userReducer(state = initialState, action) {
         ...state,
         isFetching: false,
         isError: false,
-      }
+      };
     default:
       return state;
   }

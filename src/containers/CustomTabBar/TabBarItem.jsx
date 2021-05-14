@@ -7,7 +7,7 @@ import {
 
 import {Icon, useTheme} from '@ui-kitten/components';
 import {TAB_BAR_ITEM_SIZE} from './index';
-import {TAB} from '../../config/navigator';
+import {TAB, MAIN_STACK} from '../../config/navigator';
 import {primary} from '../../components/config/colors';
 
 const TabBarItem = ({
@@ -27,7 +27,7 @@ const TabBarItem = ({
       iconName = 'headphones';
     } else if (routeName === TAB.ADD) {
       iconName = 'plus-circle';
-    } else if (routeName === TAB.CHAT_LIST) {
+    } else if (routeName === MAIN_STACK.CONVERSATION) {
       iconName = 'message-circle';
     } else if (routeName === TAB.ACCOUNT) {
       iconName = 'person';
@@ -62,7 +62,7 @@ const TabBarItem = ({
           <View style={styles.itemContainer}>
             {renderTabBarIcon({
               routeName: route.name,
-              fill: theme['color-basic-500'],
+              fill: theme['color-basic-600'],
               style: styles.icon,
             })}
           </View>

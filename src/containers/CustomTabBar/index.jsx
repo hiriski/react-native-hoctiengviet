@@ -5,6 +5,7 @@
 import React from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
 import {white} from '../../components/config/colors';
+import {ROOT_STACK, MAIN_STACK} from '../../config/navigator';
 import TabBarItem from './TabBarItem';
 
 const CustomTabBar = ({state, descriptors, navigation}) => {
@@ -29,14 +30,20 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
           const isFocused = state.index === index;
 
           const onPress = () => {
-            const event = navigation.emit({
-              type: 'tabPress',
-              target: route.key,
-              canPreventDefault: true,
-            });
+            if(route.name === MAIN_STACK.CONVERSATION) {
+              navigation.navigate(ROOT_STACK.MAIN, {
+                screen: MAIN_STACK.CONVERSATION
+              });
+            } else {
+              const event = navigation.emit({
+                type: 'tabPress',
+                target: route.key,
+                canPreventDefault: true,
+              });
 
-            if (!isFocused && !event.defaultPrevented) {
-              navigation.navigate(route.name);
+              if (!isFocused && !event.defaultPrevented) {
+                navigation.navigate(route.name);
+              }
             }
           };
 

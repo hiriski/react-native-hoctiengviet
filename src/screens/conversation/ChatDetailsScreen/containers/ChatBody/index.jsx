@@ -6,45 +6,37 @@ import {
   ActivityIndicator,
   TextInput,
 } from 'react-native';
-import {
-  GiftedChat,
-  Send,
-  InputToolbar,
-} from 'react-native-gifted-chat';
+import {GiftedChat, Send, InputToolbar} from 'react-native-gifted-chat';
 import {useDispatch, useSelector} from 'react-redux';
 import {Icon} from '@ui-kitten/components';
 import {primary, primaryLight} from '../../../../../components/config/colors';
 import {PADDING} from '../../../../../components/config/spacing';
+import {userAvatar} from '../../../../../utils/avatar';
 
 const ChatBody = ({messages, fetchMessage, sendMessage}) => {
-  const {user} = useSelector((state) => state.auth);
+  const {user} = useSelector(state => state.auth);
   const dispatch = useDispatch();
+
+  console.log(messages);
 
   console.log('==========RENDER CHAT BODY==========');
 
   const currentUser = {
     _id: user.id,
-    name: user.name,
-    avatar: user.social_account
-      ? user.social_account.photo_url
-        ? user.social_account.photo_url
-        : null
-      : user.photo_url
-        ? user.photo_url
-        : null,
+    name: userAvatar(user),
   };
 
   /**
    * OnSend message
    */
-  const handleMessageSend = (newMessages) => {
+  const handleMessageSend = newMessages => {
     sendMessage({
       text: newMessages[0].text || null,
     });
   };
 
   const handlePressCameraButton = () => {
-    alert("Button was pressed")
+    alert('Button was pressed');
   };
 
   /**
@@ -68,15 +60,15 @@ const ChatBody = ({messages, fetchMessage, sendMessage}) => {
 
   const renderChatFooter = () => <View style={styles.chatFooter}></View>;
 
-  const renderSend = (props) => {
+  const renderSend = props => {
     return (
       <Send {...props} containerStyle={styles.sendContainer}>
-        <Icon name="navigation-2" style={styles.sendIcon} />
+        <Icon name="paper-plane" fill={primary} style={styles.sendIcon} />
       </Send>
     );
   };
 
-  const renderInputToolbar = (props) => {
+  const renderInputToolbar = props => {
     return (
       <InputToolbar
         renderComposer={renderComposer}
@@ -87,7 +79,7 @@ const ChatBody = ({messages, fetchMessage, sendMessage}) => {
     );
   };
 
-  const renderComposer = (props) => {
+  const renderComposer = props => {
     return <TextInput text="foo" placeholder="foo" />;
   };
 
@@ -105,7 +97,7 @@ const ChatBody = ({messages, fetchMessage, sendMessage}) => {
         maxComposerHeight={100}
         messages={messages}
         renderChatFooter={renderChatFooter}
-        onSend={(messages) => handleMessageSend(messages)}
+        onSend={messages => handleMessageSend(messages)}
         user={currentUser}
       />
     </View>
@@ -140,7 +132,6 @@ const styles = StyleSheet.create({
   sendIcon: {
     height: 20,
     width: 20,
-    color: primary
   },
   buttonCamera: {
     alignItems: 'center',
@@ -159,7 +150,7 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingRight: PADDING.SMALL
+    paddingRight: PADDING.SMALL,
   },
 });
 

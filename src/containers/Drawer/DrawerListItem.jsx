@@ -9,7 +9,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {revokeToken} from '../../modules/auth/actions';
 import GoogleSignInService from '../../services/GoogleSignInService';
-import {TAB, HOME_DRAWER, ROOT_STACK} from '../../config/navigator';
+import {TAB, HOME_DRAWER, ROOT_STACK, MAIN_STACK} from '../../config/navigator';
 
 const navigations = [
   {
@@ -29,7 +29,7 @@ const navigations = [
   },
   {
     label: 'Chat',
-    routeName: TAB.CHAT_LIST,
+    routeName: MAIN_STACK.CONVERSATION,
     icon: 'message-circle',
   },
   {
@@ -52,17 +52,33 @@ const navigations = [
 const DrawerListItem = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const {socialProvider} = useSelector((state) => state.auth);
+  const {socialProvider} = useSelector(state => state.auth);
 
-  const handlePress = (routeName) => {
-    if (routeName === '__LOGOUT__') {
-      dispatch(revokeToken());
-      if (socialProvider === 'google') {
-        GoogleSignInService.signOut();
-      }
-    } else {
-      navigation.navigate(routeName);
+  const handlePress = routeName => {
+    switch (routeName) {
+      case MAIN_STACK.CONVERSATION:
+        navigation.navigate(ROOT_STACK.MAIN, {
+          screen: MAIN_STACK.CONVERSATION,
+        });
+        break;
+      case '__LOGOUT__':
+        dispatch(revokeToken());
+        if (socialProvider === 'google') {
+          GoogleSignInService.signOut();
+        }
+        break;
+      default:
+        navigation.navigate(routeName);
+        break;
     }
+    // if (routeName === '__LOGOUT__') {
+    //   dispatch(revokeToken());
+    //   if (socialProvider === 'google') {
+    //     GoogleSignInService.signOut();
+    //   }
+    // } else {
+    //   navigation.navigate(routeName);
+    // }
   };
 
   return (
