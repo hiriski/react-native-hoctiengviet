@@ -1,10 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {USER_TOKEN_KEY} from '../constants';
+import {USER_TOKEN_KEY} from '../config/auth';
+import {createFormData} from './form';
+import { isSmallScreen } from './screen';
 
-export const saveUserToken = async (userToken) => {
+export const saveUserToken = async (token) => {
   try {
-    const jsonUserTokenValue = JSON.stringify(userToken);
-    await AsyncStorage.setItem(USER_TOKEN_KEY, jsonUserTokenValue);
+    // const jsonUserTokenValue = JSON.stringify(token);
+    await AsyncStorage.setItem(USER_TOKEN_KEY, token);
     console.log('User token has been saved!');
   } catch (error) {
     console.log('Failed to save user token', error);
@@ -26,6 +28,7 @@ export const getUserToken = async () => {
     return userToken;
   } catch (error) {
     console.log('Failed to get user token', error);
+    return null;
   }
 };
 
@@ -52,3 +55,5 @@ export const getAllAsyncStorage = async () => {
     console.log(error, 'Failed to get all async storage data');
   }
 };
+
+export {createFormData, isSmallScreen};

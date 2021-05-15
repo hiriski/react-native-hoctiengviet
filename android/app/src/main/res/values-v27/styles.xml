@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">#000000</item>
+        <item name="android:windowIsTranslucent">true</item>
+
+        <!-- added in API 27 -->
+        <item name="android:windowLightNavigationBar">true</item>
+
+        <!-- required to contrast the dark buttons -->
+        <item name="android:navigationBarColor">@android:color/white</item>
+    </style>
+</resources>

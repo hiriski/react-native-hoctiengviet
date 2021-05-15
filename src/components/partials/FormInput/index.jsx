@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet} from 'react-native';
-import {Input} from '@ui-kitten/components';
+import {TextInput, StyleSheet} from 'react-native';
+import {Input, useTheme} from '@ui-kitten/components';
+import {grey7} from '../../config/colors';
+import {MARGIN, PADDING} from '../../config/spacing';
 
 const FormInput = ({
   placeholder,
@@ -10,11 +12,22 @@ const FormInput = ({
   size = 'large',
   ...props
 }) => {
+  const theme = useTheme();
+
+  const [borderBottomColor, setBorderBottomColor] = React.useState(
+    theme['color-basic-400'],
+  );
+
+  const onFocus = () => {
+    setBorderBottomColor('blue');
+  };
+
   return (
-    <Input
+    <TextInput
       size={size}
+      onFocus={onFocus}
       placeholder={placeholder}
-      style={styles.root}
+      style={StyleSheet.flatten([{borderBottomColor}, styles.input])}
       value={value}
       onChangeText={onChangeText}
       {...props}
@@ -23,16 +36,23 @@ const FormInput = ({
 };
 
 const styles = StyleSheet.create({
-  root: {
-    marginBottom: 10,
-    borderRadius: 5,
-    lineHeight: 10,
+  input: {
+    marginBottom: MARGIN.SMALL / 2,
+    borderRadius: 0,
+    borderTopWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderBottomWidth: 2,
+    fontSize: 22,
+    fontWeight: '600',
+    color: grey7,
+    paddingHorizontal: 0,
+    paddingBottom: PADDING.SMALL,
   },
 });
 
 FormInput.propTypes = {
-  onPress: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   onChangeText: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   size: PropTypes.string,

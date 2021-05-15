@@ -4,7 +4,7 @@ import {View, Animated, StyleSheet, Dimensions} from 'react-native';
 import {COLORS, ROUTES} from '../../constants';
 import {Icon, Text} from '@ui-kitten/components';
 import Ripple from 'react-native-material-ripple';
-import {TAB_BAR_WIDTH} from '../CustomTabBar';
+import {TAB_BAR_WIDTH} from '../../containers/CustomTabBar';
 
 const TabBarItem = ({
   route,
