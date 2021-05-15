@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Image, useWindowDimensions, StyleSheet} from 'react-native';
 import {Text} from '@ui-kitten/components';
-const logoImg = require('../../assets/images/logo.png');
+const logoImg = require('../../assets/images/logo-primary.png');
 
 const OnbardingItem = ({item}) => {
   const {width} = useWindowDimensions();

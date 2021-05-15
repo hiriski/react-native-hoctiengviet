@@ -32,7 +32,7 @@ const PersistLoading = () => {
             <Image
               style={styles.imageLogo}
               resizeMode="contain"
-              source={require('../../assets/images/logo.png')}
+              source={require('../../assets/images/logo-primary.png')}
             />
           </View>
           <View style={styles.viewIndicator}>

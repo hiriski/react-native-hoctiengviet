@@ -19,7 +19,7 @@ const PhraseItem = React.memo(({item}) => {
       shape="square"
       {...props}
       style={[styles.logo]}
-      source={require('../../../assets/images/logo.png')}
+      source={require('../../../assets/images/logo-primary.png')}
     />
   );
 

@@ -42,7 +42,7 @@ const HomeHeader = () => {
 
   const renderLogo = () => (
     <Layout level="1"  style={styles.layoutLogoContainer}>
-      <Image source={require('../../../../assets/images/logo.png')} style={styles.logoImg} />
+      <Image source={require('../../../../assets/images/logo-primary.png')} style={styles.logoImg} />
       <Text numberOfLines={1} style={styles.textLogo} category="h1">Xin Chào</Text>
     </Layout>
   );
